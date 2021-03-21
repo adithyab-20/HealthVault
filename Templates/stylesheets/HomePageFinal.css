@@ -1,0 +1,40 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.upper{
+    width: 100%;
+    height: 700px;
+    background-color: black;
+}
+
+.navigation{
+    width: 100%;
+    height: 70px;
+    background-color: cornsilk;
+}
+
+.nav-btn-set1{
+    width: fit-content;
+    height: 40px;
+    background-color:darkolivegreen;
+    margin-top: 30px;
+}
+
+.nav-btn-set1 button{
+    font-size: 16px;
+    margin:0 10px;
+    padding: 5px 10px;
+    background: transparent;
+    border: none;
+    outline: none;
+    text-align: center;
+    color: white;
+}
+
+.lower{
+    width: 100%;
+    height: 800px;
+    background-color:chocolate;
+}
