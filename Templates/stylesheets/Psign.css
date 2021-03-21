@@ -4,8 +4,6 @@
     box-sizing: border-box;
     font-family: 'Nunito', sans-serif;
   }
-
-
   
   body{
     width: 100%;
@@ -14,7 +12,7 @@
     justify-content: center;
     align-items: center;
     /*background: -webkit-linear-gradient(left, #66b3ff, #aaff80);*/
-    background-image: url(../myimages/marcel-scholte-LPurJnihmQI-unsplash.jpg);
+    background-image: url(../myimages/pexels-ben-mack-5707614.jpg);
     background-size: 100% 100vh;
     /*background-image: -webkit-linear-gradient(left, #7579ff, #b224ef);*/
     font-family: 'Nunito', sans-serif;
@@ -31,17 +29,15 @@
     position: relative;
     width: 900px;
     height: 550px;
-    border-radius: 30px;
     background: #fff;
-    box-shadow: 10px 19px 50px rgba(0, 0, 0, 1), 0 15px 15px rgba(0, 0, 0, 0.22); 
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 1), 0 15px 15px rgba(0, 0, 0, 0.22);
   }
   
   .form{
     position: relative;
-    width: 600px;
+    width: 640px;
     height: 100%;
     padding: 50px 30px;
-    border-radius: 30px;
     -webkit-transition:-webkit-transform 1.2s ease-in-out;
     transition: -webkit-transform 1.2s ease-in-out;
     transition: transform 1.2s ease-in-out;
@@ -56,9 +52,9 @@
   
   label{
     display: block;
-    width: 300px;
-    margin: 40px auto 0;
-    text-align: left;
+    width: 260px;
+    margin: 25px auto 0;
+    text-align: center;
   }
   
   label span{
@@ -71,23 +67,21 @@
   input{
     display: block;
     width: 100%;
-    margin-top: 2px;
-    /* margin-left: auto;
-    margin-right: auto; */
+    margin-top: 5px;
     font-size: 16px;
-    padding-bottom: 2px;
+    padding-bottom: 5px;
     /*border: 1px solid black;*/
     /*border-radius: 30px;*/
     /*box-shadow: 1px 1px 3px rgb(36, 35, 35);*/
     border-bottom: 1px solid rgba(109, 93, 93, 0.4);
-    text-align: left;
+    text-align: center;
     font-family: 'Nunito', sans-serif; 
   }
   
   button{
     display: block;
     margin: 0 auto;
-    width: 300px;
+    width: 260px;
     height: 36px;
     border-radius: 30px;
     color: #fff;
@@ -101,11 +95,11 @@
     text-transform: uppercase;
     font-weight: 600;
     font-family: 'Nunito', sans-serif;
-    background: rgb(38, 63, 82);
+    background: -webkit-linear-gradient(left, #ff3300, #e65c00);
   }
   
   .submit:hover{
-    background: rgb(71, 121, 152);
+    background: -webkit-linear-gradient(left, #e65c00, #ff3300);
   }
   
   .forgot-pass{
@@ -118,17 +112,17 @@
   }
   
   .forgot-pass:hover{
-    color: rgb(71, 121, 152);
+    color: red;
   }
   
   .sub-cont{
     overflow: hidden;
     position: absolute;
-    left: 600px;
+    left: 640px;
     top: 0;
     width: 900px;
     height: 100%;
-    padding-left: 300px;
+    padding-left: 260px;
     background: #fff;
     -webkit-transition: -webkit-transform 1.2s ease-in-out;
     transition: -webkit-transform 1.2s ease-in-out;
@@ -136,9 +130,8 @@
   }
   
   .cont.s-signup .sub-cont{
-    
-    -webkit-transform:translate3d(-600px, 0, 0);
-            transform:translate3d(-600px, 0, 0);
+    -webkit-transform:translate3d(-640px, 0, 0);
+            transform:translate3d(-640px, 0, 0);
   }
   
   .img{
@@ -147,7 +140,7 @@
     position: absolute;
     left: 0;
     top: 0;
-    width: 300px;
+    width: 260px;
     height: 100%;
     padding-top: 360px;
   }
@@ -159,7 +152,7 @@
     top: 0;
     width: 900px;
     height: 100%;
-    background-image: url(../myimages/phot.jpeg);
+    background-image: url(../myimages/Patient_signup_image.jpg);
     background-size: cover;
     transition: -webkit-transform 1.2s ease-in-out;
     transition: transform 1.2s ease-in-out, -webkit-transform 1.2s ease-in-out;
@@ -176,8 +169,8 @@
   }
   
   .cont.s-signup .img:before{
-    -webkit-transform:translate3d(600px, 0, 0);
-            transform:translate3d(600px, 0, 0);
+    -webkit-transform:translate3d(640px, 0, 0);
+            transform:translate3d(640px, 0, 0);
   }
   
   .img-text{
@@ -200,7 +193,7 @@
   }
   
   .img-text p{
-    font-size: 17px;
+    font-size: 14px;
     line-height: 1.5;
   }
   
@@ -231,8 +224,8 @@
             transition-timing-function:ease-in-out;
     -webkit-transition-duration:1.2s;
             transition-duration:1.2s; 
-    -webkit-transform:translate3d(600px, 0, 0);
-            transform:translate3d(600px, 0, 0);
+    -webkit-transform:translate3d(640px, 0, 0);
+            transform:translate3d(640px, 0, 0);
   }
   
   .img-btn{
