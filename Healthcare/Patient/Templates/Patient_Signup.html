@@ -3,8 +3,10 @@
 	<title>Sign In</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="Templates/stylesheets/Patient_signup.css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800&display=swap" rel="stylesheet">
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'Patient_signup.css' %}">
+
 </head>
 <body>
   <div class="cont">
@@ -59,6 +61,6 @@
       </div>
     </div>
   </div>
-<script type="text/javascript" src="script/Patient_signup.js"></script>
+<script type="text/javascript" src="{% static 'Patient_signup.js' %}"></script>
 </body>
 </html>

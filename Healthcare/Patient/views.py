@@ -22,3 +22,7 @@ def Login(request):
     else:
         form = UserCreationForm()
     return render(request, 'Patient_Signup.html', {'form': form})
+
+
+def Pat(request):
+    return render(request, 'Patient_Signup.html')
