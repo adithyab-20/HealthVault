@@ -3,11 +3,8 @@
 	<title>Sign In</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
- 
+  <link rel="stylesheet" type="text/css" href="stylesheets/Doctor_login.css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800&display=swap" rel="stylesheet">
-  {% load static %}
-  <link rel="stylesheet" type="text/css" href="{% static 'Doctor_login.css' %}">
-
 </head>
 <body>
   <div class="cont">
@@ -22,6 +19,7 @@
         <input type="password" name="password">
       </label>
       <button class="submit" type="button">Sign In</button>
+      <!-- <p class="forgot-pass">Forgot Password?</p> -->
     </div>
     
     <div class="sub-cont">
@@ -43,8 +41,28 @@
           <span class="m-in" style="font-weight: 700;">Back</span>
         </div>
       </div>
+      <!-- <div class="form sign-up">
+        <h2>Sign Up.</h2>
+        <label>
+          <span>Your Full Name</span>
+          <input type="text">
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="email">
+        </label>
+        <label>
+          <span>Password</span>
+          <input type="password">
+        </label>
+        <label>
+          <span>Confirm Password</span>
+          <input type="password">
+        </label>
+        <button type="button" class="submit">Click to Sign Up!</button>
+      </div> -->
     </div>
   </div>
-  <script type="text/javascript" src="{% static 'Doctor_login.js' %}"></script>
+<script type="text/javascript" src="script/Patient_signup.js"></script>
 </body>
 </html>
