@@ -87,7 +87,7 @@
   button{
     display: block;
     margin: 0 auto;
-    width: 300px;
+    width: 500px;
     height: 36px;
     border-radius: 30px;
     color: #fff;
@@ -239,7 +239,7 @@
     overflow: hidden;
     z-index: 2;
     position: relative;
-    width: 100px;
+    width: 200px;
     height: 36px;
     margin: 0 auto;
     background: transparent;
