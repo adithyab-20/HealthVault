@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,33 +11,41 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/all.css" type="text/css" media="all">
 </head>
+
 <body>
     <div class="upper">
         <div class="navigation">
             <div class="logo"></div>
             <div class="nav-btn-set1">
-                <button>Home</button>
-                <button>Features</button>
-                <button>Pricing</button>
+                <a href="">Home</a>
+                <a href="#feature_block">Features</a>
+                <a href="#Pricing_block">Pricing</a>
+                <a href="#Aboutus_block">About Us</a>
             </div>
+            <!--===========================================================================-->
             <div class="contact-details">
                 <button>Become a Member</button>
             </div>
+            <!--===========================================================================-->
             <div class="slider">
                 <ul class="slider-list">
-                  <li class="slider-list__item slider-list__item_active" style="background-image: url(./myimages/slide-image1.jpg)"></li>
-                  <li class="slider-list__item" style="background-image: url(./myimages/slide-image2.jpg)"></li>
-                  <li class="slider-list__item" style="background-image: url(./myimages/slide-image3.jpg)"></li>
-                  <li class="slider-list__item" style="background-image: url(./myimages/slide-image4.jpg)"></li>
+                    <li class="slider-list__item slider-list__item_active"
+                        style="background-image: url(./myimages/slide-image1.jpg)"></li>
+                    <li class="slider-list__item" style="background-image: url(./myimages/slide-image2.jpg)"></li>
+                    <li class="slider-list__item" style="background-image: url(./myimages/slide-image3.jpg)"></li>
+                    <li class="slider-list__item" style="background-image: url(./myimages/slide-image4.jpg)"></li>
                 </ul>
-                <div class="slider__nav-bar"><a class="nav-control"></a><a class="nav-control"></a><a class="nav-control"></a><a class="nav-control"></a></div>
-                <div class="slider__controls"><a class="slider__arrow slider__arrow_prev"></a><a class="slider__arrow slider__arrow_next"></a></div>
+                <div class="slider__nav-bar"><a class="nav-control"></a><a class="nav-control"></a><a
+                        class="nav-control"></a><a class="nav-control"></a></div>
+                <div class="slider__controls"><a class="slider__arrow slider__arrow_prev"></a><a
+                        class="slider__arrow slider__arrow_next"></a></div>
             </div>
             <div class="header-line">
                 <h2>Get over the old methods and be the part of revolution</h2>
             </div>
         </div>
     </div>
+    <!--===========================================================================-->
     <!--Lower Section-->
     <div class="lower">
         <div class="btns">
@@ -91,12 +100,89 @@
                 </div>
             </div>
         </div>
-        <div class="aboutUs">
-            <div class="aboutUs-cont">
-                <div class="aboutUs-text"></div>
-                <button id="about">About Us</button>
+        <!--===========================================================================-->
+        <div class="features">
+            <div class="features-heading" id="feature_block">
+                <h2>Our Key Features</h2>
+            </div>
+            <div class="features-cont">
+                <div class="feature-box" id="start">
+                    <div class="feature-icon">1</div>
+                    <div class="feature-content">
+                        <h3>Service name</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    </div>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">2</div>
+                    <div class="feature-content">
+                        <h3>Service name</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    </div>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">3</div>
+                    <div class="feature-content">
+                        <h3>Service name</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    </div>
+                </div>
+                <div class="feature-box" id="end">
+                    <div class="feature-icon">4</div>
+                    <div class="feature-content">
+                        <h3>Service name</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <!--===========================================================================-->
+        <div class="pricing" >
+            <div class="pricing-table" id="Pricing_block">
+                <div class="pricing-heading">
+                    <h2>Pricing Scheme</h2>
+                </div>
+                <div class="pricing-card" id="first-card">
+                    <i class="fas fa-paper-plane" style="font-size: 3rem; margin-top: 20px;"></i>
+                    <h2 class="pricing-card-header">Basic</h2>
+                    <div class="price"><sup>Rs</sup>3,000<span>/MO</span></div>
+                    <ul>
+                        <li><strong>1</strong> Domain Name</li>
+                        <li><strong>3</strong> Doctors</li>
+                        <li><strong>50</strong> Patients</li>
+                    </ul>
+                </div>
+
+                <div class="pricing-card" id="second-card">
+                    <i class="fas fa-plane-departure" style="font-size: 3rem; margin-top: 20px;"></i>
+                    <h2 class="pricing-card-header">Standard</h2>
+                    <div class="price"><sup>Rs</sup>10,000<span>/MO</span></div>
+                    <ul>
+                        <li><strong>1</strong> Domain Name</li>
+                        <li><strong>15</strong> Doctors</li>
+                        <li><strong>200</strong> Patients</li>
+                    </ul>
+                </div>
+
+                <div class="pricing-card" id="third-card">
+                    <i class="fas fa-rocket" style="font-size: 3rem; margin-top: 20px;"></i>
+                    <h2 class="pricing-card-header">Premium</h2>
+                    <div class="price"><sup>Rs</sup>30,000<span>/MO</span></div>
+                    <ul>
+                        <li><strong>1</strong> Domain Name</li>
+                        <li><strong>100</strong> Doctors</li>
+                        <li><strong>1000</strong>Patients</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="aboutus" id="Aboutus_block">
+            <div class="aboutus-blurimage">
+                <h2>About US</h2>
+            </div>
+        </div>
+        <!--===========================================================================-->
         <div class="footer">
             <div class="details">
                 <div class="phone">
@@ -111,7 +197,8 @@
             </div>
             <p id="copyright">&copy; Copyright 2021 Project_Health</p>
         </div>
-    </div>  
+    </div>
     <script type="text/javascript" src="./script/HomePageFinal.js"></script>
 </body>
+
 </html>

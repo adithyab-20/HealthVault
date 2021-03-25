@@ -1,6 +1,13 @@
 *{
     font-family: 'Nunito', sans-serif;
 }
+body::-webkit-scrollbar {
+    display: none;
+  }
+
+html {
+    scroll-behavior: smooth;
+  }
 
 body{
     margin: 0;
@@ -41,15 +48,14 @@ body{
     display: flex;
 }
 
-.nav-btn-set1 button{
+.nav-btn-set1 a{
     font-size: 20px;
     margin:0 10px;
     padding: 5px 20px;
     background: transparent;
-    border: none;
-    outline: none;
     text-align: center;
     color: white;
+    text-decoration: none;
 }
 
 .contact-details{
@@ -81,10 +87,13 @@ body{
 }
 
 .header-line h2{
-    font-size: 28px;
+    font-size: 30px;
     color: white;
-    font-family: cursive;
+    letter-spacing: 2px;
+    font-weight: 600;
 }
+
+/*=============================================================================*/
 
 .lower{
     width: 100%;
@@ -181,8 +190,20 @@ body{
     width: 100%;
   }
 
+.first .back{
+    background-color: rgba(60, 105, 151, 0.8);
+}
+
+.second .back{
+    background-color: rgba(217, 246, 121, 0.8);
+}
+
+.third .back{
+    background-color: rgba(2, 75, 70, 0.7);;
+}
+
   .content-back h2{
-      margin-top: 70px;
+      margin-top: 50px;
   }
 
   .content-back i{
@@ -206,7 +227,6 @@ body{
   }
   .first:hover > .back{
     transform: perspective(600px) rotateY(0deg);
-    background-color: rgba(60, 105, 151, 0.8);
   }
 
   .second:hover > .front{
@@ -214,7 +234,6 @@ body{
   }
   .second:hover > .back{
     transform: perspective(600px) rotateY(0deg);
-    background-color: rgba(217, 246, 121, 0.8);
   }
 
   .third:hover > .front{
@@ -222,7 +241,21 @@ body{
   }
   .third:hover > .back{
     transform: perspective(600px) rotateY(0deg);
-    background-color: rgba(2, 75, 70, 0.7);
+  }
+
+  .content-back-img{
+    width: 100px;
+    height: 100px;
+    background: #f08700;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-top: 30px;
+    border-radius: 50%;
+  }
+
+  .content-back-img img{
+      background-size: 100% 100%;
+      border-radius: 50%;
   }
 
 .questions{
@@ -263,42 +296,259 @@ body{
     line-height: 10px;
 }
 
-.aboutUs{
+/*Features Section=======================================================================================================*/
+.features{
     width: 100%;
     height: 650px;
     /*background-color: darkseagreen;*/
 }
 
-.aboutUs-cont{
-    width: 94%;
-    height: 530px;
-    margin-top: 40px;
-    margin-left: 3%;
+.features-heading{
+    width: 100%;
+    height: 70px;
+    text-align: center;
+    font-size: 24px;
+    position: absolute;
+    margin-top: 5px;
+    /*background-color:cornflowerblue;*/
+}
+
+.features-cont{
+    width: 100%;
+    height: 550px;
+    margin-top: 85px;
+    /*margin-left: 3%;*/
     position: absolute;
     background-image: url(../myimages/nastuh-abootalebi-eHD8Y1Znfpk-unsplash.jpg);
     background-size: 100% 100%;
-    border-radius: 20px;
-    box-shadow:  0 19px 38px rgba(0, 0, 0, 1), 0 15px 15px rgba(0, 0, 0, 0.22);
+    /*border-radius: 20px;*/
+    /*box-shadow:  0 19px 38px rgba(0, 0, 0, 1), 0 15px 15px rgba(0, 0, 0, 0.22);*/
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.aboutUs-text{
-
+#start{
+    margin-left: 30px;
+}
+#end{
+    margin-right: 40px;
 }
 
-#about{
-    font-size: 24px;
-    margin-top:400px;
-    margin-left: 85%;
+.features-cont .feature-box{
+    width: 300px;
+    height: 390px;
+    position: relative;
+    margin-top:70px;
+    box-sizing: border-box;
+    border-radius: 30px;
+    padding-top: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    box-shadow: 0px 5px 15px rgba(37, 37, 37, 0.9);
+    overflow: hidden;
+    text-align: center;
+    cursor:pointer;
+}
+
+.features-cont .feature-box .feature-icon{
+    width: 80px;
+    height: 80px;
+    position: relative;
+    color: #fff;
+    background-color: #000;
+    border-radius: 50%;
+    font-size: 40px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50%;
     transform: translateX(-50%);
-    padding: 8px 40px;
-    font-weight: 700;
-    color: black;
-    background-color: white;
-    outline: none;
-    border: none;
-    border-radius: 10px;
+    position: absolute;
+    transition: 1s;
 }
 
+.features-cont .feature-box:nth-child(1) .feature-icon{
+    box-shadow: 0 0 0 0 rgba(233, 30, 99, 0.8);
+    background: rgba(233, 30, 99, 0.8);
+}
+.features-cont .feature-box:nth-child(1):hover .feature-icon{
+    box-shadow: 0 0 0 400px rgba(233, 30, 99, 0.8);
+}
+
+.features-cont .feature-box:nth-child(2) .feature-icon{
+    box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.8);
+    background: rgba(33, 150, 243, 0.8);
+}
+.features-cont .feature-box:nth-child(2):hover .feature-icon{
+    box-shadow: 0 0 0 400px rgba(33, 150, 243, 0.8);
+}
+
+.features-cont .feature-box:nth-child(3) .feature-icon{
+    box-shadow: 0 0 0 0 rgba(35, 230, 41, 0.8);
+    background: rgba(35, 230, 41, 0.8);
+}
+.features-cont .feature-box:nth-child(3):hover .feature-icon{
+    box-shadow: 0 0 0 400px rgba(35, 230, 41, 0.8);
+}
+
+.features-cont .feature-box:nth-child(4) .feature-icon{
+    box-shadow: 0 0 0 0 rgba(255, 255, 102, 0.8);
+    background: rgba(255, 255, 102, 0.8);
+}
+.features-cont .feature-box:nth-child(4):hover .feature-icon{
+    box-shadow: 0 0 0 400px rgba(255, 255, 102, 0.8);
+}
+
+.features-cont .feature-box .feature-content{
+    position: absolute;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 100px;
+    z-index: -20px;
+    transition: 0.5s;
+}
+.features-cont .feature-box:hover .feature-content{
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+}
+/*pricing table section===========================================================================================*/
+.pricing{
+    width: 100%;
+    height: 660px;
+    margin-top: 20px;
+    background-color:white;
+}
+
+.pricing-heading{
+    height: 70px;
+    width: 100%;
+    /*background:tan;*/
+    position: absolute;
+}
+.pricing-heading h2{
+    width: 100%;
+    font-size: 32px;
+    text-align: center;
+}
+
+.pricing-table{
+    width: 94%;
+    height: 610px;
+    margin-top: 20px;
+    margin-left: 3%;
+    position: absolute;
+    /*background:greenyellow;*/
+    border-radius: 20px;
+    /*box-shadow:  0 19px 38px rgba(0, 0, 0, 1), 0 15px 15px rgba(0, 0, 0, 0.22);*/
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.pricing-table .pricing-card{
+    width: 25%;
+    height: 500px;
+    position: absolute;
+    margin-top:90px;
+    box-sizing: border-box;
+    border-radius: 30px;
+    padding-top: 10px;
+    background-image: linear-gradient(#ff00cc,#333399);
+    color: white;
+    /*box-shadow: 0px 5px 15px rgba(37, 37, 37, 0.9);*/
+    overflow: hidden;
+    text-align: center;
+    cursor:pointer;
+    transition: 0.5s;
+}
+
+.pricing-table .pricing-card i{
+    width: 80px;
+    height: 80px;
+    position: relative;
+    color: #fff;
+    background-image: linear-gradient(#f12711,#f5af19);
+    border-radius: 50%;
+    font-size: 40px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    transition: 1s;
+}
+
+.pricing-table .pricing-card .pricing-card-header{
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+
+.pricing-table .pricing-card .price{
+    font-size:40px;
+    letter-spacing: 1px;
+}
+
+.price sup, .price span{
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+#first-card{
+    margin-left: 9%
+}
+
+#second-card{
+    margin-left: 37%;
+}
+
+#third-card{
+    margin-left: 65%;
+}
+
+.pricing-table .pricing-card:hover{
+    transform: scale(1.1);
+}
+
+.pricing-table .pricing-card ul{
+    list-style: none;
+    margin-left: 46%;
+    margin-top: 50px;
+    transform: translateX(-50%);
+}
+
+.pricing-table .pricing-card li{
+    font-size: 18px;
+    line-height: 30px;
+}
+
+/*About-Us section===================================================================================================*/
+.aboutus{
+    width: 100%;
+    height: 700px;
+    background-image: url(../myimages/pexels-alex-azabache-4039921.jpg);
+    background-size: 100% 100%;
+    margin-bottom: 30px;
+}
+
+.aboutus-blurimage{
+    width: 100%;
+    height: 100%;
+    background: rgba(60, 105, 151, 0.4);
+}
+
+.aboutus-blurimage h2{
+    width: 100%;
+    font-size: 30px;
+    position: absolute;
+    text-align: center;
+    margin-top: 30px;
+}
+
+
+/*footer section===================================================================================================*/
 .footer{
     width: 100%;
     height: 100px;
