@@ -8,6 +8,9 @@ class MyAccountManager(BaseUserManager):
         if not email:
             raise ValueError("Users must have an email Address!")
 
+        if not other_fields.get('full_name'):
+            raise ValueError("Please enter your full name.")
+
         email = self.normalize_email(email)
         user = self.model(
             email = email, **other_fields)
@@ -16,13 +19,29 @@ class MyAccountManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password, **other_fields):
+        other_fields.setdefault('is_admin', True)
+        other_fields.setdefault('is_superuser', True)
+        other_fields.setdefault('is_active', True)
+        other_fields.setdefault('is_staff', True)
+        
+        if other_fields.get('is_staff') is not True:
+            raise ValueError(
+                "Superuser must be assigned to is_staff=True"
+            )
+        
+        if other_fields.get('is_superuser') is not True:
+            raise ValueError(
+                "Superuser must be assigned to is_superuser=True"
+            )
+
+        if other_fields.get('is_admin') is not True:
+            raise ValueError(
+                "Superuser must be assigned to admin=True"
+            )
         user = self.create_user(
             email, password, **other_fields,
         )
 
-        user.is_admin = True
-        user.is_staff = True
-        user.is_superuser = True
         user.save(using=self._db)
         return user
 
@@ -45,7 +64,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     objects = MyAccountManager() 
 
     def __str__(self):
-        return self.email
+        return self.full_name
 
     def has_perm(self, perm, obj=None):
         return self.is_admin
