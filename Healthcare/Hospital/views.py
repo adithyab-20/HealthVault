@@ -7,6 +7,11 @@ def Login(request):
         if form.is_valid():
             form.save()
             H_username = form.cleaned_data.get('H_username')
+            print(H_username)
     else:
         form = UserCreationForm()
     return render(request, 'Hospital_login.html', {'form': form})
+
+
+def test(request):
+    return render(request, 'test.html')

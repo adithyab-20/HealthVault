@@ -70,6 +70,12 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL = 'Patient.Account'
+
+AUTHENTICATION_BACKENDS = (
+    ('django.contrib.auth.backends.ModelBackend'),
+)
+
 WSGI_APPLICATION = 'Healthcare.wsgi.application'
 
 

@@ -1,17 +1,27 @@
 from django.shortcuts import render
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
+from Patient.forms import SignupForm
 from django.contrib import messages
 
 def Signup(request):
+    context = {}
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
-            Patient_name = form.cleaned_data.get('Patient_name')
-            messages.success(request, f'Account created for {Patient_name}!')
+            Patient_fullname = form.cleaned_data.get('full_name')
+            Patient_email = form.cleaned_data.get('email')
+            raw_password = form.cleaned_data.get('password1')
+            account = authenticate(email=Patient_email, password=raw_password)
+            login(request,account)
+            messages.success(request, f'Account created for {Patient_fullname}!')
+
+        else:
+            context['signup_form'] = form
     else:
-        form = UserCreationForm()
-    return render(request, 'Patient_Signup.html', {'form': form})
+        form = SignupForm()
+        context['signup_form'] = form
+    return render(request, 'Patient_Signup.html', context)
 
 def Login(request):
     if request.method == 'POST':

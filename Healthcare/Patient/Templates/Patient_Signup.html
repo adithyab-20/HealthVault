@@ -9,6 +9,8 @@
 
 </head>
 <body>
+  <form action ="{% url 'Patient:Login' %}" method="POST">
+    {% csrf_token %}
   <div class="cont">
     <div class="form sign-in">
       <h2>Sign In.</h2>
@@ -23,7 +25,7 @@
       <button class="submit" type="button">Sign In</button>
       <p class="forgot-pass">Forgot Password?</p>
     </div>
-
+</form>
     <div class="sub-cont">
       <div class="img">
         <div class="img-text m-up">
@@ -39,9 +41,12 @@
           <span class="m-in">Sign In</span>
         </div>
       </div>
+    
+    <form action ="{% url 'Patient:Signup' %}" method="POST">
+        {% csrf_token %}
       <div class="form sign-up">
         <h2>Sign Up.</h2>
-        <label>
+        <!-- <label>
           <span>Your Full Name</span>
           <input type="text">
         </label>
@@ -56,8 +61,26 @@
         <label>
           <span>Confirm Password</span>
           <input type="password">
-        </label>
-        <button type="button" class="submit">Click to Sign Up!</button>
+        </label> -->
+       
+        {% for field in signup_form %}
+        
+          <label>
+          {{ field.label_tag }}
+          {{field}}
+          </label>
+          {% if field.helptext %}
+            <small style="color: grey";>{{ field.help_text }}</small>
+          {% endif%}
+
+          {% for error in field.errors %}
+            <p style="color: red";>{{error}}</p>  
+          {% endfor %}
+        
+        {% endfor %}
+
+        <button type="submit" class="submit">Click to Sign Up!</button>
+        </form>
       </div>
     </div>
   </div>
