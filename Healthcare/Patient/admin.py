@@ -20,7 +20,7 @@ class AccountAdminConfig(UserAdmin):
     
     add_fieldsets = (
         (None, {'classes': ('wide',),
-        'fields': ('email', 'full_name', 'password1', 'password2', 'is_active', 'is_staff',)
+        'fields': ('email', 'full_name', 'password1', 'password2', 'is_active', 'is_staff', 'is_admin')
         }),
     )
 admin.site.register(Account, AccountAdminConfig)
