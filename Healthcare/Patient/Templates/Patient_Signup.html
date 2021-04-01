@@ -66,16 +66,21 @@
         {% for field in signup_form %}
         
           <label>
+            <div style="margin: 25px auto 0;">
           {{ field.label_tag }}
           {{field}}
+          </div>
           </label>
-          {% if field.helptext %}
+          <!-- {% if field.helptext %}
             <small style="color: grey";>{{ field.help_text }}</small>
-          {% endif%}
-
-          {% for error in field.errors %}
-            <p style="color: red";>{{error}}</p>  
-          {% endfor %}
+          {% endif%} -->
+          <label>
+           <small style="color: red;"> {% for error in field.errors %}
+            {{error}}
+            {% endfor %}
+          </small>
+        </label>
+          
         
         {% endfor %}
 
