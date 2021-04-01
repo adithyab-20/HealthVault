@@ -42,7 +42,7 @@
         </div>
       </div>
     
-    <form action ="{% url 'Patient:Signup' %}" method="POST">
+    <form id="patient-signup-form" action="{% url 'Patient:Signup' %}" method="POST">
         {% csrf_token %}
       <div class="form sign-up">
         <h2>Sign Up.</h2>
@@ -66,21 +66,18 @@
         {% for field in signup_form %}
         
           <label>
-            <div style="margin: 25px auto 0;">
+            <div id="p-form">
           {{ field.label_tag }}
           {{field}}
           </div>
           </label>
-          <!-- {% if field.helptext %}
-            <small style="color: grey";>{{ field.help_text }}</small>
-          {% endif%} -->
-          <label>
+          <!-- <label>
            <small style="color: red;"> {% for error in field.errors %}
             {{error}}
             {% endfor %}
           </small>
         </label>
-          
+           -->
         
         {% endfor %}
 
@@ -91,4 +88,36 @@
   </div>
 <script type="text/javascript" src="{% static 'Patient_signup.js' %}"></script>
 </body>
+<script type="text/javascript">
+
+$(document).on('submit', '#patient-signup-form', function(event){
+  event.preventDefault();
+  var form_id = $("#patient-signup-form");
+
+  $.ajax({
+    url: "{% Signup %}",
+    data: form_id.serialize(),
+    type: "POST",
+    dataType: "json",
+    header: {'X-CSRFToken': '{{% csrf_token %}}'},
+    success: function(response){
+      var successs = response['success'];
+
+      if(success){
+        alert("Form is valid and the user created successfully!");
+      }
+
+      else{
+        console.log("Response form with validation errors: " + response['form_html']);
+        $("#p-form").replaceWith(response['form_html']); 
+      }
+
+    },
+    failure: function(error){
+      alert("Error occured while requesting django url");
+    }
+  
+  });
+});
+</script>
 </html>
