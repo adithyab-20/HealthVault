@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Doctor Personal Information</title>
+    </head>
+    <body>
+        <form action ="{% url 'Doctor:Information' %}" method="POST">
+            {% csrf_token %}
+            <div class="form doctor-information">
+              <h2>Doctor Information.</h2>
+              <label>
+                <span>Full name</span>
+                <input type="text" name="full_Name">
+              </label>
+              <label>
+                <span>Doctor ID</span>
+                <input type="number" name="Doctor_ID">
+              </label>
+              <label>
+                  <span>Specialization</span>
+                  <input type="text" name="Specialization">
+              </label>
+              <label>
+                <span>Education</span>
+                <input type="text" name="Education">
+            </label>
+              <label>
+                <span>Overview</span>
+                <input type="text" name="Overview">
+            </label>
+            <label>
+                <span>Work Experience</span>
+                <input type="text" name="Work_Experience">
+            </label>
+            {{form}}
+              <button class="submit" type="button">Submit</button>
+            </div>
+        </form>
+    </body>
+</html>

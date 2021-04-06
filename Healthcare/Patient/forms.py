@@ -37,7 +37,7 @@ class PatientMedicalHistoryForm(forms.Form):
     Drug_Allergies = forms.CharField(widget=forms.Textarea)
     Current_Medications = forms.CharField(widget=forms.Textarea)
     class Meta:
-        # model = Patient_medical_history
+        model = Patient_medical_history
         fields = ("Full_name", "DOB", "Age", "Gender", "Height", "Weight", "Blood_Group", "Alchohol_Consumption", "Smoking_Habit", "Drug_Allergies", "Current_Medications",)
         widgets = {
             'text': forms.Textarea(attrs={'rows':5, 'cols':10}), #this is changeble.
