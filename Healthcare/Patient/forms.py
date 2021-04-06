@@ -4,7 +4,9 @@ from django.contrib.auth.forms import UserCreationForm
 from Patient.models import Account
 from django.forms import ModelForm
 from django.contrib.auth.forms import forms
-#from Patient.models import Patient_medical_history
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
+
 
 
 class SignupForm(UserCreationForm):
@@ -12,9 +14,26 @@ class SignupForm(UserCreationForm):
     email = forms.EmailField(max_length=60, help_text="Required. Please add a valid email address")
     full_name = forms.CharField(max_length=100, help_text="Full Name")
     USERNAME_FIELD = 'email'
+    
     class Meta:
         model = Account
         fields = ("full_name", "email", "password1", "password2",)
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'POST'
+        self.helper.form_id = 'id-SignupForm'
+        # self.helper.attrs = {
+        #     'novalidate': ''
+        # }
+        for fieldname in ['full_name', 'email', 'password1', 'password2']:
+            self.fields[fieldname].help_text = None
+        
+        self.helper.add_input(Submit('signup', 'Click to Signup!', css_id='ajax_save', css_class='submit'))
+
+
+
 
 class PatientMedicalHistoryForm(forms.Form):
 

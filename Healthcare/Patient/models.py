@@ -8,9 +8,6 @@ class MyAccountManager(BaseUserManager):
         if not email:
             raise ValueError("Users must have an email Address!")
 
-        if not other_fields.get('full_name'):
-            raise ValueError("Please enter your full name.")
-
         email = self.normalize_email(email)
         user = self.model(
             email = email, **other_fields)
@@ -48,7 +45,6 @@ class MyAccountManager(BaseUserManager):
 
 class Account(AbstractBaseUser, PermissionsMixin):
     email                   = models.EmailField(verbose_name="email", max_length=60, unique=True)
-    # username                = models.CharField(max_length=30, unique=True)
     date_joined             = models.DateTimeField(verbose_name="date joined", auto_now_add=True)
     last_login              = models.DateTimeField(verbose_name="last login", auto_now_add=True)
     is_admin                = models.BooleanField(default=False)
@@ -59,7 +55,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
 
-    REQUIRED_FIELDS = ['full_name']
+    REQUIRED_FIELDS = []
 
     objects = MyAccountManager() 
 
