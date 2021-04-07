@@ -315,6 +315,8 @@
   .invalid-feedback {
     color: rgb(214, 0, 11);
     margin: 0.5rem 0;
-    padding: 0;
+    padding: 0.2;
 
   }
+
+  

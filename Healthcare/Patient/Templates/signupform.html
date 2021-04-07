@@ -16,7 +16,7 @@
 
             $.ajax({
         
-            url: "{% url 'Patient:Signup' %}",
+            url: "{% url 'Patient:login' %}",
             data: form_id.serialize(),
             type: "POST",
             dataType: "json",

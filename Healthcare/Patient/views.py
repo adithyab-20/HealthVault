@@ -8,6 +8,9 @@ from crispy_forms.utils import render_crispy_form
 from django.http import HttpResponse
 import json
 from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth import login
+from django.contrib.auth.forms import AuthenticationForm
+
 
 # def Signup(request):
 #     context = {}
@@ -41,45 +44,36 @@ from django.views.decorators.csrf import csrf_protect
 #     return render(request, 'Patient_Signup.html', {'form': form})
     
 
-# @json_view
-# def Signup(request):
-#     form = SignupForm(request.POST or None)
-#     context = {}
-#     if form.is_valid():
-#         form.save()
-#         Patient_fullname = form.cleaned_data.get('full_name')
-#         Patient_email = form.cleaned_data.get('email')
-#         raw_password = form.cleaned_data.get('password1')
-#         account = authenticate(email=Patient_email, password=raw_password)
-#         login(request,account)
-#         return {'success' : True }
+def loginView(request):
 
+    context = {}
 
-#     ser_instance = serializers.serialize('json', [ instance, ])
-    
-#     context.update(csrf(request))
-
-#     form_html = render(request, 'Patient_Signup.html', context)
-    
-#     return {'success': False, 'form_html': form_html}
-
-
-def Signup(request):
     if request.method == 'POST':
+        signin_form = AuthenticationForm(data=request.POST)
+        if signin_form.is_valid():
+            user = signin_form.get_user()
+            login(request, user)
+            return redirect('/Dashboard')
+        else:
+            context['signin_form'] = signin_form
+            context['signin_form_errors'] = signin_form.errors
+            print(context['signin_form_errors'])
+    else:
+        signin_form = AuthenticationForm()
+        context['signin_form'] = signin_form
+
+    if request.method == 'POST' and request.is_ajax():
         resp = {}
         form = SignupForm(data=request.POST)
         if form.is_valid():
             resp['success'] = True
-            print("Form Valid!")
             form.save()
             Patient_fullname = form.cleaned_data.get('full_name')
             Patient_email = form.cleaned_data.get('email')
             raw_password = form.cleaned_data.get('password1')
             account = authenticate(email=Patient_email, password=raw_password)
             login(request,account)
-            print("Sucess!")
             
-
         else:
             resp['success'] = False
             print(form.errors)
@@ -92,6 +86,6 @@ def Signup(request):
 
     
     form = SignupForm()
-
-    return render(request, 'signupform.html', {'form': form})
+    context['form'] = form
+    return render(request, 'signupform.html', context)
 

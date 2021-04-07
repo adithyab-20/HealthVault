@@ -10,17 +10,31 @@
 </head>
 <body>
   <div class="cont">
+    <form method="POST">
+      {% csrf_token %}
     <div class="form sign-in">
       <h2>Sign In.</h2>
+
       <label>
-        <span>Email</span>
-        <input type="email" name="email">
+        {% for field in signin_form %}
+       
+        {{ field.label_tag }}
+        {{field}}
+       
+        {% endfor %}
       </label>
+      
       <label>
-        <span>Password</span>
-        <input type="password" name="password">
-      </label>
-      <button class="submit" type="button">Sign In</button>
+        <div class="nferror" style="color: rgb(214, 0, 11);
+        margin: 0.5rem 0;
+        padding: 0">
+         <strong> {{signin_form.non_field_errors|striptags}}</strong>
+          </div>
+        </label>
+  
+     
+      <button class="submit" type="submit">Sign In</button>
+    </form>
       <p class="forgot-pass">Forgot Password?</p>
     </div>
     <div class="sub-cont">
