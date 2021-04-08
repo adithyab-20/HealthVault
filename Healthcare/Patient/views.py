@@ -54,11 +54,11 @@ def Medical_History_Entry(request):
             Patient_smoking = form.cleaned_data.get('Smoking_Habit')
             Patient_drugallergies = form.cleaned_data.get('Drug_Allergies')
             Patient_medications = form.cleaned_data.get('Current_Medications')
-            messages.success(request, f'Medical History Form submitted by {Patient_Fullname}!')
 
         else:
             context['form'] = form
+            print(form.errors)
     else:
-        form = form
+        form = PatientMedicalHistoryForm()
         context['form'] = form
     return render(request, 'Medical_History_form.html', context)

@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from Patient.models import Account
 from django.forms import ModelForm
 from django.contrib.auth.forms import forms
-#from Patient.models import Patient_medical_history
+from Patient.models import Patient_medical_history
 
 
 class SignupForm(UserCreationForm):

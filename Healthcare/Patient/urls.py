@@ -6,4 +6,5 @@ app_name = "Patient"
 urlpatterns = [
     path("", views.Signup, name="Signup"),
     path("", views.Login, name="Login"),
+    path("", views.Medical_History_Entry, name="Medical_History_Entry"),
 ]

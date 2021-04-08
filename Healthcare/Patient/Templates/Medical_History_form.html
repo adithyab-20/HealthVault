@@ -1,59 +1,19 @@
+{%load crispy_forms_tags %}
 <html>
     <head>
         <title>Medical History</title>
     </head>
     <body>
-        <form action ="{% url 'MedicalHistory:Entries' %}" method="POST">
-            {% csrf_token %}
-            <div class="form medical-history">
-              <h2>Medical History.</h2>
-              <label>
-                <span>Full name</span>
-                <input type="text" name="Full_name">
-              </label>
-              <label>
-                <span>Date of Birth</span>
-                <input type="text" name="DOB">
-              </label>
-              <label>
-                  <span>Age</span>
-                  <input type="number" name="Age">
-              </label>
-              <label>
-                <span>Gender</span>
-                <input type="text" name="Gender">
-            </label>
-              <label>
-                <span>Height</span>
-                <input type="number" name="Height">
-            </label>
-            <label>
-                <span>Weight</span>
-                <input type="number" name="Weight">
-            </label>
-            <label>
-                <span>Blood Group</span>
-                <input type="text" name="Blood_Group">
-            </label>
-            <label>
-                <span>Alchohol Consumption</span>
-                <input type="text" name="Alchohol_Consumption">
-            </label>
-            <label>
-                <span>Smoking Habit</span>
-                <input type="text" name="Smoking_Habit">
-            </label>
-            <label>
-                <span>Drug Allergies</span>
-                <input type="text" name="Drug_Allergies">
-            </label>
-            <label>
-                <span>Current Medications</span>
-                <input type="text" name="Current_Medications">
-            </label>
-            {{form}}
-              <button class="submit" type="button">Submit</button>
-            </div>
-        </form>
+        <div class="content-section">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button type="submit" class="submit">Submit</button>
+                </div>
+            </form>
+        </div>
     </body>
 </html>
