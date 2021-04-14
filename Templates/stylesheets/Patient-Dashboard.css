@@ -1,0 +1,402 @@
+*{
+    font-family: 'Nunito', sans-serif;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color:#ffa366;
+}
+
+.main{
+    width: 90%;
+    height: auto;
+    margin-left: 5%;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 1px 3px 7px rgba(0, 0 , 0, 0.8 );
+    /*overflow: hidden;*/
+}
+.header{
+    width: 100%;
+    height: 25vh;
+    /*background-color: seagreen;*/
+    border-radius: 20px 20px 0px 0px;
+}
+
+.header .patient-name{
+    width: auto;
+    margin-left: 5%;
+    margin-top: 20px;
+    /*background-color: white;*/
+    position: absolute;
+    display: flex;
+}
+
+.header .patient-name .photo{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color:#ffbb33;
+}
+
+.header .patient-name h2{
+    margin-left: 20px;
+    font-size: 26px;
+    position: relative;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.header .add-btn{
+    float:right;
+    /*background-color: white;*/
+    margin-top: 45px;
+    margin-right: 5%;
+
+}
+
+.header .add-btn label{
+    font-size: 16px;
+    color: black;
+    padding: 10px 15px;
+    outline: none;
+    border: none;
+    border-radius: 30px;
+    background-color: #ffbb33;
+}
+
+.header .add-btn label:hover{
+    transform: scale(1.1);
+    box-shadow: 0px 1px 2px rgba(0, 0 ,0, 0.8);
+}
+
+.header .nav{
+    margin-top: 120px;
+    margin-left: 45%;
+    transform: translateX(-50%);
+    position: absolute;
+    background-color: #e0ebeb;
+    border-radius: 5px;
+}
+
+.header .nav input{
+    margin: 0;
+    padding: 4px 30px; 
+    border-radius: 5px;
+    font-weight:600;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+    background: transparent;
+}
+
+.header .nav input:hover{
+    background-color: white;
+}
+
+.content1{
+    width: 100%;
+    height: auto;
+    /*background-color:slateblue;*/
+}
+
+.content1 .doc{
+    width: 100%;
+    height: 230px;
+    /*background-color:tomato;*/
+}
+
+.content1 .doc label{
+    font-size: 22px;
+    letter-spacing: 1px;
+    position: absolute;
+    margin-top: 40px;
+    margin-left: 10%;
+}
+
+.content1 .doc span{
+    width: 70%;
+    height: 2px;
+    margin-left: 10%;
+    margin-top: 70px;
+    background: #e0ebeb; 
+    position: absolute;
+}
+
+.content1 .doc .doctor{
+    width: 25%;
+    height: 120px;
+    background-color: #e0ebeb;
+    margin-left: 10%;
+    margin-top: 90px;
+    position: absolute;
+    border-radius: 20px;
+    display: flex;
+}
+
+.content1 .doc .doctor .icon{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    /*background-color:#ffbb33;*/
+    margin-top: 30px;
+    margin-left: 10%;
+}
+
+.content1 .doc .doctor .icon i{
+    font-size: 2.5rem;
+    margin-left: 13px;
+    margin-top: 6px;
+}
+
+.content1 .doc .doctor .doctor-name{
+    margin-left: 15%;
+    margin-top: 25px;
+    line-height: 10px;
+    text-align: center;
+}
+
+.content1 .doc .doctor .doctor-name p{
+    font-size: 12px;
+}
+
+.content1 .doc .doctor .chat-sym{
+    width: 50px;
+    height: 50px;
+    background-color: #ffbb33;
+    margin-left: 15%;
+    margin-top: 80px;
+    border-radius: 50%;
+}
+
+.content1 .doc .doctor .chat-sym i{
+    font-size: 1.2em;
+    margin-top: 17px;
+    margin-left: 16px;
+    
+}
+
+.content1 .gen-info{
+    width: 100%;
+    height: 350px;
+    /*background-color:violet;*/
+}
+
+.content1 .gen-info label{
+    font-size: 22px;
+    letter-spacing: 1px;
+    position: absolute;
+    margin-top: 30px;
+    margin-left: 10%;
+}
+
+.content1 .gen-info span{
+    width: 70%;
+    height: 2px;
+    margin-left: 10%;
+    margin-top: 60px;
+    background: #e0ebeb; 
+    position: absolute;
+}
+
+.content1 .gen-info .gen-info-table{
+    margin-top: 90px;
+    margin-left: 15%;
+    position: absolute;
+}
+
+.content1 .gen-info .gen-info-table table td{
+    width: 600px;
+    line-height: 30px;
+    text-align: center;
+    border-bottom: 1px solid #e0ebeb;
+    font-size: 14px;
+    }
+    /*tbody tr:nth-child(even) {
+    background: #e8e7e1;
+    }*/
+
+.content1 .gen-info .gen-info-table .data1{
+    color: #85adad;
+}
+
+.content1 .med-info{
+    width: 100%;
+    height: 350px;
+    /*background-color:yellowgreen;*/
+}
+
+.content1 .med-info label{
+    font-size: 22px;
+    letter-spacing: 1px;
+    position: absolute;
+    margin-top: 30px;
+    margin-left: 10%;
+}
+
+.content1 .med-info span{
+    width: 70%;
+    height: 2px;
+    margin-left: 10%;
+    margin-top: 60px;
+    background: #e0ebeb; 
+    position: absolute;
+}
+
+.content1 .med-info .med-info-table{
+    margin-top: 90px;
+    margin-left: 15%;
+    position: absolute;
+}
+
+.content1 .med-info .med-info-table table td{
+    width: 600px;
+    line-height: 30px;
+    text-align: center;
+    border-bottom: 1px solid #e0ebeb;
+    font-size: 14px;
+    }
+    /*tbody tr:nth-child(even) {
+    background: #e8e7e1;
+    }*/
+
+.content1 .med-info .med-info-table .data1{
+    color: #85adad;
+}
+
+.latest-diagnosis{
+    width: 100%;
+    height: auto;
+    /*background-color: aqua;*/
+    padding: 10px 0px 20px;
+    border-radius: 0px 0px 20px 20px;
+}
+.latest-diagnosis label{
+    font-size: 22px;
+    letter-spacing: 1px;
+    position: absolute;
+    margin-top: 40px;
+    margin-left: 10%;
+}
+
+.latest-diagnosis span{
+    width: 70%;
+    height: 2px;
+    margin-left: 10%;
+    margin-top: 70px;
+    background: #e0ebeb; 
+    position: absolute;
+}
+
+.latest-diagnosis .report{
+    width: 65%;
+    height: 200px;
+    margin-left: 17.5%;
+    margin-top: 120px;
+    border-radius: 20px;
+    /*background-color: coral;*/
+}
+
+.latest-diagnosis .report .bydoc{
+    width: 25%;
+    height: 200px;
+    background-color:#ffbb33;
+    margin-left: 6%;
+    float: left;
+    border-radius: 20px;
+}
+
+.latest-diagnosis .report .bydoc p{
+    text-align: center;
+}
+
+.latest-diagnosis .report .bydoc .Doc-name{
+    margin-top: 70px;
+}
+
+.latest-diagnosis .report .advice{
+    width: 60%;
+    height: 200px;
+    background-color: #ffbb33;
+    margin-right: 6%;
+    float: right;
+    border-radius: 20px;
+}
+
+.latest-diagnosis .report .advice p{
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 5%;
+    text-align: center;
+}
+
+.prescription{
+    width: 100%;
+    height: auto;
+    /*background-color: aqua;*/
+    padding: 10px 0px 20px;
+    border-radius: 0px 0px 20px 20px;
+}
+.prescription label{
+    font-size: 22px;
+    letter-spacing: 1px;
+    position: absolute;
+    margin-top: 40px;
+    margin-left: 10%;
+}
+
+.prescription span{
+    width: 70%;
+    height: 2px;
+    margin-left: 10%;
+    margin-top: 70px;
+    background: #e0ebeb; 
+    position: absolute;
+}
+
+.prescription .prescrip1{
+    width: 65%;
+    height: 200px;
+    margin-left: 17.5%;
+    margin-top: 120px;
+    border-radius: 20px;
+    /*background-color: coral;*/
+}
+
+.prescription .prescrip1 .givenby{
+    width: 25%;
+    height: 200px;
+    background-color:#ffbb33;
+    margin-left: 6%;
+    float: left;
+    border-radius: 20px;
+}
+
+.prescription .prescrip1 .givenby p{
+    text-align: center;
+}
+
+.prescription .prescrip1 .givenby .Doctor-name{
+    margin-top: 70px;
+}
+
+.prescription .prescrip1 .Pres{
+    width: 60%;
+    height: 200px;
+    background-color: #ffbb33;
+    margin-right: 6%;
+    float: right;
+    border-radius: 20px;
+}
+
+.prescription .prescrip1 .Pres p{
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 5%;
+    text-align: center;
+}
+
+
