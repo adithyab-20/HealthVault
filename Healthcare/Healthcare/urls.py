@@ -15,11 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include,path
-
+from Doctor.admin import columbia_asia, apollo
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('ColumbiaAsia-admin/', columbia_asia.urls),
+    path('Apollo-admin/', apollo.urls),
     path('Patient/', include("Patient.urls")),
     path('Doctor/', include("Doctor.urls")),
     path('Hospital/', include("Hospital.urls")),
 ]
+
+
+# admin.site.index_title = "Patient Administration"
+# admin.site.site_header = "Project Health"
+# admin.site.site_title = "Site Title Patient"
+ 
