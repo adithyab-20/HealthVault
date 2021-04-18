@@ -7,9 +7,11 @@ function forfirst(){
     document.getElementById("btn1").style.backgroundColor = "white";
     document.getElementById("btn2").style.background = "none"
     document.getElementById("btn3").style.background = "none";
-    document.getElementById("btn1").style.borderBottom = "1px solid black"
-    document.getElementById("btn2").style.borderBottom = "none"
-    document.getElementById("btn3").style.borderBottom = "none"
+    document.getElementById("btn1").style.boxShadow = "0px 0px 2px rgba(0,0,0,0.5)";
+    document.getElementById("btn2").style.boxShadow = "none";
+    document.getElementById("btn3").style.boxShadow = "none";
+
+    
 }
 
 function forsecond(){
@@ -19,9 +21,9 @@ function forsecond(){
     document.getElementById("btn1").style.background = "none";
     document.getElementById("btn2").style.backgroundColor = "white";
     document.getElementById("btn3").style.background = "none";
-    document.getElementById("btn1").style.borderBottom = "none"
-    document.getElementById("btn2").style.borderBottom = "1px solid black"
-    document.getElementById("btn3").style.borderBottom = "none"
+    document.getElementById("btn1").style.boxShadow = "none";
+    document.getElementById("btn2").style.boxShadow = "0px 0px 2px rgba(0,0,0,0.5)";
+    document.getElementById("btn3").style.boxShadow = "none";
 }
 
 function forthird(){
@@ -31,7 +33,7 @@ function forthird(){
     document.getElementById("btn1").style.background = "none";
     document.getElementById("btn2").style.background = "none";
     document.getElementById("btn3").style.backgroundColor = "white";
-    document.getElementById("btn1").style.borderBottom = "none"
-    document.getElementById("btn2").style.borderBottom = "none"
-    document.getElementById("btn3").style.borderBottom = "1px solid black"
+    document.getElementById("btn1").style.boxShadow = "none";
+    document.getElementById("btn2").style.boxShadow = "none";
+    document.getElementById("btn3").style.boxShadow = "0px 0px 2px rgba(0,0,0,0.5)";
 }

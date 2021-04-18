@@ -5,13 +5,13 @@
 body{
     margin: 0;
     padding: 0;
-    background-color:#ffa366;
+    background-color:#e0ebeb;
 }
 
 .main{
-    width: 90%;
+    width: 80%;
     height: auto;
-    margin-left: 5%;
+    margin-left: 10%;
     margin-top: 1vh;
     margin-bottom: 1vh;
     background-color: white;
@@ -38,6 +38,7 @@ body{
 .header .patient-name .photo{
     width: 80px;
     height: 80px;
+    margin-top: 10px;
     border-radius: 50%;
     background-color:#ffbb33;
 }
@@ -58,32 +59,39 @@ body{
 
 }
 
-.header .add-btn label{
+.header .add-btn button{
     font-size: 16px;
     color: black;
-    padding: 10px 15px;
+    padding: 8px 15px;
     outline: none;
     border: none;
     border-radius: 30px;
     background-color: #ffbb33;
 }
 
-.header .add-btn label:hover{
+#chat{
+    margin-right: 20px;
+}
+
+.header .add-btn button:hover{
     transform: scale(1.1);
     box-shadow: 0px 1px 2px rgba(0, 0 ,0, 0.8);
 }
 
 .header .nav{
+    width: 40%;
     margin-top: 120px;
-    margin-left: 45%;
+    margin-left: 40%;
     transform: translateX(-50%);
     position: absolute;
     background-color: #e0ebeb;
     border-radius: 5px;
+    padding: 3px 2px;
 }
 
 .header .nav input{
     margin: 0;
+    width: 32.75%;
     padding: 4px 30px; 
     border-radius: 5px;
     font-weight:600;
@@ -110,7 +118,7 @@ body{
 }
 
 .content1 .doc label{
-    font-size: 22px;
+    font-size: 24px;
     letter-spacing: 1px;
     position: absolute;
     margin-top: 40px;
@@ -118,7 +126,7 @@ body{
 }
 
 .content1 .doc span{
-    width: 70%;
+    width: 60%;
     height: 2px;
     margin-left: 10%;
     margin-top: 70px;
@@ -156,27 +164,12 @@ body{
     margin-left: 15%;
     margin-top: 25px;
     line-height: 10px;
+    letter-spacing: 1px;
     text-align: center;
 }
 
 .content1 .doc .doctor .doctor-name p{
     font-size: 12px;
-}
-
-.content1 .doc .doctor .chat-sym{
-    width: 50px;
-    height: 50px;
-    background-color: #ffbb33;
-    margin-left: 15%;
-    margin-top: 80px;
-    border-radius: 50%;
-}
-
-.content1 .doc .doctor .chat-sym i{
-    font-size: 1.2em;
-    margin-top: 17px;
-    margin-left: 16px;
-    
 }
 
 .content1 .gen-info{
@@ -186,7 +179,7 @@ body{
 }
 
 .content1 .gen-info label{
-    font-size: 22px;
+    font-size: 24px;
     letter-spacing: 1px;
     position: absolute;
     margin-top: 30px;
@@ -194,7 +187,7 @@ body{
 }
 
 .content1 .gen-info span{
-    width: 70%;
+    width: 60%;
     height: 2px;
     margin-left: 10%;
     margin-top: 60px;
@@ -204,7 +197,7 @@ body{
 
 .content1 .gen-info .gen-info-table{
     margin-top: 90px;
-    margin-left: 15%;
+    margin-left: 10%;
     position: absolute;
 }
 
@@ -230,7 +223,7 @@ body{
 }
 
 .content1 .med-info label{
-    font-size: 22px;
+    font-size: 24px;
     letter-spacing: 1px;
     position: absolute;
     margin-top: 30px;
@@ -238,7 +231,7 @@ body{
 }
 
 .content1 .med-info span{
-    width: 70%;
+    width: 60%;
     height: 2px;
     margin-left: 10%;
     margin-top: 60px;
@@ -248,7 +241,7 @@ body{
 
 .content1 .med-info .med-info-table{
     margin-top: 90px;
-    margin-left: 15%;
+    margin-left: 10%;
     position: absolute;
 }
 
@@ -267,14 +260,18 @@ body{
     color: #85adad;
 }
 
+/*===============================================================*/
+/*===============================================================*/
+
 .latest-diagnosis{
     width: 100%;
     height: auto;
     /*background-color: aqua;*/
     padding: 10px 0px 20px;
     border-radius: 0px 0px 20px 20px;
+    position: relative;
 }
-.latest-diagnosis label{
+.latest-diagnosis .heading-label{
     font-size: 22px;
     letter-spacing: 1px;
     position: absolute;
@@ -292,46 +289,45 @@ body{
 }
 
 .latest-diagnosis .report{
-    width: 65%;
-    height: 200px;
-    margin-left: 17.5%;
-    margin-top: 120px;
-    border-radius: 20px;
-    /*background-color: coral;*/
+    width: 80%;
+    height: auto;
+    margin-top: 100px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    /*background-color: blueviolet;*/
+    margin-left: 10%;
+    position: relative;
+    line-height: 25px;
+    border-bottom: 1px solid rgba(0, 0 , 0, 0.5);
 }
 
-.latest-diagnosis .report .bydoc{
-    width: 25%;
-    height: 200px;
-    background-color:#ffbb33;
-    margin-left: 6%;
-    float: left;
-    border-radius: 20px;
+.latest-diagnosis .report label{
+    width: 50%;
+    height: 25px;
+    font-size: 16px;
+    margin-left: 10%;
+    position: absolute;
+    color: #85adad;
 }
 
-.latest-diagnosis .report .bydoc p{
-    text-align: center;
+.latest-diagnosis .report input{
+    width: 20%;
+    height: 20px;
+    margin-left: 30%;
+    position: absolute;
 }
 
-.latest-diagnosis .report .bydoc .Doc-name{
-    margin-top: 70px;
+.latest-diagnosis .report textarea{
+    width: 40%;
+    margin-left: 30%;
+    position: relative;
 }
 
-.latest-diagnosis .report .advice{
-    width: 60%;
-    height: 200px;
-    background-color: #ffbb33;
-    margin-right: 6%;
-    float: right;
-    border-radius: 20px;
-}
 
-.latest-diagnosis .report .advice p{
-    width: 90%;
-    margin-left: 5%;
-    margin-top: 5%;
-    text-align: center;
-}
+
+
+/*===============================================================*/
+/*===============================================================*/
 
 .prescription{
     width: 100%;

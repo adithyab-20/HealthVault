@@ -16,8 +16,9 @@
                 <h2>Patient Name</h2>
             </div>
             <div class="add-btn">
-                <!--<input type="button" value=" Add New">-->
-                <label for=""><i class="fas fa-plus-circle"></i> Add New</label>
+                <!--<label for=""><i class="fas fa-plus-circle"></i> Add New</label>-->
+                <button id="chat"><i class="fas fa-comment-alt"></i> Chat</button>
+                <button><i class="fas fa-plus-circle"></i> Add New</button>
             </div>
             <div class="nav">
                 <input type="button" id="btn1" value="Patient Info" onclick="forfirst()">
@@ -36,7 +37,6 @@
                         <h3>Doctor Name</h3>
                         <p>Qualification</p>
                     </div>
-                    <div class="chat-sym"><i class="fa fa-comment-alt"></i></div>
                 </div>
             </div>
 
@@ -44,7 +44,7 @@
                 <label for="" id="heading2">General Information</label>
                 <span></span>
                 <div class="gen-info-table">
-                    <table width="70%" cellspacing="1">
+                    <table width="80%" cellspacing="1">
                         <tbody>
                             <tr>
                                 <td class="data1">Date of birth</td>
@@ -87,7 +87,7 @@
                 <label for="" id="heading3">Medical Information</label>
                 <span></span>
                 <div class="med-info-table">
-                    <table width="70%" cellspacing="1">
+                    <table width="80%" cellspacing="1">
                         <tbody>
                             <tr>
                                 <td class="data1">Any Previous Illness</td>
@@ -123,21 +123,43 @@
             </div>
         </div>
 
+        <!--=================================================================================-->
+
         <div class="latest-diagnosis" id="l-diagnosis">
-            <label for="">Latest Diagnosis</label>
+            <label class="heading-label" for="">Latest Diagnosis</label>
             <span></span>
             <div class="report">
-                <div class="bydoc">
-                    <p class="Doc-name"><b>By: </b>Dr. ----</p>
-                    <p><b>Date: </b>April 14, 2021</p>
-                </div>
-                <div class="advice">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                    Incidunt perferendis vel deserunt consequatur iste recusandae? 
-                    Tempore eos incidunt beatae, magni, omnis eveniet, dolore ducimus minus cum dolorum fuga porro error.</p>
-                </div>
+                <div class="labels"></div>
+                <label for="">Doctor Name</label>
+                <input type="text">
+                <br>
+                <br>
+                <label for="">Doctor ID</label>
+                <input type="text">
+                <br>
+                <br>
+                <label for="">Date & Time</label>
+                <input type="datetime-local">
+                <br>
+                <br>
+                <label for="">Diagnosis</label>
+                <input type="text">
+                <br>
+                <br>
+                <label for="">Description</label>
+                <textarea rowspan="20" colspan="30"></textarea>
+                <br>
+                <br>
+                <label for="">Advice</label>
+                <textarea rowspan="20" colspan="30"></textarea>
+                <br>
+                <br>
+                <label for="">Addtional Comments</label>
+                <textarea rowspan="20" colspan="30"></textarea>
             </div>
         </div>
+
+        <!--=================================================================================-->
 
         <div class="prescription" id="prescrips">
             <label for="">Prescriptions</label>
