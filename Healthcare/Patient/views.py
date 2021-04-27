@@ -54,7 +54,7 @@ def loginView(request):
         if signin_form.is_valid():
             user = signin_form.get_user()
             login(request, user)
-            return redirect('/Dashboard')
+            return redirect('/Patient/dashboard')
         else:
             context['signin_form'] = signin_form
             context['signin_form_errors'] = signin_form.errors
@@ -108,6 +108,7 @@ def medformview(request):
             Patient_smoking = form.cleaned_data.get('Smoking_Habit')
             Patient_drugallergies = form.cleaned_data.get('Drug_Allergies')
             Patient_medications = form.cleaned_data.get('Current_Medications')
+            return redirect('/Patient/dashboard')
 
         else:
             context['form'] = form
@@ -125,3 +126,7 @@ def success(request):
 
 def dashboard(request):
     return render(request, 'Patient-Dashboard.html')
+
+
+def docselection(request):
+    return render(request, 'doctor-Selection.html')

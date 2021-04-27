@@ -22,7 +22,9 @@
             <div class="add-btn">
                 <!--<label for=""><i class="fas fa-plus-circle"></i> Add New</label>-->
                 <button id="chat"><i class="fas fa-comment-alt"></i> Chat</button>
-                <button><i class="fas fa-plus-circle"></i> Add New</button>
+                
+                <!-- <button onclick="location.href='{% url 'Patient:Docselection'%}'" type="button" ><i class="fas fa-plus-circle"></i> Add New</button> -->
+                <a href="{% url 'Patient:Docselection' %}"><button><i class="fas fa-plus-circle"></i> Add New</button></a>
             </div>
             <div class="nav">
                 <input type="button" id="btn1" value="Patient Info" onclick="forfirst()">

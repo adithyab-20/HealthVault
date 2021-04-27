@@ -25,9 +25,7 @@ class SignupForm(UserCreationForm):
         self.helper = FormHelper()
         self.helper.form_method = 'POST'
         self.helper.form_id = 'id-SignupForm'
-        # self.helper.attrs = {
-        #     'novalidate': ''
-        # }
+
         for fieldname in ['full_name', 'email', 'password1', 'password2']:
             self.fields[fieldname].help_text = None
         
@@ -36,7 +34,7 @@ class SignupForm(UserCreationForm):
 
 
 
-class MedicalHistoryForm(forms.Form):
+class MedicalHistoryForm(ModelForm):
 
     Full_name = forms.CharField(label='Full name',max_length=100)
     # DOB = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'],
@@ -58,7 +56,7 @@ class MedicalHistoryForm(forms.Form):
     Current_Medications = forms.CharField(widget=forms.Textarea)
     class Meta:
         model = Patient_medical_history
-        fields = ("Full_name", "DOB", "Age", "Gender", "Height", "Weight", "Blood_Group", "Alchohol_Consumption", "Smoking_Habit", "Drug_Allergies", "Current_Medications",)
+        fields = ("Full_name", "Age", "Gender", "Height", "Weight", "Blood_Group", "Alchohol_Consumption", "Smoking_Habit", "Drug_Allergies", "Current_Medications",)
         widgets = {
             'text': forms.Textarea(attrs={'rows':5, 'cols':10}), #this is changeble.
         }

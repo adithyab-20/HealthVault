@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Account
+from .models import Account, Patient_medical_history
 
 # Register your models here.
 
@@ -25,3 +25,5 @@ class AccountAdminConfig(UserAdmin):
     )
 admin.site.register(Account, AccountAdminConfig)
 
+
+admin.site.register(Patient_medical_history)
