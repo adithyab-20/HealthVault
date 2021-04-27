@@ -121,3 +121,7 @@ def medformview(request):
 
 def success(request):
     return render(request, 'Success.html')
+
+
+def dashboard(request):
+    return render(request, 'Patient-Dashboard.html')
