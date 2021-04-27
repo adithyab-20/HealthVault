@@ -10,7 +10,8 @@ import json
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
-
+from django.shortcuts import redirect
+from Patient.forms import MedicalHistoryForm
 
 # def Signup(request):
 #     context = {}
@@ -89,3 +90,38 @@ def loginView(request):
     context['form'] = form
     return render(request, 'signupform.html', context)
 
+
+def medformview(request):
+    context = {}
+    if request.method == 'POST':
+        form = MedicalHistoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            Patient_Fullname = form.cleaned_data.get('Full_name')
+            # Patient_DateofBirth = form.cleaned_data.get('DOB')
+            Patient_age = form.cleaned_data.get('Age')
+            Patient_gender = form.cleaned_data.get('Gender')
+            Patient_height = form.cleaned_data.get('Height')
+            Patient_weight = form.cleaned_data.get('Weight')
+            Patient_bloodgroup = form.cleaned_data.get('Blood_Group')
+            Patient_alchohol = form.cleaned_data.get('Alchohol_Consumption')
+            Patient_smoking = form.cleaned_data.get('Smoking_Habit')
+            Patient_drugallergies = form.cleaned_data.get('Drug_Allergies')
+            Patient_medications = form.cleaned_data.get('Current_Medications')
+
+        else:
+            context['form'] = form
+            print(form.errors)
+    else:
+        form = MedicalHistoryForm()
+        context['form'] = form
+    return render(request, 'Medical_History_form.html', context)
+
+
+
+def success(request):
+    return render(request, 'Success.html')
+
+
+def dashboard(request):
+    return render(request, 'Patient-Dashboard.html')

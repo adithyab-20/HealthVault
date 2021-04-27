@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'jsonview',
     'crispy_forms',
+    'django_static_fontawesome',
 ]
 
 MIDDLEWARE = [
@@ -128,6 +129,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
@@ -135,4 +137,3 @@ STATICFILES_DIRS = [
     '/var/www/static/',
 ]
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'

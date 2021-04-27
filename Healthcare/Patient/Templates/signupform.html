@@ -27,7 +27,9 @@
                 var success = response['success']
   
                 if(success){
-                    alert("Form is valid and user created successfully!");
+                    // alert("Form is valid and user created successfully!");
+                    window.location.href = "{% url 'Patient:Success' %}";
+
                  }
   
                 else{
