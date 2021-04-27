@@ -67,4 +67,23 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
     def has_module_perms(self, app_Label):
         return True
-    
+
+
+class Patient_medical_history(models.Model):
+
+    REQUIRED_FIELDS = ['Full_name','DOB','Age','Gender','Blood Group']
+
+    Full_name = models.CharField(max_length=100)
+    # DOB = models.DateTimeField(default=timezone.now)
+    Age = models.IntegerField()
+    Gender = models.CharField(max_length=20)
+    Height = models.IntegerField()
+    Weight = models.IntegerField()
+    Blood_Group =  models.CharField(max_length=5)
+    Alchohol_Consumption = models.TextField()
+    Smoking_Habit = models.TextField()
+    Drug_Allergies = models.TextField()
+    Current_Medications = models.TextField()
+
+    def __str__(self):
+        return self.Full_name
