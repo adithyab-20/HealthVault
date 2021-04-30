@@ -12,6 +12,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect
 from Patient.forms import MedicalHistoryForm
+from django.contrib.auth.decorators import login_required
 
 # def Signup(request):
 #     context = {}
@@ -123,9 +124,9 @@ def medformview(request):
 def success(request):
     return render(request, 'Success.html')
 
-
+@login_required
 def dashboard(request):
-    return render(request, 'Patient-Dashboard.html')
+    return render(request, 'new-dash.html')
 
 
 def docselection(request):

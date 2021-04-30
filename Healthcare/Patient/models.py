@@ -86,3 +86,11 @@ class Patient_medical_history(models.Model):
 
     def __str__(self):
         return self.Full_name
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(Account, on_delete=models.CASCADE)
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+
+    def __str__(self):
+        return f'{self.user.full_name} Profile'

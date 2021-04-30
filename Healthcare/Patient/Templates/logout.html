@@ -30,8 +30,7 @@
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
-              <a class="nav-item nav-link" href="#">Login</a>
-              <a class="nav-item nav-link" href="#">Register</a>
+              <a class="nav-item nav-link" href="{% url 'Patient:login' %}">Login</a>
             </div>
           </div>
         </div>
@@ -40,26 +39,11 @@
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-8">
-          {% if messages %}
-            {% for message in messages %}
-              <div class="alert alert-{{ message.tags }}">
-                {{ message }}
+
+              <div class="alert alert-success">
+                You've been logged out!
               </div>
-            {% endfor %}
-          {% endif %}
-          {% block content %}{% endblock %}
-        </div>
-        <div class="col-md-4">
-          <div class="content-section">
-            <h3>Welcome Adi!</h3>
-            <div class="media">
-              <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
-              <div class="media-body">
-                <h2 class="account-heading">{{ user.full_name }}</h2>
-                <p class="text-secondary">{{ user.email }}</p>
-              </div>
-            </div>
-          </div>
+       
         </div>
       </div>
     </main>
