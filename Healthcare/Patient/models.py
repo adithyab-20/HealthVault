@@ -71,7 +71,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
 class Patient_medical_history(models.Model):
 
-    REQUIRED_FIELDS = ['Full_name','Age','Gender','Blood Group']
+    REQUIRED_FIELDS = ['Full_name','Age','Gender','Blood_Group']
 
     Full_name = models.CharField(max_length=100)
     Age = models.IntegerField()
