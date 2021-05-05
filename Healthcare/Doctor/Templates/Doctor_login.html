@@ -6,23 +6,38 @@
  
   <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800&display=swap" rel="stylesheet">
   {% load static %}
+  {% load crispy_forms_tags %}
+
   <link rel="stylesheet" type="text/css" href="{% static 'Doctor_login.css' %}">
 
 </head>
 <body>
   <div class="cont">
+    <form method="POST">
+      {% csrf_token %}
     <div class="form sign-in">
       <h2>Sign In.</h2>
+
       <label>
-        <span>Email</span>
-        <input type="email" name="email">
+        {% for field in form %}
+       
+        {{ field.label_tag }}
+        {{field}}
+       
+        {% endfor %}
       </label>
+      
       <label>
-        <span>Password</span>
-        <input type="password" name="password">
-      </label>
-      <button class="submit" type="button">Sign In</button>
-    </div>
+        <div class="nferror" style="color: rgb(214, 0, 11);
+        margin: 0.5rem 0;
+        padding: 0">
+         <strong> {{form.non_field_errors|striptags}}</strong>
+          </div>
+        </label>
+  
+     
+      <button class="submit" type="submit">Sign In</button>
+    </form>
     
     <div class="sub-cont">
         <div class="background-image"></div>
