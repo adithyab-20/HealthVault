@@ -13,6 +13,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect
 from Patient.forms import MedicalHistoryForm
 from django.contrib.auth.decorators import login_required
+from .models import Patient_medical_history
 
 # def Signup(request):
 #     context = {}
@@ -102,9 +103,11 @@ def medformview(request):
             # Patient_DateofBirth = form.cleaned_data.get('DOB')
             Patient_age = form.cleaned_data.get('Age')
             Patient_gender = form.cleaned_data.get('Gender')
+            Patient_contactnumber - form.cleaned_data.get('Contact_Number')
             Patient_height = form.cleaned_data.get('Height')
             Patient_weight = form.cleaned_data.get('Weight')
             Patient_bloodgroup = form.cleaned_data.get('Blood_Group')
+            Patient_previousillness =  form.cleaned_data.get('Previous_Illness')
             Patient_alchohol = form.cleaned_data.get('Alchohol_Consumption')
             Patient_smoking = form.cleaned_data.get('Smoking_Habit')
             Patient_drugallergies = form.cleaned_data.get('Drug_Allergies')
@@ -126,7 +129,8 @@ def success(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'new-dash.html')
+    data = Patient_medical_history.objects.all()
+    return render(request, 'new-dash.html', {"historys":data})
 
 
 def docselection(request):

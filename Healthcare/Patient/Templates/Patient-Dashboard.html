@@ -15,9 +15,10 @@
 <body>
     <div class="main">
         <div class="header">
+{% for history in historys %}
             <div class="patient-name">
                 <div class="photo"></div>
-                <h2>Patient Name</h2>
+                <h2>{{history.Full_name}}</h2>
             </div>
             <div class="add-btn">
                 <!--<label for=""><i class="fas fa-plus-circle"></i> Add New</label>-->
@@ -58,7 +59,7 @@
                             </tr>
                             <tr>
                                 <td class="data1">Gender</td>
-                                <td>Male</td>
+                                <td>{{history.Gender}}</td>
                             </tr>
                             <tr>
                                 <td class="data1">Address</td>
@@ -74,15 +75,15 @@
                             </tr>
                             <tr>
                                 <td class="data1">Height</td>
-                                <td>180 cm</td>
+                                <td>{{history.Height}}</td>
                             </tr>
                             <tr>
                                 <td class="data1">Weight</td>
-                                <td>70 kg</td>
+                                <td>{{history.Weight}}</td>
                             </tr>
                             <tr>
                                 <td class="data1">Blood Type</td>
-                                <td>O+</td>
+                                <td>{{history.Blood_Group}}/td>
                             </tr>    
                             </tbody>
                     </table>
@@ -101,7 +102,7 @@
                             </tr>
                             <tr>
                                 <td class="data1">Any Current Allergies</td>
-                                <td>Male</td>
+                                <td>{{history.Drug_Allergies}}</td>
                             </tr>
                             <tr>
                                 <td class="data1">Any Recent Operation</td>
@@ -109,25 +110,26 @@
                             </tr>
                             <tr>
                                 <td class="data1">Do You Drink Alcohol</td>
-                                <td>91492XXXXX</td>                        
+                                <td>{{history.Alchohol_Consumption}}</td>                        
                             </tr>
                             <tr>
                                 <td class="data1">Do You Smoke</td>
-                                <td>91492XXXXX</td>
+                                <td>{{history.Smoking_Habit}}</td>
                             </tr>
                             <tr>
                                 <td class="data1">Any Drug Allergy</td>
-                                <td>180 cm</td>
+                                <td>{{history.Drug_Allergies}}</td>
                             </tr>
                             <tr>
                                 <td class="data1">Under any Medication</td>
-                                <td>70 kg</td>
+                                <td>{{history.Current_Medications}}</td>
                             </tr>   
                             </tbody>
                     </table>
                 </div>
             </div>
         </div>
+{% endfor %}
 
         <!--=================================================================================-->
 

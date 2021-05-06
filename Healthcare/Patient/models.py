@@ -72,13 +72,15 @@ class Account(AbstractBaseUser, PermissionsMixin):
 class Patient_medical_history(models.Model):
 
     REQUIRED_FIELDS = ['Full_name','Age','Gender','Blood_Group']
-
+    user = models.OneToOneField(Account, on_delete=models.CASCADE)
     Full_name = models.CharField(max_length=100)
     Age = models.IntegerField()
     Gender = models.CharField(max_length=20)
+    Contact_Number = models.IntegerField()
     Height = models.IntegerField()
     Weight = models.IntegerField()
     Blood_Group =  models.CharField(max_length=5)
+    Previous_Illness = models.TextField()
     Alchohol_Consumption = models.TextField()
     Smoking_Habit = models.TextField()
     Drug_Allergies = models.TextField()
