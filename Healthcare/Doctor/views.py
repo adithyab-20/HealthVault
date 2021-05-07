@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from Doctor.decorators import *
+
+
 
 # def Login(request):
 #     if request.method == 'POST':
@@ -10,6 +14,11 @@ from django.contrib.auth.forms import UserCreationForm
 #     else:
 #         form = UserCreationForm()
 #     return render(request, 'Doctor_login.html', {'form': form})
+
+
+@allowed_users(allowed_roles=['Admin', 'Doctors'])
+def dashboard(request):
+    return render(request, 'doctor-dashboard.html')
 
 def Latest_Diagnosis(request):
     context = {}
@@ -36,3 +45,8 @@ def Latest_Diagnosis(request):
         form = LatestDiagnosisForm()
         context['form'] = form
     return render(request, 'Latest_Diagnosis_form.html', context)
+
+
+
+def patient_redirect(request):
+    return render(request, 'Patient_Redirect.html')

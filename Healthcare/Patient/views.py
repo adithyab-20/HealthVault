@@ -13,6 +13,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect
 from Patient.forms import MedicalHistoryForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
+from Patient.decorators import *
 
 # def Signup(request):
 #     context = {}
@@ -45,7 +47,7 @@ from django.contrib.auth.decorators import login_required
 #         form = UserCreationForm()
 #     return render(request, 'Patient_Signup.html', {'form': form})
     
-
+@unauthenticated_user
 def loginView(request):
 
     context = {}
@@ -69,10 +71,13 @@ def loginView(request):
         form = SignupForm(data=request.POST)
         if form.is_valid():
             resp['success'] = True
-            form.save()
+            user = form.save()
             Patient_fullname = form.cleaned_data.get('full_name')
             Patient_email = form.cleaned_data.get('email')
             raw_password = form.cleaned_data.get('password1')
+            group = Group.objects.get(name='Patients')
+            user.groups.add(group)
+
             account = authenticate(email=Patient_email, password=raw_password)
             login(request,account)
             
@@ -91,7 +96,7 @@ def loginView(request):
     context['form'] = form
     return render(request, 'signupform.html', context)
 
-
+@login_required()
 def medformview(request):
     context = {}
     if request.method == 'POST':
@@ -124,10 +129,16 @@ def medformview(request):
 def success(request):
     return render(request, 'Success.html')
 
-@login_required
+@login_required(login_url="{% url 'Patient:login' %}")
+@allowed_users(allowed_roles=['Admin', 'Patients'])
 def dashboard(request):
     return render(request, 'new-dash.html')
 
-
+@login_required()
 def docselection(request):
     return render(request, 'doctor-Selection.html')
+
+
+
+def doctor_redirect(request):
+    return render(request, 'Doctor-Redirect.html')
