@@ -1,7 +1,7 @@
 import datetime
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from Patient.models import Account, Patient_medical_history
+from Patient.models import Account, Patient_medical_history, Profile
 from django.forms import ModelForm
 from django.contrib.auth.forms import forms
 from crispy_forms.helper import FormHelper
@@ -36,7 +36,6 @@ class SignupForm(UserCreationForm):
 
 class MedicalHistoryForm(ModelForm):
 
-    Full_name = forms.CharField(label='Full name',max_length=100)
     # DOB = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'],
     #     widget=forms.DateInput(
     #        attrs={
@@ -56,7 +55,7 @@ class MedicalHistoryForm(ModelForm):
     Current_Medications = forms.CharField(widget=forms.Textarea)
     class Meta:
         model = Patient_medical_history
-        fields = ("Full_name", "Age", "Gender", "Height", "Weight", "Blood_Group", "Alchohol_Consumption", "Smoking_Habit", "Drug_Allergies", "Current_Medications",)
+        fields = ("Age", "Gender", "Height", "Weight", "Blood_Group", "Alchohol_Consumption", "Smoking_Habit", "Drug_Allergies", "Current_Medications",)
         widgets = {
             'text': forms.Textarea(attrs={'rows':5, 'cols':10}), #this is changeble.
         }
@@ -70,3 +69,9 @@ class MedicalHistoryForm(ModelForm):
 #     });
 #   });
 # </script>
+
+
+class ProfileUpdateForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['image']

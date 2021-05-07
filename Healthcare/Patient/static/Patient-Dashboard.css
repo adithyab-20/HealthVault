@@ -45,10 +45,11 @@ body{
 
 .header .patient-name h2{
     margin-left: 20px;
-    font-size: 26px;
+    font-size: 40px;
     position: relative;
+    margin-top: 5px;
     margin-bottom: 10px;
-    letter-spacing: 1px;
+    /* letter-spacing: 1px; */
 }
 
 .header .add-btn{

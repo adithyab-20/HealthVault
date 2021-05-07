@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'Patient-Dashboard.css' %}"> 
     {% block style %}
         <link rel="stylesheet" type="text/css" href="{% static 'fontawesome/css/all.min.css' %}"/>
     {% endblock %}
- 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
 </head>
@@ -26,7 +25,7 @@
             <div class="collapse navbar-collapse" id="navbarToggle">
               <div class="navbar-nav mr-auto">
                 <a class="nav-item nav-link" href="#">Home</a>
-                <a class="nav-item nav-link" href="3">About</a>
+                <a class="nav-item nav-link" href="{% url 'Patient:Profile' %}">Update Profile</a>
               </div>
               <!-- Navbar Right Side -->
               <div class="navbar-nav">
@@ -41,8 +40,8 @@
     <div class="main">
         <div class="header">
             <div class="patient-name">
-                <div class="photo"></div>
-                <h2>Patient Name</h2>
+                <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+                  <h2 class="account-heading">{{ user.full_name }}</h2>
             </div>
             <div class="add-btn">
                 <!--<label for=""><i class="fas fa-plus-circle"></i> Add New</label>-->

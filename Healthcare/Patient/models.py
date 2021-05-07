@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-
+from PIL import Image
 
 class MyAccountManager(BaseUserManager):
     def create_user(self, email, password=None, **other_fields): 
@@ -72,25 +72,35 @@ class Account(AbstractBaseUser, PermissionsMixin):
 class Patient_medical_history(models.Model):
 
     REQUIRED_FIELDS = ['Full_name','Age','Gender','Blood_Group']
-
-    Full_name = models.CharField(max_length=100)
-    Age = models.IntegerField()
-    Gender = models.CharField(max_length=20)
-    Height = models.IntegerField()
-    Weight = models.IntegerField()
-    Blood_Group =  models.CharField(max_length=5)
-    Alchohol_Consumption = models.TextField()
-    Smoking_Habit = models.TextField()
-    Drug_Allergies = models.TextField()
-    Current_Medications = models.TextField()
+    
+    user = models.OneToOneField(Account, on_delete=models.CASCADE)
+    Age = models.IntegerField(default=0)
+    Gender = models.CharField(max_length=20, default="Null")
+    Height = models.IntegerField(default=0)
+    Weight = models.IntegerField(default=0)
+    Blood_Group =  models.CharField(max_length=5, default="Null")
+    Alchohol_Consumption = models.TextField(default="Null")
+    Smoking_Habit = models.TextField(default="Null")
+    Drug_Allergies = models.TextField(default="Null")
+    Current_Medications = models.TextField(default="Null")
 
     def __str__(self):
-        return self.Full_name
+        return f'{self.user.full_name} Medical History'
 
 
 class Profile(models.Model):
     user = models.OneToOneField(Account, on_delete=models.CASCADE)
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    image = models.ImageField(default= 'default.jpg', upload_to='profile_pics')
 
     def __str__(self):
         return f'{self.user.full_name} Profile'
+
+    def save(self):
+        super().save()
+
+        img = Image.open(self.image.path)
+        
+        if img.height >300 or img.width > 300:
+            output_size = (300,300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)

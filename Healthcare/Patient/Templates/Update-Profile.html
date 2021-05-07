@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
 
    
-        <title>Medical History Form</title>
+        <title>Update Profile</title>
 </head>
 <body>
     <header class="site-header">
@@ -26,6 +27,7 @@
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
               <a class="nav-item nav-link" href="#">Home</a>
+              <a class="nav-item nav-link" href="{% url 'Patient:Dashboard' %}">Dashboard</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
@@ -45,13 +47,35 @@
               </div>
             {% endfor %}
           {% endif %}
-          {% block content %}{% endblock %}
+
+
+            <div class="content-section">
+                 <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Update Profile</legend>
+                        {{ medupdate_form|crispy }}
+                    </fieldset>
+            </div>
         </div>
+
         <div class="col-md-4">
           <div class="profile">
-            {% block sidebar %}{%endblock%}
+            <div class="media">
+                <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+                <div class="media-body">
+                  <h2 class="account-heading">{{ user.full_name }}</h2>
+                  <p class="text-secondary">{{ user.email }}</p>
+                </div>
+              </div>
+            {{ p_form |crispy }}
           </div>
         </div>
+
+        <div class="form-group" >
+            <button class="btn btn-outline-info" type="submit">Submit</button>
+        </div>
+    </form>
       </div>
     </main>
 

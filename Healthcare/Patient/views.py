@@ -11,41 +11,11 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect
-from Patient.forms import MedicalHistoryForm
+from Patient.forms import MedicalHistoryForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from Patient.decorators import *
-
-# def Signup(request):
-#     context = {}
-#     if request.method == 'POST':
-#         form = SignupForm(request.POST or None)
-#         if form.is_valid():
-#             form.save()
-#             Patient_fullname = form.cleaned_data.get('full_name')
-#             Patient_email = form.cleaned_data.get('email')
-#             raw_password = form.cleaned_data.get('password1')
-#             account = authenticate(email=Patient_email, password=raw_password)
-#             login(request,account)
-#             messages.success(request, f'Account created for {Patient_fullname}!')
-
-#         else:
-#             context['form'] = form
-#             print(form.errors)
-#     else:
-#         form = SignupForm()
-#         context['form'] = form
-#     return render(request, 'signupform.html', context)
-
-# def Login(request):
-#     if request.method == 'POST':
-#         form = UserCreationForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             P_username = form.cleaned_data.get('P_username')
-#     else:
-#         form = UserCreationForm()
-#     return render(request, 'Patient_Signup.html', {'form': form})
+from Patient.models import Account
     
 @unauthenticated_user
 def loginView(request):
@@ -102,9 +72,10 @@ def medformview(request):
     if request.method == 'POST':
         form = MedicalHistoryForm(request.POST)
         if form.is_valid():
-            form.save()
-            Patient_Fullname = form.cleaned_data.get('Full_name')
-            # Patient_DateofBirth = form.cleaned_data.get('DOB')
+            
+            pat = form.save(commit=False)
+            pat.user = request.user
+            pat.save()
             Patient_age = form.cleaned_data.get('Age')
             Patient_gender = form.cleaned_data.get('Gender')
             Patient_height = form.cleaned_data.get('Height')
@@ -127,7 +98,11 @@ def medformview(request):
 
 
 def success(request):
-    return render(request, 'Success.html')
+
+    obj = request.user.patient_medical_history
+
+    # return render(request, 'Success.html')
+    return HttpResponse(obj)
 
 @login_required(login_url="{% url 'Patient:login' %}")
 @allowed_users(allowed_roles=['Admin', 'Patients'])
@@ -142,3 +117,34 @@ def docselection(request):
 
 def doctor_redirect(request):
     return render(request, 'Doctor-Redirect.html')
+
+@login_required()
+def profile(request):
+    if request.method == 'POST':
+        medupdate_form = MedicalHistoryForm(request.POST, instance=request.user.patient_medical_history)
+        p_form = ProfileUpdateForm(request.POST, 
+                                   request.FILES, 
+                                   instance=request.user.profile)
+
+        
+        if medupdate_form.is_valid() and p_form.is_valid():
+            medupdate_form.save()
+            p_form.save()
+            messages.success(request, f'Your profile has been updated!')
+            return redirect('/Patient/update-profile')
+
+
+
+    
+    else:
+         medupdate_form = MedicalHistoryForm(instance=request.user.patient_medical_history)
+         p_form = ProfileUpdateForm(instance=request.user.profile)
+
+
+    context = {
+        
+        'medupdate_form': medupdate_form,
+        'p_form': p_form
+    }
+
+    return render(request, 'Update-Profile.html', context)
