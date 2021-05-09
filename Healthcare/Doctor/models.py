@@ -18,16 +18,16 @@ class Doctor_latest_diagnosis(models.Model):
 
     REQUIRED_FIELDS = ['Full_name','Age','Gender','Blood Group']
 
-    Patient_name = models.CharField(max_length=100)
-    Doctor_name = models.CharField(max_length=100)
-    Patient_ID = models.IntegerField()
-    Doctor_ID = models.IntegerField()
-    Department = models.CharField(max_length=100)
-    Date_of_updation =  models.DateField()
-    Diagnosis = models.TextField()
-    Diagnosis_description = models.TextField()
-    Doctor_advice = models.TextField()
-    Additional_comments = models.TextField()
+    patient_name = models.CharField(max_length=100)
+    doctor_name = models.CharField(max_length=100)
+    patient_ID = models.IntegerField()
+    doctor_ID = models.IntegerField()
+    department = models.CharField(max_length=100)
+    date_of_updation =  models.DateField()
+    diagnosis = models.TextField()
+    diagnosis_description = models.TextField()
+    doctor_advice = models.TextField()
+    additional_comments = models.TextField()
 
     def __str__(self):
         return self.Patient_name

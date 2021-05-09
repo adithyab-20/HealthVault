@@ -141,7 +141,7 @@ class Doctor_Request(models.Model):
         self.Is_Active = False
         self.save()
 
-    def cancel(self):
+    def cancel(self): 
         #Cancel a doctor request
         #It is cancelled by setting is_active field to False
         self.Is_Active = False
