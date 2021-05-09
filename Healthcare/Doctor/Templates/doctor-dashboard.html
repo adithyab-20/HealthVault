@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard</title>
     {% load static %}
     {% block style %}
     <link rel="stylesheet" type="text/css" href="{% static 'fontawesome/css/all.min.css' %}"/>
@@ -28,7 +28,8 @@
             <div class="collapse navbar-collapse" id="navbarToggle">
               <div class="navbar-nav mr-auto">
                 <a class="nav-item nav-link" href="#">Home</a>
-                <a class="nav-item nav-link" href="3">About</a>
+                <a class="nav-item nav-link" href="{% url 'Doctor:Profile' %}">Update Profile</a>
+                <a class="nav-item nav-link" href="#">Patient Requests</a>
               </div>
               <!-- Navbar Right Side -->
               <div class="navbar-nav">

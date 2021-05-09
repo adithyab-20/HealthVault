@@ -74,15 +74,20 @@ class Patient_medical_history(models.Model):
     REQUIRED_FIELDS = ['Full_name','Age','Gender','Blood_Group']
     
     user = models.OneToOneField(Account, on_delete=models.CASCADE)
-    Age = models.IntegerField(default=0)
-    Gender = models.CharField(max_length=20, default="Null")
-    Height = models.IntegerField(default=0)
-    Weight = models.IntegerField(default=0)
-    Blood_Group =  models.CharField(max_length=5, default="Null")
-    Alchohol_Consumption = models.TextField(default="Null")
-    Smoking_Habit = models.TextField(default="Null")
-    Drug_Allergies = models.TextField(default="Null")
-    Current_Medications = models.TextField(default="Null")
+    age = models.IntegerField(default=0)
+    gender = models.CharField(max_length=20, default="Null")
+    address = models.TextField(default="Null")
+    contact_no = models.CharField(max_length=12, default="Null")
+    emergency_contact = models.CharField(max_length=12, default="Null")
+    height = models.IntegerField(default=0)
+    weight = models.IntegerField(default=0)
+    blood_group =  models.CharField(max_length=5, default="Null")
+    
+    alchohol_consumption = models.TextField(default="Null")
+    smoking_habit = models.TextField(default="Null")
+    drug_allergies = models.TextField(default="Null")
+    previous_illness = models.TextField(default="Null")
+    current_medications = models.TextField(default="Null")
 
     def __str__(self):
         return f'{self.user.full_name} Medical History'
@@ -95,8 +100,8 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.full_name} Profile'
 
-    def save(self):
-        super().save()
+    def save(self, *args, **kwargs):
+        super(Profile, self).save(*args, **kwargs)
 
         img = Image.open(self.image.path)
         

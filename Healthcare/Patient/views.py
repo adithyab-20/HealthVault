@@ -15,7 +15,7 @@ from Patient.forms import MedicalHistoryForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from Patient.decorators import *
-from Patient.models import Account
+from Patient.models import Account,Profile
     
 @unauthenticated_user
 def loginView(request):
@@ -47,9 +47,10 @@ def loginView(request):
             raw_password = form.cleaned_data.get('password1')
             group = Group.objects.get(name='Patients')
             user.groups.add(group)
-
             account = authenticate(email=Patient_email, password=raw_password)
             login(request,account)
+            
+            Profile.objects.create(user=request.user)
             
         else:
             resp['success'] = False
@@ -72,7 +73,6 @@ def medformview(request):
     if request.method == 'POST':
         form = MedicalHistoryForm(request.POST)
         if form.is_valid():
-            
             pat = form.save(commit=False)
             pat.user = request.user
             pat.save()
@@ -98,11 +98,8 @@ def medformview(request):
 
 
 def success(request):
+    return render(request, 'Success.html')
 
-    obj = request.user.patient_medical_history
-
-    # return render(request, 'Success.html')
-    return HttpResponse(obj)
 
 @login_required(login_url="{% url 'Patient:login' %}")
 @allowed_users(allowed_roles=['Admin', 'Patients'])

@@ -77,36 +77,36 @@
                     <table width="80%" cellspacing="1">
                         <tbody>
                             <tr>
-                                <td class="data1">Date of birth</td>
-                                <td>March 9, 1990</td>
+                                <td class="data1">Age</td>
+                                <td>{{ user.patient_medical_history.age }} Years Old</td>
                             </tr>
                             <tr>
                                 <td class="data1">Gender</td>
-                                <td>Male</td>
+                                <td>{{ user.patient_medical_history.gender }}</td>
                             </tr>
                             <tr>
                                 <td class="data1">Address</td>
-                                <td>Sector 76, House number 5, Noida</td>
+                                <td>{{ user.patient_medical_history.address }}</td>
                             </tr>
                             <tr>
                                 <td class="data1">Contact Number</td>
-                                <td>91492XXXXX</td>                        
+                                <td>{{ user.patient_medical_history.contact_no }}</td>                        
                             </tr>
                             <tr>
                                 <td class="data1">Emergency Contact</td>
-                                <td>91492XXXXX</td>
+                                <td>{{ user.patient_medical_history.emergency_contact }}</td>
                             </tr>
                             <tr>
                                 <td class="data1">Height</td>
-                                <td>180 cm</td>
+                                <td>{{ user.patient_medical_history.height }} cm</td>
                             </tr>
                             <tr>
                                 <td class="data1">Weight</td>
-                                <td>70 kg</td>
+                                <td>{{ user.patient_medical_history.weight }} kg</td>
                             </tr>
                             <tr>
                                 <td class="data1">Blood Type</td>
-                                <td>O+</td>
+                                <td>{{ user.patient_medical_history.blood_group }}</td>
                             </tr>    
                             </tbody>
                     </table>
@@ -119,34 +119,31 @@
                 <div class="med-info-table">
                     <table width="80%" cellspacing="1">
                         <tbody>
+
                             <tr>
-                                <td class="data1">Any Previous Illness</td>
-                                <td>March 9, 1990</td>
+                                <td class="data1">Do I drink?</td>
+                                <td>{{ user.patient_medical_history.alchohol_consumption }}</td>                        
                             </tr>
+
                             <tr>
-                                <td class="data1">Any Current Allergies</td>
-                                <td>Male</td>
+                                <td class="data1">Do I Smoke?</td>
+                                <td>{{  user.patient_medical_history.smoking_habit }}</td>
                             </tr>
+
                             <tr>
-                                <td class="data1">Any Recent Operation</td>
-                                <td>Sector 76, House number 5, Noida</td>
+                                <td class="data1">Previous Illnesses</td>
+                                <td>{{ user.patient_medical_history.previous_illness }}</td>
                             </tr>
+
                             <tr>
-                                <td class="data1">Do You Drink Alcohol</td>
-                                <td>91492XXXXX</td>                        
+                                <td class="data1">Drug Allergies</td>
+                                <td>{{  user.patient_medical_history.drug_allergies }}</td>
                             </tr>
+                           
                             <tr>
-                                <td class="data1">Do You Smoke</td>
-                                <td>91492XXXXX</td>
-                            </tr>
-                            <tr>
-                                <td class="data1">Any Drug Allergy</td>
-                                <td>180 cm</td>
-                            </tr>
-                            <tr>
-                                <td class="data1">Under any Medication</td>
-                                <td>70 kg</td>
-                            </tr>   
+                                <td class="data1">Current Medications</td>
+                                <td>{{  user.patient_medical_history.current_medications }}</td>
+                            </tr> 
                             </tbody>
                     </table>
                 </div>

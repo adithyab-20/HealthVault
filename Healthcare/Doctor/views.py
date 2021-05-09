@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from Doctor.decorators import *
-
-
+from Doctor.forms import DocProfileUpdateForm, DocImageForm
+from django.contrib import messages
 
 # def Login(request):
 #     if request.method == 'POST':
@@ -50,3 +50,34 @@ def Latest_Diagnosis(request):
 
 def patient_redirect(request):
     return render(request, 'Patient_Redirect.html')
+
+
+@login_required()
+def profile(request):
+    if request.method == 'POST':
+        doc_form = DocProfileUpdateForm(request.POST, 
+                                   instance=request.user.columbiaasia_doctor)
+        
+        image_form = DocImageForm(request.POST,request.FILES,instance=request.user.columbiaasia_doctor)
+
+
+        
+        if doc_form.is_valid() and image_form.is_valid():
+            image_form.save()
+            doc_form.save()
+            messages.success(request, f'Your profile has been updated!')
+            return redirect('/Doctor/update-profile')
+
+
+    else:
+         doc_form = DocProfileUpdateForm(instance=request.user.columbiaasia_doctor)
+         image_form = DocImageForm(instance=request.user.columbiaasia_doctor)
+
+
+    context = {
+
+        'doc_form': doc_form,
+        'image_form': image_form
+    }
+
+    return render(request, 'Update-DocProfile.html', context)
