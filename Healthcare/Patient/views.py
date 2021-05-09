@@ -11,9 +11,9 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect
-from Patient.forms import MedicalHistoryForm
+#from Patient.forms import MedicalHistoryForm
 from django.contrib.auth.decorators import login_required
-from .models import Patient_medical_history
+#from .models import Patient_medical_history
 
 # def Signup(request):
 #     context = {}
@@ -93,34 +93,34 @@ def loginView(request):
     return render(request, 'signupform.html', context)
 
 
-def medformview(request):
-    context = {}
-    if request.method == 'POST':
-        form = MedicalHistoryForm(request.POST)
-        if form.is_valid():
-            form.save()
-            Patient_Fullname = form.cleaned_data.get('Full_name')
-            # Patient_DateofBirth = form.cleaned_data.get('DOB')
-            Patient_age = form.cleaned_data.get('Age')
-            Patient_gender = form.cleaned_data.get('Gender')
-            Patient_contactnumber - form.cleaned_data.get('Contact_Number')
-            Patient_height = form.cleaned_data.get('Height')
-            Patient_weight = form.cleaned_data.get('Weight')
-            Patient_bloodgroup = form.cleaned_data.get('Blood_Group')
-            Patient_previousillness =  form.cleaned_data.get('Previous_Illness')
-            Patient_alchohol = form.cleaned_data.get('Alchohol_Consumption')
-            Patient_smoking = form.cleaned_data.get('Smoking_Habit')
-            Patient_drugallergies = form.cleaned_data.get('Drug_Allergies')
-            Patient_medications = form.cleaned_data.get('Current_Medications')
-            return redirect('/Patient/dashboard')
+# def medformview(request):
+#     context = {}
+#     if request.method == 'POST':
+#         form = MedicalHistoryForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             Patient_Fullname = form.cleaned_data.get('Full_name')
+#             # Patient_DateofBirth = form.cleaned_data.get('DOB')
+#             Patient_age = form.cleaned_data.get('Age')
+#             Patient_gender = form.cleaned_data.get('Gender')
+#             Patient_contactnumber - form.cleaned_data.get('Contact_Number')
+#             Patient_height = form.cleaned_data.get('Height')
+#             Patient_weight = form.cleaned_data.get('Weight')
+#             Patient_bloodgroup = form.cleaned_data.get('Blood_Group')
+#             Patient_previousillness =  form.cleaned_data.get('Previous_Illness')
+#             Patient_alchohol = form.cleaned_data.get('Alchohol_Consumption')
+#             Patient_smoking = form.cleaned_data.get('Smoking_Habit')
+#             Patient_drugallergies = form.cleaned_data.get('Drug_Allergies')
+#             Patient_medications = form.cleaned_data.get('Current_Medications')
+#             return redirect('/Patient/dashboard')
 
-        else:
-            context['form'] = form
-            print(form.errors)
-    else:
-        form = MedicalHistoryForm()
-        context['form'] = form
-    return render(request, 'Medical_History_form.html', context)
+#         else:
+#             context['form'] = form
+#             print(form.errors)
+#     else:
+#         form = MedicalHistoryForm()
+#         context['form'] = form
+#     return render(request, 'Medical_History_form.html', context)
 
 
 
@@ -129,8 +129,8 @@ def success(request):
 
 @login_required
 def dashboard(request):
-    data = Patient_medical_history.objects.all()
-    return render(request, 'new-dash.html', {"historys":data})
+    #data = Patient_medical_history.objects.all()
+    return render(request, 'new-dash.html')
 
 
 def docselection(request):

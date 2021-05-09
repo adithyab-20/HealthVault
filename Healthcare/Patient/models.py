@@ -1,7 +1,9 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 
+#WHEN WE CREATE NEW USER WE MUST GENERATE A REQUEST LIST
 class MyAccountManager(BaseUserManager):
     def create_user(self, email, password=None, **other_fields): 
         
@@ -69,25 +71,24 @@ class Account(AbstractBaseUser, PermissionsMixin):
         return True
 
 
-class Patient_medical_history(models.Model):
+# class Patient_medical_history(models.Model):
 
-    REQUIRED_FIELDS = ['Full_name','Age','Gender','Blood_Group']
-    user = models.OneToOneField(Account, on_delete=models.CASCADE)
-    Full_name = models.CharField(max_length=100)
-    Age = models.IntegerField()
-    Gender = models.CharField(max_length=20)
-    Contact_Number = models.IntegerField()
-    Height = models.IntegerField()
-    Weight = models.IntegerField()
-    Blood_Group =  models.CharField(max_length=5)
-    Previous_Illness = models.TextField()
-    Alchohol_Consumption = models.TextField()
-    Smoking_Habit = models.TextField()
-    Drug_Allergies = models.TextField()
-    Current_Medications = models.TextField()
+#     REQUIRED_FIELDS = ['Full_name','Age','Gender','Blood_Group']
+#     Full_name = models.CharField(max_length=100)
+#     Age = models.IntegerField()
+#     Gender = models.CharField(max_length=20)
+#     Contact_Number = models.IntegerField()
+#     Height = models.IntegerField()
+#     Weight = models.IntegerField()
+#     Blood_Group =  models.CharField(max_length=5)
+#     Previous_Illness = models.TextField()
+#     Alchohol_Consumption = models.TextField()
+#     Smoking_Habit = models.TextField()
+#     Drug_Allergies = models.TextField()
+#     Current_Medications = models.TextField()
 
-    def __str__(self):
-        return self.Full_name
+#     def __str__(self):
+#         return self.Full_name
 
 
 class Profile(models.Model):
@@ -96,3 +97,53 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user.full_name} Profile'
+
+class Patient_List(models.Model): 
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user")
+    doctors = models.ManyToManyField(settings.AUTH_USER_MODEL,blank=True, related_name="doctors")
+
+    def __str__(self):
+        return self.user.full_name
+
+    #This is if patient can have multiple doctors in doctor list
+    #def add_doctor(self, account):
+        #if not account in self.doctors.all():
+            #self.doctors.add(account)
+            #self.save()
+
+    def remove_doctor(self,account):
+        #   Remove a doctor or unenroll from doctor
+        if account in self.doctors.all():
+            self.doctors.remove(account)
+
+
+class Doctor_Request(models.Model):
+    patient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="patient")
+    doctor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="doctor")
+    #we are gonna define a field is_active to see if request is active or not
+    #doctor request becomes inactive if it gets accepted
+    Is_Active = models.BooleanField(blank=True, null=False, default=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.patient.full_name
+
+    def accept(self):
+        #accept a patient's request
+        doctor_request_list = Patient_List.objects.get(user=self.doctor)
+        if doctor_request_list:
+            doctor_request_list.add_patient(self.patient)
+            self.Is_Active = False
+            self.save()
+
+    def decline(self):
+        #It is declined by setting is_active field to False
+        self.Is_Active = False
+        self.save()
+
+    def cancel(self):
+        #Cancel a doctor request
+        #It is cancelled by setting is_active field to False
+        self.Is_Active = False
+        self.save()
+     

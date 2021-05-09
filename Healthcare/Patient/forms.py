@@ -1,7 +1,7 @@
 import datetime
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from Patient.models import Account, Patient_medical_history
+from Patient.models import Account
 from django.forms import ModelForm
 from django.contrib.auth.forms import forms
 from crispy_forms.helper import FormHelper
@@ -34,34 +34,34 @@ class SignupForm(UserCreationForm):
 
 
 
-class MedicalHistoryForm(ModelForm):
+# class MedicalHistoryForm(ModelForm):
 
-    Full_name = forms.CharField(label='Full name',max_length=100)
-    # DOB = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'],
-    #     widget=forms.DateInput(
-    #        attrs={
-    #             'type': 'date', 
-    #             'class': 'form_input',
-    #        },
-    #     ),
-    # )
-    Age = forms.IntegerField()
-    Gender = forms.CharField(max_length=20)
-    Contact_Number = forms.IntegerField()
-    Height = forms.IntegerField(label='Height(in cm)')
-    Weight = forms.IntegerField(label='Weight(in kg)')
-    Blood_Group =  forms.CharField(max_length=5)
-    Previous_Illness = forms.CharField(widget=forms.Textarea)
-    Alchohol_Consumption = forms.CharField(max_length=50)
-    Smoking_Habit = forms.CharField(max_length=50)
-    Drug_Allergies = forms.CharField(widget=forms.Textarea)
-    Current_Medications = forms.CharField(widget=forms.Textarea)
-    class Meta:
-        model = Patient_medical_history
-        fields = ("Full_name", "Age", "Gender", "Contact_Number", "Height", "Weight", "Blood_Group", "Previous Illness", "Alchohol_Consumption", "Smoking_Habit", "Drug_Allergies", "Current_Medications",)
-        widgets = {
-            'text': forms.Textarea(attrs={'rows':5, 'cols':10}), #this is changeble.
-        }
+#     Full_name = forms.CharField(label='Full name',max_length=100)
+#     # DOB = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'],
+#     #     widget=forms.DateInput(
+#     #        attrs={
+#     #             'type': 'date', 
+#     #             'class': 'form_input',
+#     #        },
+#     #     ),
+#     # )
+#     Age = forms.IntegerField()
+#     Gender = forms.CharField(max_length=20)
+#     Contact_Number = forms.IntegerField()
+#     Height = forms.IntegerField(label='Height(in cm)')
+#     Weight = forms.IntegerField(label='Weight(in kg)')
+#     Blood_Group =  forms.CharField(max_length=5)
+#     Previous_Illness = forms.CharField(widget=forms.Textarea)
+#     Alchohol_Consumption = forms.CharField(max_length=50)
+#     Smoking_Habit = forms.CharField(max_length=50)
+#     Drug_Allergies = forms.CharField(widget=forms.Textarea)
+#     Current_Medications = forms.CharField(widget=forms.Textarea)
+#     class Meta:
+#         model = Patient_medical_history
+#         fields = ("Full_name", "Age", "Gender", "Contact_Number", "Height", "Weight", "Blood_Group", "Previous Illness", "Alchohol_Consumption", "Smoking_Habit", "Drug_Allergies", "Current_Medications",)
+#         widgets = {
+#             'text': forms.Textarea(attrs={'rows':5, 'cols':10}), #this is changeble.
+#         }
 
 
 # {{ form.date.id_for_label }}
