@@ -258,7 +258,6 @@
     /*background-color: aqua;*/
     padding: 10px 0px 20px;
     border-radius: 0px 0px 20px 20px;
-    position: relative;
 }
 .latest-diagnosis .heading-label{
     font-size: 22px;
@@ -278,38 +277,45 @@
 }
 
 .latest-diagnosis .report{
-    width: 80%;
-    height: auto;
-    margin-top: 100px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    /*background-color: blueviolet;*/
-    margin-left: 10%;
-    position: relative;
-    line-height: 25px;
-    border-bottom: 1px solid rgba(0, 0 , 0, 0.5);
+    width: 65%;
+    height: 200px;
+    margin-left: 17.5%;
+    margin-top: 120px;
+    border-radius: 20px;
+    /*background-color: coral;*/
 }
 
-.latest-diagnosis .report label{
-    width: 50%;
-    height: 25px;
-    font-size: 16px;
-    margin-left: 10%;
-    position: absolute;
-    color: #85adad;
+.latest-diagnosis .report .givenbyD{
+    width: 25%;
+    height: 200px;
+    background-color:#9EB53C;
+    margin-left: 6%;
+    float: left;
+    border-radius: 20px;
 }
 
-.latest-diagnosis .report input{
-    width: 20%;
-    height: 20px;
-    margin-left: 30%;
-    position: absolute;
+.latest-diagnosis .report .givenbyD p{
+    text-align: center;
 }
 
-.latest-diagnosis .report textarea{
-    width: 40%;
-    margin-left: 30%;
-    position: relative;
+.latest-diagnosis .report .givenbyD .Doctor-ka-name{
+    margin-top: 70px;
+}
+
+.latest-diagnosis .report .newrep{
+    width: 60%;
+    height: 200px;
+    background-color: #9EB53C;
+    margin-right: 6%;
+    float: right;
+    border-radius: 20px;
+}
+
+.latest-diagnosis .report .newrep p{
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 5%;
+    text-align: center;
 }
 
 
