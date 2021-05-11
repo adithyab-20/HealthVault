@@ -25,7 +25,7 @@ urlpatterns = [
     path('Apollo-admin/', apollo.urls),
     path('Patient/', include("Patient.urls")),
     path('Doctor/', include("Doctor.urls")),
-    path('Hospital/', include("Hospital.urls")),
+    path('Home/', include("Home.urls"))
 ]
 
 
