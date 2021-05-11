@@ -1,0 +1,94 @@
+{% extends "base_requests.html" %}
+{% block content %}
+<style type="text/css">
+	.image-container{
+		max-width: 250px;
+		height: auto;
+	}
+	.field-heading{
+		color: var(--secondary-text-color);
+	}
+	.icon-container:hover {
+		opacity: 0.3;
+		cursor: pointer;
+	}
+	.friends-icon{
+		color: #4287f5;
+		font-size: 40px;
+	}
+	.person-add-icon{
+		color: #4287f5;
+		font-size: 40px;
+	}
+	.friend-text{
+		font-weight: 500;
+		color: black;
+	}
+	.friends-btn{
+		background-color: #cccccc;
+		border-color: #cccccc;
+		color: #000;
+		font-weight: 500;
+	}
+	.friends-btn:hover {
+		background-color: #bfbfbf;
+		border-color: #bfbfbf;
+	}
+	.dropdown-toggle::after { 
+		content: none; 
+	}
+	.card{
+		border-radius: 12px;
+	}
+	.material-icons{
+		font-size: 30px;
+	}
+	.material-icons:hover{
+		cursor: pointer;
+	}
+	.confirm-friend-request{
+		color: green;
+	}
+	.confirm-friend-request:hover {
+		opacity: 0.3;
+	}
+	.decline-friend-request:hover {
+		opacity: 0.3;
+	}
+	.decline-friend-request{
+		color: red;
+	}
+	.message-btn-text{
+		font-weight: 500;
+	}
+</style>
+
+    <div class="content-section" style="font-size: 18px;">
+            <legend class="border-bottom mb-4" style="font-size: 2rem">Patient Requests</legend>
+
+            {% if patient_requests %}
+
+                {% for patient in patient_requests %}
+                    {{ patient }}
+                {% endfor %}
+            
+            {% else %}
+            <div class="alert alert-danger">
+                You have no requests yet!
+              </div>
+            {% endif %}
+
+    </div>
+{% endblock content %}
+
+{% block sidebar %}
+
+<div class="media">
+  <img class="rounded-circle account-img" src="{{ image }}">
+  <div class="media-body">
+    <h2 class="account-heading">{{ user.full_name }}</h2>
+    <p class="text-secondary">{{ user.email }}</p>
+  </div>
+</div>
+
+{%endblock sidebar %}

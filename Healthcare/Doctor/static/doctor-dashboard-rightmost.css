@@ -68,12 +68,12 @@
 }
 
 .header .nav{
-    width: 40%;
+    width: 39%;
     margin-top: 120px;
     margin-left: 40%;
     transform: translateX(-50%);
     position: absolute;
-    background-color: #0000;
+    background-color: #e0ebeb;
     border-radius: 5px;
     padding: 3px 2px;
 }
@@ -126,7 +126,7 @@
 .content1 .doc .doctor{
     width: 25%;
     height: 120px;
-    background-color: #0000;
+    background-color: #e0ebeb;
     margin-left: 10%;
     margin-top: 90px;
     position: absolute;

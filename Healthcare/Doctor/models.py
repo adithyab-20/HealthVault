@@ -4,12 +4,14 @@ from django.contrib.auth.models import User
 from Patient.models import Account
 from PIL import Image
 
+from django.conf import settings
+from django.utils import timezone
 # Create your models here.
 
 
 class ColumbiaAsia_Doctor(models.Model):
     
-    doctor = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True)
+    doctor                  = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True)
     id_doctor               = models.IntegerField(unique=True)
     image                   = models.ImageField(default='default.jpg', upload_to='profile_pics')
     department              = models.CharField(max_length=100)
@@ -51,3 +53,92 @@ class Doctor_latest_diagnosis(models.Model):
 
     def __str__(self):
         return self.Patient_name
+
+
+
+class Patient_List(models.Model):
+    doctor                  = models.OneToOneField(Account, on_delete=models.CASCADE, 
+                                related_name="doctor")
+
+    
+    patients                = models.ManyToManyField(Account, blank=True, related_name="patients_of_doc")
+
+
+    def __str__(self):
+        return  f"{self.doctor.full_name}'s Patients"
+
+    def add_patient(self, patient):
+        '''Add a new patient'''
+        
+        if not patient in self.patients.all():
+            self.patients.add(patient)
+            # self.save()
+    
+
+    def remove_patient(self, patient):
+        '''Remove a patient'''
+        self.patients.remove(patient)
+
+
+    def unenroll(self, doctor):
+        doctor.remove_patient(self)
+        doctor_assigned_to_patient = Doctor_Assigned_To_Patient.objects.get(patient=self)
+        doctor_assigned_to_patient.unenroll(self.doctor)
+
+
+
+
+
+
+class Doctor_Assigned_To_Patient(models.Model):
+    patient = models.OneToOneField(Account, on_delete=models.CASCADE, related_name="patient")
+
+    doctor = models.ForeignKey(Account,on_delete=models.CASCADE, related_name="doc_assigned_to_patient")
+
+    def __str__(self):
+        return f"{self.patient} - Doctor Assigned"
+
+    def enroll(self, doctor):
+        self.doctor.add(doctor)
+    
+    def unenroll(self, doctor):
+        self.doctor.remove(doctor)
+
+    
+
+
+class Doctor_Request(models.Model):
+    patient                     = models.ForeignKey(Account,on_delete=models.CASCADE, related_name="patient_sender")
+    doctor                      = models.ForeignKey(Account,on_delete=models.CASCADE, related_name="doctor_receiver")
+
+    is_active                   = models.BooleanField(blank=True, null=False, default=True)
+    timestamp                   = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.patient.full_name}'s Requests"
+
+    def accept(self):
+        #Accept a patient request
+        patient_list = Patient_List.objects.get(doctor=self.doctor)
+
+        if patient_list:
+            patient_list.add_patient(self.patient)
+            doctor_assigned_to_patient = Doctor_Assigned_To_Patient.objects.get(patient=self.patient)
+            doctor_assigned_to_patient.enroll(self.doctor)
+            self.is_active = False
+            self.save()
+
+    def decline(self):
+        self.is_active = False
+        self.save()
+
+
+    def cancel(self):
+        self.is_active = False
+        self.save()
+
+
+ 
+
+
+    

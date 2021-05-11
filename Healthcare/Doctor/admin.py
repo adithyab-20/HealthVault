@@ -1,7 +1,7 @@
 from django.contrib import admin
 from . import models 
 from Patient import models as Pmodels
-
+from Doctor.models import Patient_List, Doctor_Assigned_To_Patient, Doctor_Request
 from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
@@ -42,3 +42,38 @@ class ApolloAdminArea(admin.AdminSite):
     site_header = "Apollo Hospital Admin"
 
 apollo = ApolloAdminArea(name="Apollo")
+
+
+# class PatientListAdmin(admin.ModelAdmin):
+#     list_display = ['doctor']
+#     list_filter = ['doctor']
+#     search_fields = ['doctor']
+#     readonly_fields = ['doctor']
+
+#     class Meta:
+#         model = Patient_List
+
+admin.site.register(Patient_List)
+columbia_asia.register(Patient_List)
+
+
+# class DoctorAssignedToPatientAdmin(admin.ModelAdmin):
+#     list_display = ['patient']
+#     list_filter = ['patient']
+#     search_fields = ['patient']
+#     readonly_fields = ['patient']
+
+#     class Meta:
+#         model = Doctor_Assigned_To_Patient
+
+admin.site.register(Doctor_Assigned_To_Patient)
+
+class DoctorRequestAdmin(admin.ModelAdmin):
+    list_filter = ['patient', 'doctor']
+    list_display = ['patient', 'doctor']
+    search_fields = ['patient__fullname', 'patient__email', 'doctor__fullname', 'doctor__email']
+
+    class Meta:
+        model = Doctor_Request
+
+admin.site.register(Doctor_Request, DoctorRequestAdmin)

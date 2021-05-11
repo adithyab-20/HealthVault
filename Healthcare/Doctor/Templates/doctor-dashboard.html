@@ -12,7 +12,7 @@
    
     <link rel="stylesheet" type="text/css" href="{% static 'doctor-dashboard.css' %}"> 
     <link rel="stylesheet" type="text/css" href="{% static 'doctor-dashboard-rightmost.css' %}"> 
-    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800&display=swap" rel="stylesheet">
+   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
 </head>
@@ -29,7 +29,7 @@
               <div class="navbar-nav mr-auto">
                 <a class="nav-item nav-link" href="#">Home</a>
                 <a class="nav-item nav-link" href="{% url 'Doctor:Profile' %}">Update Profile</a>
-                <a class="nav-item nav-link" href="#">Patient Requests</a>
+                <a class="nav-item nav-link" href="{% url 'Doctor:PatientRequests' %}">Patient Requests</a>
               </div>
               <!-- Navbar Right Side -->
               <div class="navbar-nav">
