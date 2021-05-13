@@ -6,44 +6,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select Doctor</title>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'doctor-Selection.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'doctor-Selection.css' %}">
+    <style type="text/css">
+    .patient-img {
+        height: 100px;
+        width: 100px;
+        margin-left: 35px;
+        margin-top:15px
+        /* margin-right: 20px; */
+        /* margin-bottom: 16px; */
+      }
+
+    .patient-req{
+
+        /* width: 25px; */
+        margin-top: 55px;
+      }
+
+    .btn-primary:hover {
+    color: #fff;
+    background-color: #66b418;
+    border-color: #66b418;
+}
+    .btn-primary {
+        color: #fff;
+        background-color: #5A7995;
+        border-color: #5A7995;
+    }
+
+    </style>
+    
 </head>
 <body>
+
+    <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+          <div class="container">
+            <a class="navbar-brand mr-4" href="">Project Health</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+              <div class="navbar-nav mr-auto">
+                <a class="nav-item nav-link" href="#">Home</a>
+                <a class="nav-item nav-link" href="{% url 'Patient:Dashboard' %}">Dashboard</a>
+              </div>
+              <!-- Navbar Right Side -->
+              <div class="navbar-nav">
+                <a class="nav-item nav-link" href="{% url 'Patient:logout' %}">Logout</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+
     <div class="main">
-        <div class="header">
-            <h2>Please Select a Doctor</h2>
-        </div>
 
         <div class="list">
 
             <div class="Neurology">
                 <div class="img1"></div>
-                <label for="">Neurology Department</label>
+
+                {% for obj in neurology %}
+               
+                <label for="">Department of Neurology</label>
                 <span></span>
                 <div class="first">
                     <div class="bywhom">
-                        <div class="bywhom-img"></div>
+                         <img class="rounded-circle patient-img" src="{{ obj.image.url }}">
                         <div class="bywhom-info">
-                            <h4>Dr. -------------</h4>
-                            <p style="font-size: 12px;">Neuro-Muscular</p>
+                            <h4>{{ obj.doctor.full_name }}<h4>
+                            <p style="font-size: 12px;">{{ obj.specialization }}</p>
                         </div>
-                        <div class="rqst-btn">
+                        <!-- <div class="rqst-btn">
                             <input class="request-btn" type="button" value="Request">
-                        </div>
+                        </div> -->
+                        <div class="d-flex flex-column align-items-center pt-4">
+							<button class="btn btn-primary patient-req" id="id_send_friend_request_btn">
+								Request
+							</button>
+						</div>
                     </div>
                     <span></span>
                     <div class="paragraph">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Mollitia voluptatem accusamus molestias vitae sint labore optio quo distinctio quas facere laborum facilis,
-                        commodi architecto incidunt saepe fuga adipisci expedita iusto. Distinctio, earum perferendis?
-                        Eius inventore eos facilis quis fugiat iure ad molestiae nobis hic! Repudiandae dolorum laboriosam 
-                        quod alias rerum voluptatum quasi voluptatem impedit eum voluptates dolore quidem nam maiores, 
-                        veniam, illum autem, cumque assumenda aperiam mollitia accusamus! Quasi alias impedit 
-                        nesciunt dolores consectetur voluptatibus facere repudiandae quia sapiente quod.</p>
+                        <h4>Overview</h4>
+                        <p>{{ obj.doc_overview }}</p>
+                        <h4>Education</h4>
+                        <p>{{ obj.education }}</p>
                     </div>
                 </div>
-
+                {% endfor %}
                 <div class="second">
                     <div class="bywhom">
                         <div class="bywhom-img"></div>

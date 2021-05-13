@@ -11,10 +11,26 @@ from django.utils import timezone
 
 class ColumbiaAsia_Doctor(models.Model):
     
+
+    neurology = 'Neurology'
+    oncology = 'Oncology'
+    diagmed = 'Diagnostic_Medicine'
+    cardiology = 'Cardiology'
+    
+    DEPARTMENT_CHOICES = [
+        (neurology, 'Neurology'),
+        (oncology, 'Oncology'),
+        (cardiology, 'Cardiology'),
+        (diagmed, 'Diagnostic Medicine'),
+     
+    ]
+
     doctor                  = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True)
     id_doctor               = models.IntegerField(unique=True)
     image                   = models.ImageField(default='default.jpg', upload_to='profile_pics')
-    department              = models.CharField(max_length=100)
+
+    department              = models.CharField(max_length=20,choices=DEPARTMENT_CHOICES)
+    # department              = models.CharField(max_length=100)
     education               = models.CharField(max_length=200)
     specialization          = models.CharField(max_length=100)
     work_experience         = models.TextField()
@@ -22,6 +38,9 @@ class ColumbiaAsia_Doctor(models.Model):
 
     def __str__(self):
         return f'{self.doctor.full_name} Profile'
+
+    def dep(self):
+        return self.department   
 
     def save(self, *args, **kwargs):
             super(ColumbiaAsia_Doctor, self).save(*args, **kwargs)

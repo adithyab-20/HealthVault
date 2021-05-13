@@ -22,7 +22,9 @@
 	}
 	.friend-text{
 		font-weight: 500;
+		font-size: larger;
 		color: black;
+		padding-right: 15px;
 	}
 	.friends-btn{
 		background-color: #cccccc;
@@ -60,7 +62,15 @@
 	}
 	.message-btn-text{
 		font-weight: 500;
+		padding-right: 15px;
 	}
+
+	.patient-img {
+    height: 80px;
+    width: 80px;
+    margin-right: 20px;
+    /* margin-bottom: 16px; */
+  }
 </style>
 
     <div class="content-section" style="font-size: 18px;">
@@ -68,9 +78,19 @@
 
             {% if patient_requests %}
 
-                {% for patient in patient_requests %}
-                    {{ patient }}
-                {% endfor %}
+			{% for patient in patient_requests %}
+			<div class="card m-3 p-4">
+				<div class="d-flex flex-row align-items-center">
+					<span><img class="rounded-circle patient-img" src="{{ patient.patient.profile.image.url }}"></span>
+					<span class="friend-text align-items-center mr-2">{{ patient.patient.full_name }}</span>
+				
+					<span id="id_cancel_{{id}}" class="decline-friend-request material-icons p-1" onclick='triggerDeclineFriendRequest("{{pending_friend_request_id}}")'>cancel</span>
+					<span class="message-btn-text">Decline</span>
+  					<span id="id_confirm_{{id}}" class="confirm-friend-request material-icons p-1" onclick='triggerAcceptFriendRequest("{{pending_friend_request_id}}")'>check</span>
+					<span class="message-btn-text">Accept</span>
+				</div>
+			</div>
+			{% endfor %}          
             
             {% else %}
             <div class="alert alert-danger">
@@ -79,6 +99,74 @@
             {% endif %}
 
     </div>
+
+	<script type="text/javascript">
+
+		// called from base_js.html
+		//preloadImage("{{profile_image|safe}}", 'id_profile_image')
+	
+		function onFriendRequestSent(){
+			location.reload();
+		}
+	
+		function onFriendRequestCancelled(){
+			location.reload();
+		}
+	
+		function onFriendRemoved(){
+			location.reload();
+		}
+	
+		function onFriendRequestAccepted(){
+			location.reload();
+		}
+	
+		function onFriendRequestDeclined(){
+			location.reload();
+		}
+	
+	
+		var sendFriendRequestBtn = document.getElementById("id_send_friend_request_btn")
+		if (sendFriendRequestBtn != null){
+			sendFriendRequestBtn.addEventListener("click", function(){
+				sendFriendRequest("{{id}}", onFriendRequestSent)
+			})
+		}
+	
+		var cancelFriendRequestBtn = document.getElementById("id_cancel_friend_request_btn")
+		if(cancelFriendRequestBtn != null){
+			cancelFriendRequestBtn.addEventListener("click", function(){
+				cancelFriendRequest("{{id}}", onFriendRequestCancelled)
+			})
+		}
+	
+		var removeFriendBtn = document.getElementById("id_unfriend_btn")
+		if (removeFriendBtn != null){
+			removeFriendBtn.addEventListener("click", function(){
+				removeFriend("{{id}}", onFriendRemoved)
+			})
+		}
+	
+		function triggerAcceptFriendRequest(friend_request_id){
+			acceptFriendRequest(friend_request_id, onFriendRequestAccepted)
+		}
+	
+		function triggerDeclineFriendRequest(friend_request_id){
+			declineFriendRequest(friend_request_id, onFriendRequestDeclined)
+		}
+		
+	</script>
+	
+	{% include 'friend/snippets/send_friend_request.html' %}
+	{% include 'friend/snippets/accept_friend_request.html' %}
+	{% include 'friend/snippets/decline_friend_request.html' %}
+	{% include 'friend/snippets/cancel_friend_request.html' %}
+	{% include 'friend/snippets/remove_friend.html' %}
+	{% include 'chat/snippets/create_or_return_private_chat.html' %}
+	
+	
+	
+	
 {% endblock content %}
 
 {% block sidebar %}
@@ -92,3 +180,4 @@
 </div>
 
 {%endblock sidebar %}
+

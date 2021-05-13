@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth import login, authenticate
-from Patient.forms import SignupForm
+from Patient.forms import SignupForm, MedicalHistoryForm, ProfileUpdateForm
 from django.contrib import messages
 from jsonview.decorators import json_view
 from django.template.context_processors import csrf
@@ -11,12 +11,12 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect
-from Patient.forms import MedicalHistoryForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from Patient.decorators import *
 from Patient.models import Account,Profile
-    
+from Doctor.models import ColumbiaAsia_Doctor
+
 @unauthenticated_user
 def loginView(request):
 
@@ -108,7 +108,15 @@ def dashboard(request):
 
 @login_required()
 def docselection(request):
-    return render(request, 'doctor-Selection.html')
+
+    context = {}
+
+    context['neurology'] = ColumbiaAsia_Doctor.objects.filter(department="Neurology")
+    context['oncology'] = ColumbiaAsia_Doctor.objects.filter(department="Oncology")
+    context['cardiology'] = ColumbiaAsia_Doctor.objects.filter(department="Cardiology")
+    context['diagmed'] = ColumbiaAsia_Doctor.objects.filter(department="Diagnostic_Medicine")
+
+    return render(request, 'doctor-Selection.html', context)
 
 
 
@@ -145,3 +153,42 @@ def profile(request):
     }
 
     return render(request, 'Update-Profile.html', context)
+
+
+   
+
+
+def send_doctor_request(request, *args, **kwargs):
+	user = request.user
+	payload = {}
+	if request.method == "POST" and user.is_authenticated:
+		user_id = request.POST.get("receiver_user_id")
+		if user_id:
+			receiver = Account.objects.get(pk=user_id)
+			try:
+				# Get any friend requests (active and not-active)
+				friend_requests = FriendRequest.objects.filter(sender=user, receiver=receiver)
+				# find if any of them are active (pending)
+				try:
+					for request in friend_requests:
+						if request.is_active:
+							raise Exception("You already sent them a friend request.")
+					# If none are active create a new friend request
+					friend_request = FriendRequest(sender=user, receiver=receiver)
+					friend_request.save()
+					payload['response'] = "Friend request sent."
+				except Exception as e:
+					payload['response'] = str(e)
+			except FriendRequest.DoesNotExist:
+				# There are no friend requests so create one.
+				friend_request = FriendRequest(sender=user, receiver=receiver)
+				friend_request.save()
+				payload['response'] = "Friend request sent."
+
+			if payload['response'] == None:
+				payload['response'] = "Something went wrong."
+		else:
+			payload['response'] = "Unable to sent a friend request."
+	else:
+		payload['response'] = "You must be authenticated to send a friend request."
+	return HttpResponse(json.dumps(payload), content_type="application/json")
