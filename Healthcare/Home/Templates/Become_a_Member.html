@@ -9,7 +9,7 @@
 
 </head>
 <body>
-  <form action ="{% url 'Hospital:test' %}" method="POST">
+  <form action ="{% url 'Home:Home' %}" method="POST">
     {% csrf_token %}
   <div class="cont">
     <div class="form sign-in">
@@ -49,19 +49,18 @@
           <span>Name of Institution</span>
           <input type="text">
         </label>
-        <label>
-          <span></span>
+          <span>Email ID</span>
           <input type="email">
         </label>
         <label>
-          <span>Password</span>
-          <input type="password">
+          <span>Phone Number</span>
+          <input type="text">
         </label>
         <label>
-          <span>Confirm Password</span>
-          <input type="password">
+          <span>How did you get to know about us?</span>
+          <input type="text">
         </label>
-        <button type="button" class="submit">Click to Sign Up!</button>
+        <button type="button" class="submit">Click to Become a Member</button>
       </div>
     </div>
   </div>
