@@ -69,13 +69,47 @@
 
         <div class="list">
 
-            <div class="Neurology">
+            <div class="Neurology various-depts">
                 <div class="img1"></div>
+                <label for="">Department of Neurology</label>
 
                 {% for obj in neurology %}
                
-                <label for="">Department of Neurology</label>
-                <span></span>
+
+                <div class="first">
+                    <div class="bywhom">
+                        <img class="rounded-circle patient-img" src="{{ obj.image.url }}">
+                        <div class="bywhom-info">
+                            <h4>{{ obj.doctor.full_name }}<h4>
+                            <p style="font-size: 12px;">{{ obj.specialization }}</p>
+                        </div>
+                        <!-- <div class="rqst-btn">
+                            <input class="request-btn" type="button" value="Request">
+                        </div> -->
+                        <div class="d-flex flex-column align-items-center pt-4">
+							<button class="btn btn-primary patient-req" id="id_send_friend_request_btn">
+								Request
+							</button>
+						</div>
+                    </div>
+                    <span></span>
+                    <div class="paragraph">
+                        <h4>Overview</h4>
+                        <p>{{ obj.doc_overview }}</p>
+                        <h4>Education</h4>
+                        <p>{{ obj.education }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="Cardiology various-depts">
+                <div class="img2"></div>
+                <label for="">Department of Cardiology</label>
+
+                {% for obj in cardiology %}
+               
+
                 <div class="first">
                     <div class="bywhom">
                          <img class="rounded-circle patient-img" src="{{ obj.image.url }}">
@@ -101,182 +135,79 @@
                     </div>
                 </div>
                 {% endfor %}
-                <div class="second">
-                    <div class="bywhom">
-                        <div class="bywhom-img"></div>
-                        <div class="bywhom-info">
-                            <h4>Dr. -------------</h4>
-                            <p style="font-size: 12px;">Neuro-Muscular</p>
-                        </div>
-                        <div class="rqst-btn">
-                            <input class="request-btn" type="button" value="Request">
-                        </div>
-                    </div>
-                    <span></span>
-                    <div class="paragraph">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Mollitia voluptatem accusamus molestias vitae sint labore optio quo distinctio quas facere laborum facilis,
-                        commodi architecto incidunt saepe fuga adipisci expedita iusto. Distinctio, earum perferendis?
-                        Eius inventore eos facilis quis fugiat iure ad molestiae nobis hic! Repudiandae dolorum laboriosam 
-                        quod alias rerum voluptatum quasi voluptatem impedit eum voluptates dolore quidem nam maiores, 
-                        veniam, illum autem, cumque assumenda aperiam mollitia accusamus! Quasi alias impedit 
-                        nesciunt dolores consectetur voluptatibus facere repudiandae quia sapiente quod.</p>
-                    </div>
-                </div>
+                
             </div>
 
-            <div class="Cardiology">
-                <div class="img2"></div>
-                <label for="">Cardiology Department</label>
-                <span></span>
-                <div class="first">
-                    <div class="bywhom">
-                        <div class="bywhom-img"></div>
-                        <div class="bywhom-info">
-                            <h4>Dr. -------------</h4>
-                            <p style="font-size: 12px;">Neuro-Muscular</p>
-                        </div>
-                        <div class="rqst-btn">
-                            <input class="request-btn" type="button" value="Request">
-                        </div>
-                    </div>
-                    <span></span>
-                    <div class="paragraph">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Mollitia voluptatem accusamus molestias vitae sint labore optio quo distinctio quas facere laborum facilis,
-                        commodi architecto incidunt saepe fuga adipisci expedita iusto. Distinctio, earum perferendis?
-                        Eius inventore eos facilis quis fugiat iure ad molestiae nobis hic! Repudiandae dolorum laboriosam 
-                        quod alias rerum voluptatum quasi voluptatem impedit eum voluptates dolore quidem nam maiores, 
-                        veniam, illum autem, cumque assumenda aperiam mollitia accusamus! Quasi alias impedit 
-                        nesciunt dolores consectetur voluptatibus facere repudiandae quia sapiente quod.</p>
-                    </div>
-                </div>
-
-                <div class="second">
-                    <div class="bywhom">
-                        <div class="bywhom-img"></div>
-                        <div class="bywhom-info">
-                            <h4>Dr. -------------</h4>
-                            <p style="font-size: 12px;">Neuro-Muscular</p>
-                        </div>
-                        <div class="rqst-btn">
-                            <input class="request-btn" type="button" value="Request">
-                        </div>
-                    </div>
-                    <span></span>
-                    <div class="paragraph">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Mollitia voluptatem accusamus molestias vitae sint labore optio quo distinctio quas facere laborum facilis,
-                        commodi architecto incidunt saepe fuga adipisci expedita iusto. Distinctio, earum perferendis?
-                        Eius inventore eos facilis quis fugiat iure ad molestiae nobis hic! Repudiandae dolorum laboriosam 
-                        quod alias rerum voluptatum quasi voluptatem impedit eum voluptates dolore quidem nam maiores, 
-                        veniam, illum autem, cumque assumenda aperiam mollitia accusamus! Quasi alias impedit 
-                        nesciunt dolores consectetur voluptatibus facere repudiandae quia sapiente quod.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="Radiology">
+            <div class="Radiology various-depts">
                 <div class="img3"></div>
-                <label for="">Radiology Department</label>
-                <span></span>
+                <label for="">Department of Radiology</label>
+
+                {% for obj in diagmed %}
+               
+
                 <div class="first">
                     <div class="bywhom">
-                        <div class="bywhom-img"></div>
+                         <img class="rounded-circle patient-img" src="{{ obj.image.url }}">
                         <div class="bywhom-info">
-                            <h4>Dr. -------------</h4>
-                            <p style="font-size: 12px;">Neuro-Muscular</p>
+                            <h4>{{ obj.doctor.full_name }}<h4>
+                            <p style="font-size: 12px;">{{ obj.specialization }}</p>
                         </div>
-                        <div class="rqst-btn">
+                        <!-- <div class="rqst-btn">
                             <input class="request-btn" type="button" value="Request">
-                        </div>
+                        </div> -->
+                        <div class="d-flex flex-column align-items-center pt-4">
+							<button class="btn btn-primary patient-req" id="id_send_friend_request_btn">
+								Request
+							</button>
+						</div>
                     </div>
                     <span></span>
                     <div class="paragraph">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Mollitia voluptatem accusamus molestias vitae sint labore optio quo distinctio quas facere laborum facilis,
-                        commodi architecto incidunt saepe fuga adipisci expedita iusto. Distinctio, earum perferendis?
-                        Eius inventore eos facilis quis fugiat iure ad molestiae nobis hic! Repudiandae dolorum laboriosam 
-                        quod alias rerum voluptatum quasi voluptatem impedit eum voluptates dolore quidem nam maiores, 
-                        veniam, illum autem, cumque assumenda aperiam mollitia accusamus! Quasi alias impedit 
-                        nesciunt dolores consectetur voluptatibus facere repudiandae quia sapiente quod.</p>
+                        <h4>Overview</h4>
+                        <p>{{ obj.doc_overview }}</p>
+                        <h4>Education</h4>
+                        <p>{{ obj.education }}</p>
                     </div>
                 </div>
-
-                <div class="second">
-                    <div class="bywhom">
-                        <div class="bywhom-img"></div>
-                        <div class="bywhom-info">
-                            <h4>Dr. -------------</h4>
-                            <p style="font-size: 12px;">Neuro-Muscular</p>
-                        </div>
-                        <div class="rqst-btn">
-                            <input class="request-btn" type="button" value="Request">
-                        </div>
-                    </div>
-                    <span></span>
-                    <div class="paragraph">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Mollitia voluptatem accusamus molestias vitae sint labore optio quo distinctio quas facere laborum facilis,
-                        commodi architecto incidunt saepe fuga adipisci expedita iusto. Distinctio, earum perferendis?
-                        Eius inventore eos facilis quis fugiat iure ad molestiae nobis hic! Repudiandae dolorum laboriosam 
-                        quod alias rerum voluptatum quasi voluptatem impedit eum voluptates dolore quidem nam maiores, 
-                        veniam, illum autem, cumque assumenda aperiam mollitia accusamus! Quasi alias impedit 
-                        nesciunt dolores consectetur voluptatibus facere repudiandae quia sapiente quod.</p>
-                    </div>
-                </div>
+                {% endfor %}
+                
             </div>
 
-            <div class="Oncology">
+            <div class="Oncology various-depts">
                 <div class="img4"></div>
-                <label for="">Oncology Department</label>
-                <span></span>
+                <label for="">Department of Oncology</label>
+                
+                {% for obj in oncology %}
+               
+
                 <div class="first">
                     <div class="bywhom">
-                        <div class="bywhom-img"></div>
+                         <img class="rounded-circle patient-img" src="{{ obj.image.url }}">
                         <div class="bywhom-info">
-                            <h4>Dr. -------------</h4>
-                            <p style="font-size: 12px;">Neuro-Muscular</p>
+                            <h4>{{ obj.doctor.full_name }}<h4>
+                            <p style="font-size: 12px;">{{ obj.specialization }}</p>
                         </div>
-                        <div class="rqst-btn">
+                        <!-- <div class="rqst-btn">
                             <input class="request-btn" type="button" value="Request">
-                        </div>
+                        </div> -->
+                        <div class="d-flex flex-column align-items-center pt-4">
+							<button class="btn btn-primary patient-req" id="id_send_friend_request_btn">
+								Request
+							</button>
+						</div>
                     </div>
                     <span></span>
                     <div class="paragraph">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Mollitia voluptatem accusamus molestias vitae sint labore optio quo distinctio quas facere laborum facilis,
-                        commodi architecto incidunt saepe fuga adipisci expedita iusto. Distinctio, earum perferendis?
-                        Eius inventore eos facilis quis fugiat iure ad molestiae nobis hic! Repudiandae dolorum laboriosam 
-                        quod alias rerum voluptatum quasi voluptatem impedit eum voluptates dolore quidem nam maiores, 
-                        veniam, illum autem, cumque assumenda aperiam mollitia accusamus! Quasi alias impedit 
-                        nesciunt dolores consectetur voluptatibus facere repudiandae quia sapiente quod.</p>
+                        <h4>Overview</h4>
+                        <p>{{ obj.doc_overview }}</p>
+                        <h4>Education</h4>
+                        <p>{{ obj.education }}</p>
                     </div>
                 </div>
+                {% endfor %}
 
-                <div class="second">
-                    <div class="bywhom">
-                        <div class="bywhom-img"></div>
-                        <div class="bywhom-info">
-                            <h4>Dr. -------------</h4>
-                            <p style="font-size: 12px;">Neuro-Muscular</p>
-                        </div>
-                        <div class="rqst-btn">
-                            <input class="request-btn" type="button" value="Request">
-                        </div>
-                    </div>
-                    <span></span>
-                    <div class="paragraph">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Mollitia voluptatem accusamus molestias vitae sint labore optio quo distinctio quas facere laborum facilis,
-                        commodi architecto incidunt saepe fuga adipisci expedita iusto. Distinctio, earum perferendis?
-                        Eius inventore eos facilis quis fugiat iure ad molestiae nobis hic! Repudiandae dolorum laboriosam 
-                        quod alias rerum voluptatum quasi voluptatem impedit eum voluptates dolore quidem nam maiores, 
-                        veniam, illum autem, cumque assumenda aperiam mollitia accusamus! Quasi alias impedit 
-                        nesciunt dolores consectetur voluptatibus facere repudiandae quia sapiente quod.</p>
-                    </div>
-                </div>
             </div>
+
         </div>
     </div>
 </body>
