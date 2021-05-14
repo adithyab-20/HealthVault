@@ -5,6 +5,7 @@ from django.contrib.auth.forms import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from django import forms
+from Patient.models import Prescription
 
 
 
@@ -50,3 +51,20 @@ class DocImageForm(ModelForm):
     class Meta:
         model = ColumbiaAsia_Doctor
         fields = ['image']
+
+class PrescriptionForm(ModelForm):
+
+    Patient_name = forms.CharField(label='Patient name',max_length=100)
+    Patient_ID = forms.IntegerField()
+    Doctor_name = forms.CharField(label='Doctor name',max_length=100)
+    Doctor_ID = forms.IntegerField()
+    Prescription_ID = forms.IntegerField()
+    Prescription_Info = forms.CharField(widget=forms.Textarea)
+    Additional_advice = forms.CharField(widget=forms.Textarea)
+    
+    class Meta:
+        model = Prescription
+        fields = ("Patient_name", "Patient_ID", "Doctor_name", "Doctor_ID", "Prescription_ID", "Prescription_Info", "Additional_advice",)
+        widgets = {
+            'text': forms.Textarea(attrs={'rows':5, 'cols':10}), #this is changeble.
+        }

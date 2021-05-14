@@ -109,3 +109,18 @@ class Profile(models.Model):
             output_size = (300,300)
             img.thumbnail(output_size)
             img.save(self.image.path)
+
+class Prescription(models.Model):
+
+    REQUIRED_FIELDS = ['Patient_name','Patient_ID','Doctor_name','Doctor_ID','Prescription_ID','Prescription_Info',]
+
+    Patient_name = models.CharField(max_length=100)
+    Patient_ID = models.IntegerField()
+    Doctor_name =  models.CharField(max_length=100)
+    Doctor_ID = models.IntegerField()
+    Prescription_ID = models.IntegerField()
+    Prescription_Info = models.TextField()
+    Additional_advice = models.TextField()
+
+    def __str__(self):
+        return self.Patient_name
