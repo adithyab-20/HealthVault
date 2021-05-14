@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'doctor-Selection.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style type="text/css">
     .patient-img {
         height: 100px;
@@ -38,6 +39,11 @@
         background-color: #5A7995;
         border-color: #5A7995;
     }
+
+    .btn-danger{
+        width: 80%;
+    }
+
 
     </style>
     
@@ -83,14 +89,27 @@
                             <h4>{{ obj.doctor.full_name }}<h4>
                             <p style="font-size: 12px;">{{ obj.specialization }}</p>
                         </div>
-                        <!-- <div class="rqst-btn">
-                            <input class="request-btn" type="button" value="Request">
-                        </div> -->
+                      
+                        {% if doctor_requests and doctor_id == obj.doctor.id %} 
+                    
+                                
+                                <div class="d-flex flex-column align-items-center pt-4">
+                                    <button class="btn btn-danger patient-req" id="cancel_doc_btn_{{ obj.doctor.id }}">
+                                        Cancel Request
+                                    </button>
+                                </div>
+
+
+					    {% else %}
+				
                         <div class="d-flex flex-column align-items-center pt-4">
-							<button class="btn btn-primary patient-req" id="id_send_friend_request_btn">
+							<button class="btn btn-primary patient-req" id="doc_btn_{{ obj.doctor.id }}">
 								Request
 							</button>
 						</div>
+
+                        {% endif %}
+				
                     </div>
                     <span></span>
                     <div class="paragraph">
@@ -121,7 +140,7 @@
                             <input class="request-btn" type="button" value="Request">
                         </div> -->
                         <div class="d-flex flex-column align-items-center pt-4">
-							<button class="btn btn-primary patient-req" id="id_send_friend_request_btn">
+							<button class="btn btn-primary patient-req" id="doc_btn_{{ obj.doctor.id }}">
 								Request
 							</button>
 						</div>
@@ -140,7 +159,7 @@
 
             <div class="Radiology various-depts">
                 <div class="img3"></div>
-                <label for="">Department of Radiology</label>
+                <label for="">Department of Diagnostic Medicine</label>
 
                 {% for obj in diagmed %}
                
@@ -156,7 +175,7 @@
                             <input class="request-btn" type="button" value="Request">
                         </div> -->
                         <div class="d-flex flex-column align-items-center pt-4">
-							<button class="btn btn-primary patient-req" id="id_send_friend_request_btn">
+							<button class="btn btn-primary patient-req" id="doc_btn_{{ obj.doctor.id }}">
 								Request
 							</button>
 						</div>
@@ -191,7 +210,7 @@
                             <input class="request-btn" type="button" value="Request">
                         </div> -->
                         <div class="d-flex flex-column align-items-center pt-4">
-							<button class="btn btn-primary patient-req" id="id_send_friend_request_btn">
+							<button class="btn btn-primary patient-req" id="doc_btn_{{ obj.doctor.id }}">
 								Request
 							</button>
 						</div>
@@ -210,5 +229,61 @@
 
         </div>
     </div>
+    
+
+
+    <script type="text/javascript">
+
+        // called from base_js.html
+        //preloadImage("{{profile_image|safe}}", 'id_profile_image')
+    
+        function onFriendRequestSent(){
+            location.reload();
+        }
+    
+        function onFriendRequestCancelled(){
+            location.reload();
+        }
+        
+    
+        
+      
+
+    </script>
+    
+    {% include 'snippets/send_doctor_request.html' %}
+    {% include 'snippets/cancel_doctor_request.html' %}
+
+
+
+    {% for doc in doctors %}
+
+    <script type="text/javascript">
+    
+    
+    var sendDoctorRequestBtn_{{doc.doctor.id}} = document.getElementById("doc_btn_{{ doc.doctor.id }}")
+        if (sendDoctorRequestBtn_{{doc.doctor.id}} != null){
+            sendDoctorRequestBtn_{{doc.doctor.id}}.addEventListener("click", function(){
+                sendDoctorRequest("{{doc.doctor.id}}", onFriendRequestSent)
+                // alert("It Worked!");
+            })
+        }
+
+        var cancelDoctorRequestBtn_{{doc.doctor.id}} = document.getElementById("cancel_doc_btn_{{ doc.doctor.id }}")
+        if(cancelDoctorRequestBtn_{{doc.doctor.id}} != null){
+            cancelDoctorRequestBtn_{{doc.doctor.id}}.addEventListener("click", function(){
+                cancelDoctorRequest("{{doc.doctor.id}}", onFriendRequestCancelled)
+            })
+        }
+    
+    
+    </script>
+
+    {% endfor %}
+
+    
+
+   
+
 </body>
 </html>

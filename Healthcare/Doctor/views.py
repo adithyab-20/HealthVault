@@ -47,7 +47,7 @@ def request_view(request, *args, **kwargs):
 		return render(request, "Patient_Requests.html", context)	   
 
 
-
+@login_required(login_url="/Doctor")
 @allowed_users(allowed_roles=['Admin', 'Doctors'])
 def dashboard(request):
 	return render(request, 'doctor-dashboard.html')

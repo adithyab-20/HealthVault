@@ -15,7 +15,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from Patient.decorators import *
 from Patient.models import Account,Profile
-from Doctor.models import ColumbiaAsia_Doctor
+from Doctor.models import ColumbiaAsia_Doctor, Doctor_Request, Doctor_Assigned_To_Patient
+from Doctor.doctor_request_status import DoctorRequestStatus
+
 
 @unauthenticated_user
 def loginView(request):
@@ -101,21 +103,53 @@ def success(request):
     return render(request, 'Success.html')
 
 
-@login_required(login_url="{% url 'Patient:login' %}")
+@login_required(login_url="/Patient")
 @allowed_users(allowed_roles=['Admin', 'Patients'])
 def dashboard(request):
     return render(request, 'new-dash.html')
 
 @login_required()
-def docselection(request):
-
+def docselection(request, *args, **kwargs):
     context = {}
+    user_id = request.user.id
+    # print(user_id)
+    context['doctor_id'] = None
+    context['doctor_requests'] = False
+    try:
+        account = Account.objects.get(pk=user_id)
+    except:
+        return HttpResponse("Something went wrong.")
+
+    if account:
+        try:
+            doctor_requests = Doctor_Request.objects.get(patient=account, is_active=True)
+            doctor_id  = doctor_requests.doctor.id
+            context['doctor_requests'] = True
+            context['doctor_id'] = doctor_id
+            print(doctor_id)
+        
+        except Exception as e:
+            print(e)
+
+		# request_sent = DoctorRequestStatus.NO_REQUEST_SENT.value
+		# patient_requests = get_doctor_request_or_false(doctor=account)
+	
+		# if patient_requests!= False:
+		# 	request_sent = DoctorRequestStatus.THEM_SENT_TO_YOU.value
+		# 	context['patient_requests'] = patient_requests
+		# else:
+		# 	request_sent = DoctorRequestStatus.NO_REQUEST_SENT.value 
+
+		# # Set the template variables to the values
+		# context['request_sent'] = request_sent
+		# context['patient_requests'] = patient_requests
+		# return render(request, "Patient_Requests.html", context)
 
     context['neurology'] = ColumbiaAsia_Doctor.objects.filter(department="Neurology")
     context['oncology'] = ColumbiaAsia_Doctor.objects.filter(department="Oncology")
     context['cardiology'] = ColumbiaAsia_Doctor.objects.filter(department="Cardiology")
     context['diagmed'] = ColumbiaAsia_Doctor.objects.filter(department="Diagnostic_Medicine")
-
+    context['doctors'] = ColumbiaAsia_Doctor.objects.all()
     return render(request, 'doctor-Selection.html', context)
 
 
@@ -155,8 +189,6 @@ def profile(request):
     return render(request, 'Update-Profile.html', context)
 
 
-   
-
 
 def send_doctor_request(request, *args, **kwargs):
 	user = request.user
@@ -167,28 +199,59 @@ def send_doctor_request(request, *args, **kwargs):
 			receiver = Account.objects.get(pk=user_id)
 			try:
 				# Get any friend requests (active and not-active)
-				friend_requests = FriendRequest.objects.filter(sender=user, receiver=receiver)
+				doctor_requests = Doctor_Request.objects.filter(patient=user, doctor=receiver)
 				# find if any of them are active (pending)
 				try:
-					for request in friend_requests:
+					for request in doctor_requests:
 						if request.is_active:
-							raise Exception("You already sent them a friend request.")
+							raise Exception("You already sent the doctor a request!")
 					# If none are active create a new friend request
-					friend_request = FriendRequest(sender=user, receiver=receiver)
-					friend_request.save()
-					payload['response'] = "Friend request sent."
+					doctor_request = Doctor_Request(patient=user, doctor=receiver)
+					doctor_request.save()
+					payload['response'] = "Doctor request sent."
 				except Exception as e:
 					payload['response'] = str(e)
-			except FriendRequest.DoesNotExist:
+			except Doctor_Request.DoesNotExist:
 				# There are no friend requests so create one.
-				friend_request = FriendRequest(sender=user, receiver=receiver)
-				friend_request.save()
-				payload['response'] = "Friend request sent."
+				doctor_request = Doctor_Request(patient=user, doctor=receiver)
+				doctor_request.save()
+				payload['response'] = "Doctor request sent."
 
 			if payload['response'] == None:
 				payload['response'] = "Something went wrong."
 		else:
-			payload['response'] = "Unable to sent a friend request."
+			payload['response'] = "Unable to send a doctor request."
 	else:
-		payload['response'] = "You must be authenticated to send a friend request."
+		payload['response'] = "You must be authenticated to send a doctor request."
 	return HttpResponse(json.dumps(payload), content_type="application/json")
+
+
+def cancel_doctor_request(request, *args, **kwargs):
+    user = request.user
+    payload = {}
+    if request.method == "POST" and user.is_authenticated:
+        user_id = request.POST.get("receiver_user_id")
+        if user_id:
+            receiver = Account.objects.get(pk=user_id)
+            try:
+                doctor_requests = Doctor_Request.objects.filter(patient=user, doctor=receiver, is_active=True)
+       
+
+            except Doctor_Request.DoesNotExist:
+                payload['response'] = "Nothing to cancel. Doctor request does not exist."
+
+			# There should only ever be ONE active friend request at any given time. Cancel them all just in case.
+            if len(doctor_requests) > 1:
+                for request in doctor_requests:
+                    request.cancel()
+                payload['response'] = "Doctor request canceled."
+            else:
+                # found the request. Now cancel it
+                doctor_requests.first().cancel()
+                payload['response'] = "Doctor request canceled."
+        else:
+            payload['response'] = "Unable to cancel that doctor request."
+    else:
+        # should never happen
+        payload['response'] = "You must be authenticated to cancel a doctor request."
+    return HttpResponse(json.dumps(payload), content_type="application/json")
