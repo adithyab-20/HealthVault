@@ -1,5 +1,5 @@
 body{
-    background:#DCFAF8;
+    background:#FFF7D6;
 }
 
 .header{
@@ -11,9 +11,9 @@ body{
 
 .header h1{
     color: black;
-  -webkit-text-fill-color:#324e4e; /* Will override color (regardless of order) */
+  -webkit-text-fill-color:#000437; /* Will override color (regardless of order) */
   -webkit-text-stroke-width: 0.5px;
-  -webkit-text-stroke-color: black;
+  -webkit-text-stroke-color: #000437;
   letter-spacing: 0.1em;
   text-decoration: underline;
 }
@@ -28,6 +28,8 @@ body{
     margin-top: 50px;
     position: relative;
     box-shadow: 2px 7px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 30px;
+    overflow:hidden;
 }
 
 .inner-hospital{
@@ -67,13 +69,19 @@ body{
 
 .hospital .name button{
     margin-left: 40px;
-    padding: 3px 20px;
+    padding: 5px 25px;
     color: wheat;
     outline: none;
     border-color: wheat;
-    border-radius: 30px;
+    border-radius: 10px;
     background: transparent;
     margin-top: 15px;
+}
+
+.hospital .name button:hover{
+    background-color: #82DC7D;
+    color: black;
+    border-color: black;
 }
 
 .hospital .information{
@@ -84,6 +92,7 @@ body{
     margin-left: 65%;
     background: rgba(255, 255, 255, 0.5);
     background-size: 100% 100%;
+    border-radius: 30px;
 }
 
 .hospital .information  label{
