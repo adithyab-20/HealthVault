@@ -1,5 +1,19 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
+from Doctor.forms import LatestDiagnosisForm
+from django.contrib import messages
+from jsonview.decorators import json_view
+from django.template.context_processors import csrf
+from crispy_forms.utils import render_crispy_form
+from django.http import HttpResponse
+import json
+from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth import login
+from django.contrib.auth.forms import AuthenticationForm
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+from Doctor.models import Doctor_latest_diagnosis
 
 def Login(request):
     if request.method == 'POST':
@@ -25,7 +39,7 @@ def Latest_Diagnosis(request):
             # Doctor_DateofUpdation = form.cleaned_data.get('Date_of_updation')
             Patient_diagnosis = form.cleaned_data.get('Diagnosis')
             Patient_diagnosis_description = form.cleaned_data.get('Diagnosis_description')
-            Doctor_Advice = forms.cleaned_data.get('Doctor_advice')
+            Doctor_Advice = form.cleaned_data.get('Doctor_advice')
             Doctor_additional_comments = form.cleaned_data.get('Additional_comments')
             return redirect('/Patient/dashboard')
 

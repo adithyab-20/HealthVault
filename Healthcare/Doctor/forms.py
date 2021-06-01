@@ -1,3 +1,14 @@
+import datetime
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from Doctor.models import Doctor_latest_diagnosis
+from django.forms import ModelForm
+from django.contrib.auth.forms import forms
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
+from django import forms
+from django.forms import Form
+
 class LatestDiagnosisForm(ModelForm):
 
     Patient_name = forms.CharField(label='Full name',max_length=100)
