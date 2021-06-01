@@ -112,16 +112,17 @@ class Patient_List(models.Model):
 class Doctor_Assigned_To_Patient(models.Model):
     patient = models.OneToOneField(Account, on_delete=models.CASCADE, related_name="patient")
 
-    doctor = models.ForeignKey(Account,on_delete=models.CASCADE, related_name="doc_assigned_to_patient")
+    doctor = models.ForeignKey(Account,on_delete=models.CASCADE, blank=True, null=True, related_name="doc_assigned_to_patient")
 
     def __str__(self):
         return f"{self.patient} - Doctor Assigned"
 
     def enroll(self, doctor):
-        self.doctor.add(doctor)
+        self.doctor = doctor
+        self.save()
     
     def unenroll(self, doctor):
-        self.doctor.remove(doctor)
+        self.doctor = None
 
     
 

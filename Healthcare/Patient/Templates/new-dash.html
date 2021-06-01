@@ -12,6 +12,21 @@
     {% endblock %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+    <style type="text/css">
+    .doc-img {
+    
+        height: 100px;
+        width: 100px;
+        margin-top: -20px;
+        margin-left: -10px;
+       
+      }
+
+    p{
+        margin-top: 12px;
+        margin-bottom: 1rem;
+    }
+    </style>
 </head>
 <body>
 
@@ -62,10 +77,10 @@
                 <label for="">Doctor</label>
                 <span></span>
                 <div class="doctor">
-                    <div class="icon"><i class="fa fa-user-md"></i></div>
+                    <div class="icon"><img class="rounded-circle doc-img" src="{{ doc_image }}"></div>
                     <div class="doctor-name">
-                        <h3>Doctor Name</h3>
-                        <p>Qualification</p>
+                        <h3>{{ doctor_assigned.doctor.full_name }}</h3>
+                        <p>{{ doctor_assigned.doctor.columbiaasia_doctor.education }}</p>
                     </div>
                 </div>
             </div>

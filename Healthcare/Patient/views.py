@@ -53,6 +53,7 @@ def loginView(request):
             login(request,account)
             
             Profile.objects.create(user=request.user)
+            Doctor_Assigned_To_Patient.objects.create(patient=request.user)
             
         else:
             resp['success'] = False
@@ -106,7 +107,19 @@ def success(request):
 @login_required(login_url="/Patient")
 @allowed_users(allowed_roles=['Admin', 'Patients'])
 def dashboard(request):
-    return render(request, 'new-dash.html')
+    context = {}
+    try:
+        doctor_assigned = Doctor_Assigned_To_Patient.objects.get(patient=request.user)
+        image = doctor_assigned.doctor.columbiaasia_doctor.image.url
+    except Doctor_Assigned_To_Patient.DoesNotExist:
+        return HttpResponse("Something went wrong trying to fetch the doctor assigned")
+
+
+    context['doctor_assigned'] = doctor_assigned
+    context['doc_image'] = image
+
+
+    return render(request, 'new-dash.html', context)
 
 @login_required()
 def docselection(request, *args, **kwargs):

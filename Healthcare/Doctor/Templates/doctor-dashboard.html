@@ -14,7 +14,39 @@
     <link rel="stylesheet" type="text/css" href="{% static 'doctor-dashboard-rightmost.css' %}"> 
    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'docmain.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Chivo:300,700|Playfair+Display:700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700|Montserrat:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <style type=text/css>
+   
+    #Hello{ color: #363636; font-family: "Great Vibes", cursive; font-size: 60px; line-height: 130px; font-weight: 550; 
+    margin-bottom: 0px; margin-top: 0px; text-align: center; text-shadow: 0 1px 1px #fff; }
+
+    .header .patient-name h2 {
+    margin-left: 20px;
+    font-size: 40px;
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    }
+
+      .doc-img {
+    
+        height: 100px;
+        width: 100px;
+        margin-top: -20px;
+        margin-left: -10px;
+       
+      }
+
+    p{
+        margin-top: 12px;
+        margin-bottom: 1rem;
+    }
+    </style>
 </head>
 <body>
     
@@ -55,14 +87,19 @@
         <div class="middle-one">
             
             <div class="list-of-patients">
-                <button>
+
+            {% for patient in patients %}
+
+                <button id="pat_btn_{{ patient.id }}" onclick='triggerPatientSelected("{{ patient.id }}")'>
+                    <img class="patient-ki-img" src="{{ patient.profile.image.url }}">
+                    <h4>{{ patient.full_name }}</h4>
+                </button>
+
+                {% endfor %}
+                {% comment %} <button>
                     <div class="patient-ki-img"></div>
                     <h4>Patient name</h4>
-                </button>
-                <button>
-                    <div class="patient-ki-img"></div>
-                    <h4>Patient name</h4>
-                </button>
+                </button> {% endcomment %}
 
                 
                 <div class="middle-one-heading">
@@ -72,19 +109,34 @@
             </div>
         </div>
 
+    {% if patient == None %}
+
+    <div class="rightmost">
+            <div class="header">
+            <h1 id="Hello">Hello, {{ user.full_name }}</h1>
+          <img src="{% static 'images/removed.png' %}" style="display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 60%;">
+  
+            </div>
+    </div>
+
+    {% else %}
+
         <!--*****************************************************************************************-->
         <!--*****************************************************************************************-->
 
         <div class="rightmost">
             <div class="header">
                 <div class="patient-name">
-                    <div class="photo"></div>
-                    <h2>Patient Name</h2>
+                    <img class="rounded-circle account-img" src="{{ patient.profile.image.url }}">
+                     <h2 class="account-heading">{{ patient.full_name }}</h2>
                 </div>
                 <div class="add-btn">
                     <!--<label for=""><i class="fas fa-plus-circle"></i> Add New</label>-->
                     <button id="chat"><i class="fas fa-comment-alt"></i> Chat</button>
-                    <button><i class="fas fa-plus-circle"></i> Add New</button>
+                    <button><i class="fas fa-plus-circle"></i> Update Medical History</button>
                 </div>
                 <div class="nav">
                     <input type="button" id="btn1" value="Patient Info" onclick="forfirst()">
@@ -94,101 +146,98 @@
             </div>
     
             <div class="content1" id="p-info">
-                <div class="doc">
-                    <label for="">Doctor</label>
-                    <span></span>
-                    <div class="doctor">
-                        <div class="icon"><i class="fa fa-user-md"></i></div>
-                        <div class="doctor-name">
-                            <h3>Doctor Name</h3>
-                            <p>Qualification</p>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="gen-info">
-                    <label for="" id="heading2">General Information</label>
-                    <span></span>
-                    <div class="gen-info-table">
-                        <table width="80%" cellspacing="1">
-                            <tbody>
-                                <tr>
-                                    <td class="data1">Date of birth</td>
-                                    <td>March 9, 1990</td>
-                                </tr>
-                                <tr>
-                                    <td class="data1">Gender</td>
-                                    <td>Male</td>
-                                </tr>
-                                <tr>
-                                    <td class="data1">Address</td>
-                                    <td>Sector 76, House number 5, Noida</td>
-                                </tr>
-                                <tr>
-                                    <td class="data1">Contact Number</td>
-                                    <td>91492XXXXX</td>                        
-                                </tr>
-                                <tr>
-                                    <td class="data1">Emergency Contact</td>
-                                    <td>91492XXXXX</td>
-                                </tr>
-                                <tr>
-                                    <td class="data1">Height</td>
-                                    <td>180 cm</td>
-                                </tr>
-                                <tr>
-                                    <td class="data1">Weight</td>
-                                    <td>70 kg</td>
-                                </tr>
-                                <tr>
-                                    <td class="data1">Blood Type</td>
-                                    <td>O+</td>
-                                </tr>    
-                                </tbody>
-                        </table>
-                    </div>
-                </div>
-                
-                <div class="med-info">
-                    <label for="" id="heading3">Medical Information</label>
-                    <span></span>
-                    <div class="med-info-table">
-                        <table width="80%" cellspacing="1">
-                            <tbody>
-                                <tr>
-                                    <td class="data1">Any Previous Illness</td>
-                                    <td>March 9, 1990</td>
-                                </tr>
-                                <tr>
-                                    <td class="data1">Any Current Allergies</td>
-                                    <td>Male</td>
-                                </tr>
-                                <tr>
-                                    <td class="data1">Any Recent Operation</td>
-                                    <td>Sector 76, House number 5, Noida</td>
-                                </tr>
-                                <tr>
-                                    <td class="data1">Do You Drink Alcohol</td>
-                                    <td>91492XXXXX</td>                        
-                                </tr>
-                                <tr>
-                                    <td class="data1">Do You Smoke</td>
-                                    <td>91492XXXXX</td>
-                                </tr>
-                                <tr>
-                                    <td class="data1">Any Drug Allergy</td>
-                                    <td>180 cm</td>
-                                </tr>
-                                <tr>
-                                    <td class="data1">Under any Medication</td>
-                                    <td>70 kg</td>
-                                </tr>   
-                                </tbody>
-                        </table>
+            <div class="doc">
+                <label for="">Doctor</label>
+                <span></span>
+                <div class="doctor">
+                    <div class="icon"><img class="rounded-circle doc-img" src="{{ doc_image }}"></div>
+                    <div class="doctor-name">
+                        <h3>{{ doctor_assigned.doctor.full_name }}</h3>
+                        <p>{{ doctor_assigned.doctor.columbiaasia_doctor.education }}</p>
                     </div>
                 </div>
             </div>
-    
+
+            <div class="gen-info">
+                <label for="" id="heading2">General Information</label>
+                <span></span>
+                <div class="gen-info-table">
+                    <table width="80%" cellspacing="1">
+                        <tbody>
+                            <tr>
+                                <td class="data1">Age</td>
+                                <td>{{ patient.patient_medical_history.age }} Years Old</td>
+                            </tr>
+                            <tr>
+                                <td class="data1">Gender</td>
+                                <td>{{ patient.patient_medical_history.gender }}</td>
+                            </tr>
+                            <tr>
+                                <td class="data1">Address</td>
+                                <td>{{ patient.patient_medical_history.address }}</td>
+                            </tr>
+                            <tr>
+                                <td class="data1">Contact Number</td>
+                                <td>{{ patient.patient_medical_history.contact_no }}</td>                        
+                            </tr>
+                            <tr>
+                                <td class="data1">Emergency Contact</td>
+                                <td>{{ patient.patient_medical_history.emergency_contact }}</td>
+                            </tr>
+                            <tr>
+                                <td class="data1">Height</td>
+                                <td>{{ patient.patient_medical_history.height }} cm</td>
+                            </tr>
+                            <tr>
+                                <td class="data1">Weight</td>
+                                <td>{{ patient.patient_medical_history.weight }} kg</td>
+                            </tr>
+                            <tr>
+                                <td class="data1">Blood Type</td>
+                                <td>{{ patient.patient_medical_history.blood_group }}</td>
+                            </tr>    
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="med-info">
+                <label for="" id="heading3">Medical Information</label>
+                <span></span>
+                <div class="med-info-table">
+                    <table width="80%" cellspacing="1">
+                        <tbody>
+
+                            <tr>
+                                <td class="data1">Do I drink?</td>
+                                <td>{{ patient.patient_medical_history.alchohol_consumption }}</td>                        
+                            </tr>
+
+                            <tr>
+                                <td class="data1">Do I Smoke?</td>
+                                <td>{{  patient.patient_medical_history.smoking_habit }}</td>
+                            </tr>
+
+                            <tr>
+                                <td class="data1">Previous Illnesses</td>
+                                <td>{{ patient.patient_medical_history.previous_illness }}</td>
+                            </tr>
+
+                            <tr>
+                                <td class="data1">Drug Allergies</td>
+                                <td>{{  patient.patient_medical_history.drug_allergies }}</td>
+                            </tr>
+                           
+                            <tr>
+                                <td class="data1">Current Medications</td>
+                                <td>{{  patient.patient_medical_history.current_medications }}</td>
+                            </tr> 
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
             <!--=================================================================================-->
     
             <div class="latest-diagnosis" id="l-diagnosis">
@@ -245,5 +294,18 @@
         </div>
         <script src="{% static 'Doctor-Dashboard.js' %}"></script>
     </div>
+
+    {% endif %}
+
+
+    <script type=text/javascript>
+
+        function triggerPatientSelected(patient_id){
+            window.location.replace(patient_id);
+			
+		}
+
+
+    </script>
 </body>
 </html>

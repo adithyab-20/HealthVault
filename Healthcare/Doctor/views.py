@@ -8,6 +8,7 @@ from Patient.models import Account
 from Doctor.models import Patient_List, Doctor_Request, Doctor_Assigned_To_Patient, ColumbiaAsia_Doctor
 from Doctor.doctor_request_status import DoctorRequestStatus
 from Doctor.utils import get_doctor_request_or_false
+import json
 
 def request_view(request, *args, **kwargs):
 	context = {}
@@ -24,53 +25,62 @@ def request_view(request, *args, **kwargs):
 		context['email'] = account.email
 		context['image'] = account.columbiaasia_doctor.image.url
 
-		try:
-			patient_list = Patient_List.objects.get(doctor=account)
-		except Patient_List.DoesNotExist:
-			patient_list = Patient_List(user=account)
-			patient_list.save()
-		patients = patient_list.patients.all()
-		context['patients'] = patients
+
 
 		request_sent = DoctorRequestStatus.NO_REQUEST_SENT.value
 		patient_requests = get_doctor_request_or_false(doctor=account)
 	
-		if patient_requests!= False:
-			request_sent = DoctorRequestStatus.THEM_SENT_TO_YOU.value
-			context['patient_requests'] = patient_requests
-		else:
-			request_sent = DoctorRequestStatus.NO_REQUEST_SENT.value 
-
-		# Set the template variables to the values
+		
 		context['request_sent'] = request_sent
 		context['patient_requests'] = patient_requests
+
 		return render(request, "Patient_Requests.html", context)	   
 
 
 @login_required(login_url="/Doctor")
 @allowed_users(allowed_roles=['Admin', 'Doctors'])
-def dashboard(request):
-	return render(request, 'doctor-dashboard.html')
+def dashboard(request, *args, **kwargs):
+
+	context = {}
+	try: 
+		patient_list = Patient_List.objects.get(doctor=request.user)
+		patients = patient_list.patients.all()
+
+	except Patient_List.DoesNotExist:
+		return HttpResponse("Something went wrong trying to fetch the Patient List")
 
 
+	context['patients'] = patients
+
+	patient_id = kwargs.get("patient_id")
+
+	if patient_id != None:
+		print(f"patient_id = {patient_id}")
+
+		try:
+			patient = Account.objects.get(id=patient_id)
+			context['patient'] = patient
+
+			try:
+				doctor_assigned = Doctor_Assigned_To_Patient.objects.get(patient=patient)
+				image = doctor_assigned.doctor.columbiaasia_doctor.image.url
+			
+				context['doctor_assigned'] = doctor_assigned
+				context['doc_image'] = image
+    	
+			except Doctor_Assigned_To_Patient.DoesNotExist:
+				return HttpResponse("Something went wrong trying to fetch the doctor assigned")
+
+		except Account.DoesNotExist:
+			return HttpResponse("Something went wrong trying to fetch patient information.")
 
 
+	else:
+		print("Doctor accessing default dashboard")
+		context['patient'] = None
+	
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	return render(request, 'doctor-dashboard.html', context)
 
 
 def Latest_Diagnosis(request):
@@ -134,3 +144,64 @@ def profile(request):
 	}
 
 	return render(request, 'Update-DocProfile.html', context)
+
+
+
+def accept_patient_request(request, *args, **kwargs):
+	user = request.user
+	payload = {}
+	if request.method == "GET" and user.is_authenticated:
+		doctor_request_id = kwargs.get("doctor_request_id")
+		print(doctor_request_id)
+		if doctor_request_id:
+			doctor_request = Doctor_Request.objects.get(id=doctor_request_id)
+			# confirm that is the correct request
+			if doctor_request.doctor == user:
+				if doctor_request: 
+					# found the request. Now accept it
+					try:
+						patient_list = Patient_List.objects.get(doctor=user)
+
+					except Patient_List.DoesNotExist:
+						patient_list =  Patient_List.objects.create(doctor=user)
+
+					updated_notification = doctor_request.accept()
+					payload['response'] = "Patient request accepted."
+
+				else:
+					payload['response'] = "Something went wrong."
+			else:
+				payload['response'] = "That is not your request to accept."
+		else:
+			payload['response'] = "Unable to accept that patient request."
+	else:
+		# should never happen
+		payload['response'] = "You must be authenticated to accept a patient's request."
+	return HttpResponse(json.dumps(payload), content_type="application/json")
+
+
+def decline_patient_request(request, *args, **kwargs):
+	user = request.user
+	payload = {}
+	if request.method == "GET" and user.is_authenticated:
+		doctor_request_id = kwargs.get("doctor_request_id")
+		if doctor_request_id:
+			doctor_request = Doctor_Request.objects.get(id=doctor_request_id)
+			# confirm that is the correct request
+			if doctor_request.doctor == user:
+				if doctor_request: 
+					# found the request. Now decline it
+					updated_notification = doctor_request.decline()
+					payload['response'] = "Patient request declined."
+				else:
+					payload['response'] = "Something went wrong."
+			else:
+				payload['response'] = "That is not your patient request to decline."
+		else:
+			payload['response'] = "Unable to decline that patient request."
+	else:
+		# should never happen
+		payload['response'] = "You must be authenticated to decline a patient request."
+	return HttpResponse(json.dumps(payload), content_type="application/json")
+
+
