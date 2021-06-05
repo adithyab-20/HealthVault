@@ -1,5 +1,5 @@
 *{
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Airbnb Cereal App Book', sans-serif;
 }
 body::-webkit-scrollbar {
     display: none;
@@ -32,7 +32,7 @@ body{
     width: 80px;
     height: 80px;
     margin-top: 20px;
-    background:url(images/logo3.jpg);
+    background:url(images/create_thumb.png);
     background-size: 100% 100%;
     border-radius: 50%;
     position: absolute;
@@ -177,12 +177,12 @@ body{
 }
 
 .second .front{
-    background-image: url(images/PEXELS1.jpg);
+    background-image: url(images/photo-1551601651-2a8555f1a136.png);
     background-size: 100% 100%;
 }
 
 .third .front{
-    background-image: url(images/istockphoto-1002020774-612x612.jpg);
+    background-image: url(images/photo-1519494026892-80bbd2d6fd0d.png);
     background-size: 100% 100%;
 }
 
@@ -631,3 +631,49 @@ body{
     margin-top: 40px;
     color: rgba(245, 245, 245, 0.9);
 }
+@font-face {
+    font-family: 'Airbnb Cereal App Book';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Airbnb Cereal App Book'), url('font/AirbnbCerealBook.woff') format('woff');
+    }
+    
+
+    @font-face {
+    font-family: 'Airbnb Cereal App Light';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Airbnb Cereal App Light'), url('font/AirbnbCerealLight.woff') format('woff');
+    }
+    
+
+    @font-face {
+    font-family: 'Airbnb Cereal App Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Airbnb Cereal App Medium'), url('font/AirbnbCerealMedium.woff') format('woff');
+    }
+    
+
+    @font-face {
+    font-family: 'Airbnb Cereal App Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Airbnb Cereal App Bold'), url('font/AirbnbCerealBold.woff') format('woff');
+    }
+    
+
+    @font-face {
+    font-family: 'Airbnb Cereal App Extra Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Airbnb Cereal App Extra Bold'), url('font/AirbnbCerealExtraBold.woff') format('woff');
+    }
+    
+
+    @font-face {
+    font-family: 'Airbnb Cereal App Black';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Airbnb Cereal App Black'), url('font/AirbnbCerealBlack.woff') format('woff');
+    }
