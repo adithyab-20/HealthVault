@@ -213,3 +213,54 @@ def decline_patient_request(request, *args, **kwargs):
 	return HttpResponse(json.dumps(payload), content_type="application/json")
 
 
+
+def unenroll_patient(request, *args, **kwargs):
+    user = request.user
+    payload = {}
+
+    if request.method == "GET" and user.is_authenticated:
+        patient_id = kwargs.get("patient_id")
+        
+        if patient_id != None:
+            
+            patient = Account.objects.get(id=patient_id)
+            print(patient_id)
+             
+            try:
+                patient = Account.objects.get(id=patient_id)
+
+            except Account.DoesNotExist:
+                HttpResponse("Something went wrong trying to fetch the patient with patient id: " + patient_id)
+
+            
+            try:
+                patient_list = Patient_List.objects.get(doctor=user)
+
+            except Patient_List.DoesNotExist:
+                HttpResponse("Error while trying to fetch Patient List of Doctor " + user)
+
+                
+            doctor_assigned = Doctor_Assigned_To_Patient.objects.get(patient=patient)
+
+            print(doctor_assigned)
+
+            if doctor_assigned != None:
+
+                    
+                # doctor_assigned.doctor = None
+
+                patient_list.unenroll(doctor=user, patient=patient)
+
+                payload['response'] = "Unenrolled Successfully."
+        
+            else:
+                payload['response'] = "No Doctor Assigned."
+        
+        else:
+            payload['response'] = "Something went wrong trying to fetch the Patient id. Value Received: " + patient_id
+    else:
+        payload['response'] = "User not authenticated."
+         
+    return HttpResponse(json.dumps(payload), content_type="application/json")
+
+

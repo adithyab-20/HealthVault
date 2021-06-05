@@ -134,8 +134,7 @@
                      <h2 class="account-heading">{{ patient.full_name }}</h2>
                 </div>
                 <div class="add-btn">
-                    <!--<label for=""><i class="fas fa-plus-circle"></i> Add New</label>-->
-                    <button id="chat"><i class="fas fa-comment-alt"></i> Chat</button>
+                    <button id="chat" style="background-color: #eb3447" onclick="triggerUnenroll({{ patient.id }})"><i class="fas fa-user-minus"></i> Unenroll </button>
                     <button><i class="fas fa-plus-circle"></i> Update Medical History</button>
                 </div>
                 <div class="nav">
@@ -297,6 +296,7 @@
 
     {% endif %}
 
+ {% include 'snippets/unenroll_patient.html' %}
 
     <script type=text/javascript>
 
@@ -304,6 +304,23 @@
             window.location.replace(patient_id);
 			
 		}
+
+
+
+    
+    
+        function onPatientUnenrolled(){
+			location.reload();
+		}
+	
+	
+	
+		function triggerUnenroll(patient_id){
+			unenrollPatient(patient_id, onPatientUnenrolled);
+		}
+
+ 
+
 
 
     </script>
