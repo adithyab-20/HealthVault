@@ -1,8 +1,8 @@
 .slider {
     margin-top: 120px;
-    margin-left: 5%;
+    /* margin-left: 5%; */
     position: relative;
-    width: 90%;
+    width: 100%;
     position: absolute;
   }
   .slider__nav-bar {

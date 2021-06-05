@@ -14,6 +14,27 @@
     <link rel="stylesheet" type="text/css" href="{% static 'fontawesome/css/all.css' %}"/>
     {% endblock %}
 
+    <style type="text/css">
+
+    .become-memeber{
+
+        font-size: 19px;
+    }
+    
+    .become-memeber a{
+
+    background: transparent;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    }
+
+    .become-memeber a:hover{
+    color: rgba(255, 255, 255, 0.5);
+    }
+
+    </style>
+
 </head>
 
 <body>
@@ -28,16 +49,20 @@
             </div>
             <!--===========================================================================-->
             <div class="contact-details">
-                <button>Become a Member</button>
+                <div class="become-memeber">
+                  <a href="{% url 'Home:BecomeAMember' %}">Become a Member</a>
+                </div>
             </div>
             <!--===========================================================================-->
             <div class="slider">
                 <ul class="slider-list">
                     <li class="slider-list__item slider-list__item_active"
-                        style="background-image: url(./myimages/robina-weermeijer-Pw9aFhc92P8-unsplash.jpg)"></li>
-                    <li class="slider-list__item" style="background-image: url(image/jonathan-borba-v_2FRXEba94-unsplash.jpg)"></li>
-                    <li class="slider-list__item" style="background-image: url(./myimages/pixpoetry-GeV0KRf8WVA-unsplash.jpg)"></li>
-                    <li class="slider-list__item" style="background-image: url(./myimages/slide-image4.jpg)"></li>
+                   
+                        style="background-image: url( {% static 'images/robina-weermeijer-Pw9aFhc92P8-unsplash.jpg' %})"></li>
+                  
+                    <li class="slider-list__item" style="background-image: url( {% static 'images/jonathan-borba-v_2FRXEba94-unsplash.jpg' %} )"></li>
+                    <li class="slider-list__item" style="background-image: url({% static 'images/pixpoetry-GeV0KRf8WVA-unsplash.jpg' %} )"></li>
+                    <li class="slider-list__item" style="background-image: url( {% static 'images/slide-image4.jpg' %} )"></li>
                 </ul>
                 <div class="slider__nav-bar"><a class="nav-control"></a><a class="nav-control"></a><a
                         class="nav-control"></a><a class="nav-control"></a></div>
@@ -94,13 +119,13 @@
             </div>
             <div class="questions">
                 <div class="questions-patient">
-                    <h2>Are you a Patient ?</h2>
+                    <h2>Patient: Bringing joy to you</h2>
                 </div>
                 <div class="questions-doctor">
-                    <h2>Are you a Doctor ?</h2>
+                    <h2>Doctor: Saving a life daily</h2>
                 </div>
                 <div class="questions-hospital">
-                    <h2>For Admins only !</h2>
+                    <h2>Admin: Depend on Us for Life</h2>
                 </div>
             </div>
         </div>
