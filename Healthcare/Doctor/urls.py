@@ -4,7 +4,8 @@ from django.contrib.auth import views as auth_views
 
 from Doctor.views import(
     accept_patient_request,
-    decline_patient_request
+    decline_patient_request,
+    unenroll_patient
 )
 
 app_name = "Doctor"
@@ -19,6 +20,7 @@ urlpatterns = [
     path("update-profile", views.profile, name="Profile"),
     path("patient-requests", views.request_view, name="PatientRequests"),
     path("accept-patient-request/<doctor_request_id>", accept_patient_request, name="AcceptPatientRequest"), 
-    path("decline-patient-request/<doctor_request_id>", decline_patient_request, name="DeclinePatientRequest")
+    path("decline-patient-request/<doctor_request_id>", decline_patient_request, name="DeclinePatientRequest"),
+    path("unenroll-patient/<patient_id>", unenroll_patient, name="UnenrollPatient"), 
 
 ]
