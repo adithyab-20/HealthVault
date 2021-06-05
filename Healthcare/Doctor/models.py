@@ -99,9 +99,9 @@ class Patient_List(models.Model):
         self.patients.remove(patient)
 
 
-    def unenroll(self, doctor):
-        doctor.remove_patient(self)
-        doctor_assigned_to_patient = Doctor_Assigned_To_Patient.objects.get(patient=self)
+    def unenroll(self, doctor, patient):
+        self.patients.remove(patient)
+        doctor_assigned_to_patient = Doctor_Assigned_To_Patient.objects.get(patient=patient)
         doctor_assigned_to_patient.unenroll(self.doctor)
 
 
@@ -123,6 +123,7 @@ class Doctor_Assigned_To_Patient(models.Model):
     
     def unenroll(self, doctor):
         self.doctor = None
+        self.save()
 
     
 

@@ -15,8 +15,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from Patient.decorators import *
 from Patient.models import Account,Profile
-from Doctor.models import ColumbiaAsia_Doctor, Doctor_Request, Doctor_Assigned_To_Patient
+from Doctor.models import ColumbiaAsia_Doctor, Doctor_Request, Doctor_Assigned_To_Patient, Patient_List
 from Doctor.doctor_request_status import DoctorRequestStatus
+
 
 
 @unauthenticated_user
@@ -110,13 +111,21 @@ def dashboard(request):
     context = {}
     try:
         doctor_assigned = Doctor_Assigned_To_Patient.objects.get(patient=request.user)
-        image = doctor_assigned.doctor.columbiaasia_doctor.image.url
+
+        if doctor_assigned.doctor != None:
+            image = doctor_assigned.doctor.columbiaasia_doctor.image.url
+            context['doc_image'] = image
+        
+        else:
+         doctor_assigned = None
+
+        
     except Doctor_Assigned_To_Patient.DoesNotExist:
-        return HttpResponse("Something went wrong trying to fetch the doctor assigned")
+       doctor_assigned = None
 
 
     context['doctor_assigned'] = doctor_assigned
-    context['doc_image'] = image
+ 
 
 
     return render(request, 'new-dash.html', context)
@@ -267,4 +276,55 @@ def cancel_doctor_request(request, *args, **kwargs):
     else:
         # should never happen
         payload['response'] = "You must be authenticated to cancel a doctor request."
+    return HttpResponse(json.dumps(payload), content_type="application/json")
+
+
+
+def unenroll(request, *args, **kwargs):
+    user = request.user
+    payload = {}
+
+    if request.method == "GET" and user.is_authenticated:
+        doctor_id = kwargs.get("doctor_id")
+        
+        if doctor_id != None:
+            
+            doctor = Account.objects.get(id=doctor_id)
+            print(doctor_id)
+             
+            try:
+                doctor = Account.objects.get(id=doctor_id)
+
+            except Account.DoesNotExist:
+                HttpResponse("Something went wrong trying to fetch the Doctor with doctor id: " + doctor_id)
+
+            
+            try:
+                patient_list = Patient_List.objects.get(doctor=doctor)
+
+            except Patient_List.DoesNotExist:
+                HttpResponse("Error while trying to fetch Patient List of Doctor " + doctor)
+
+                
+            doctor_assigned = Doctor_Assigned_To_Patient.objects.get(patient=user)
+
+            print(doctor_assigned)
+
+            if doctor_assigned != None:
+
+                    
+                # doctor_assigned.doctor = None
+
+                patient_list.unenroll(doctor=doctor, patient=user)
+
+                payload['response'] = "Unenrolled Successfully."
+        
+            else:
+                payload['response'] = "No Doctor Assigned."
+        
+        else:
+            payload['response'] = "Something went wrong trying to fetch the Doctor id. Value Received: " + doctor_id
+    else:
+        payload['response'] = "User not authenticated."
+         
     return HttpResponse(json.dumps(payload), content_type="application/json")

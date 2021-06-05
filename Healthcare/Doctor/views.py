@@ -63,10 +63,18 @@ def dashboard(request, *args, **kwargs):
 
 			try:
 				doctor_assigned = Doctor_Assigned_To_Patient.objects.get(patient=patient)
-				image = doctor_assigned.doctor.columbiaasia_doctor.image.url
+				
+				if doctor_assigned.doctor != None:
+					image = doctor_assigned.doctor.columbiaasia_doctor.image.url
+					context['doc_image'] = image
+				
+				else:
+					print("Doctor accessing default dashboard")
+					context['patient'] = None
+				
 			
 				context['doctor_assigned'] = doctor_assigned
-				context['doc_image'] = image
+				
     	
 			except Doctor_Assigned_To_Patient.DoesNotExist:
 				return HttpResponse("Something went wrong trying to fetch the doctor assigned")

@@ -12,7 +12,41 @@
     {% endblock %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
-    <style type="text/css">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <script type="text/javascript" src="{% static 'context-menu.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'context-menu.css' %}">
+
+   <script>
+            var tableContextMenu = null;
+
+            $(document).ready(function(){
+                var options = {
+                    openCallBack: function(contextMenu) {
+                        contextMenu.disableMenuItem("Warning Item");
+                    }
+                };
+                tableContextMenu = new ContextMenu("context-menu-items", menuItemClickListener);
+                tableContextMenu.disableMenuItem(1);
+            });
+
+            function menuItemClickListener(menu_item, parent)
+            {
+                
+                console.log("Menu Item Clicked: " + menu_item.text() + "\nDoctor ID " + parent.attr("data-row-id"));
+
+                console.log("Doctor ID: " + {{ doctor_assigned.doctor.id }})  
+
+                triggerUnenroll({{ doctor_assigned.doctor.id }})     
+
+                console.log("Function triggered")       
+            }
+        </script>
+
+<style type="text/css">
     .doc-img {
     
         height: 100px;
@@ -26,9 +60,30 @@
         margin-top: 12px;
         margin-bottom: 1rem;
     }
+
+    #dots{
+
+          margin-left: 5px;
+    margin-top: 5px;
+    font-size: 25px;
+
+
+    }
+
+
+
     </style>
+
+
 </head>
 <body>
+
+     <div class="context-menu-container" id="context-menu-items">
+            <ul>
+                <li class="danger" id="{{ doctor_assigned.doctor.id }}">Unenroll</li>
+            </ul>
+        </div>
+
 
     <header class="site-header">
         <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
@@ -63,26 +118,53 @@
                 <button id="chat"><i class="fas fa-comment-alt"></i> Chat</button>
                 
                 <!-- <button onclick="location.href='{% url 'Patient:Docselection'%}'" type="button" ><i class="fas fa-plus-circle"></i> Add New</button> -->
-                <a href="{% url 'Patient:Docselection' %}"><button><i class="fas fa-plus-circle"></i> Add New</button></a>
+                <a href="{% url 'Patient:Docselection' %}"><button><i class="fas fa-plus-circle"></i> Add Doctor</button></a>
             </div>
             <div class="nav">
                 <input type="button" id="btn1" value="Patient Info" onclick="forfirst()">
                 <input type="button" id="btn2" value="Latest Daignosis" onclick="forsecond()">
-                <input type="button" id="btn3" value="Prescription" onclick="forthird()">
+                <input type="button" id="btn3" value="Prescriptions" onclick="forthird()">
             </div>
         </div>
 
         <div class="content1" id="p-info">
             <div class="doc">
-                <label for="">Doctor</label>
-                <span></span>
-                <div class="doctor">
-                    <div class="icon"><img class="rounded-circle doc-img" src="{{ doc_image }}"></div>
-                    <div class="doctor-name">
-                        <h3>{{ doctor_assigned.doctor.full_name }}</h3>
-                        <p>{{ doctor_assigned.doctor.columbiaasia_doctor.education }}</p>
+               
+                {% if doctor_assigned != None %}
+                    <label for="">Doctor</label>
+                        <span></span>
+                         
+                        <div class="doctor">
+                        <div class="icon"><img class="rounded-circle doc-img" src="{{ doc_image }}"></div>
+                         
+                        <div class="doctor-name">
+                         
+                            <h3>{{ doctor_assigned.doctor.full_name }}</h3>
+                            <p>{{ doctor_assigned.doctor.columbiaasia_doctor.education }}</p>
+  
+                        </div>
+                         <div id="dots">
+                           
+                           
+                          <h3 class="context-menu" data-container-id="context-menu-items"></h3>
+
+                           
+                           </div>
+
                     </div>
-                </div>
+
+                {% else %}
+
+                    <label for="">No Doctor Assigned</label>
+                        <span style="margin-top: 73px;"></span>
+                        <div class="doctor">
+                            <div class="icon"><i class="fa fa-user-md"></i></div>
+                            <p style="font-weight: 800;margin-left: 30px;margin-top: 30px;margin-right: 30px;">Click on "Add Doctor" to send a request to a doctor</p>
+                         </div>
+
+                    
+                {% endif %}
+                
             </div>
 
             <div class="gen-info">
@@ -220,7 +302,32 @@
         </div>
 
         <script src="{% static 'Patient-Dashboard.js' %}"></script>
+
+       
+    
         
     </div>
+
+     {% include 'snippets/unenroll.html' %}
+
+     <script type="text/javascript">
+    
+    
+        function onDoctorUnenrolled(){
+			location.reload();
+		}
+	
+		function onPatientRequestDeclined(){
+			location.reload();
+		}
+	
+	
+		function triggerUnenroll(doctor_id){
+			unenrollDoctor(doctor_id, onDoctorUnenrolled)
+		}
+
+    </script>
+
+
 </body>
 </html>
