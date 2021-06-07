@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from Doctor.decorators import *
-from Doctor.forms import DocProfileUpdateForm, DocImageForm, LatestDiagnosisForm
+from Doctor.forms import DocProfileUpdateForm, DocImageForm, LatestDiagnosisForm, PrescriptionForm
 from django.contrib import messages
 from Patient.models import Account
 from Doctor.models import Patient_List, Doctor_Request, Doctor_Assigned_To_Patient, ColumbiaAsia_Doctor
@@ -162,6 +162,82 @@ def latest_diagnosis(request, *args, **kwargs):
 	
 
 	return render(request, 'Latest-Diagnosis.html', context)
+
+
+
+
+
+def prescription(request, *args, **kwargs):
+	
+	context = {}
+
+	patient_id = kwargs.get("patient_id")
+
+	user = request.user
+
+	context['doctor'] = user
+
+	if patient_id != None:
+		print(f"patient_id = {patient_id}")
+		
+
+		try:
+			patient = Account.objects.get(id=patient_id)
+			context['patient'] = patient
+
+
+			context['patient_img'] = patient.profile.image.url
+
+			try:
+				doctor_assigned = Doctor_Assigned_To_Patient.objects.get(patient=patient)
+				
+				if doctor_assigned.doctor == user:
+					print("Doctor verified.")
+
+					if request.method == 'POST':
+						pres_form = PrescriptionForm(request.POST)
+
+						if pres_form.is_valid():
+							
+							prescript = pres_form.save(commit=False)
+							prescript.doctor = user
+							prescript.patient = patient
+							prescript.save()
+
+							# messages.success(request, f'Your profile has been updated!')
+							return redirect('/Doctor/dashboard')
+
+
+						else:
+							context['form'] = pres_form
+							print(pres_form.errors)
+
+					else:
+						pres_form = PrescriptionForm()
+						context['form'] = pres_form
+				
+				else:
+					return HttpResponse("This patient is not assigned to you. Patient: " + patient + " Doctor: " + user)
+				
+				
+    	
+			except Doctor_Assigned_To_Patient.DoesNotExist:
+				return HttpResponse("Something went wrong trying to fetch the doctor assigned")
+
+		except Account.DoesNotExist:
+			return HttpResponse("Something went wrong trying to fetch patient information.")
+
+
+	else:
+		print("Error while trying to get patient id. Patient ID: " + patient_id)
+		context['patient'] = None
+
+		return HttpResponse("Something went wrong trying to fetch patient id. Value Received: " + patient_id)
+	
+
+	return render(request, 'Prescription.html', context)
+
+
 
 
 

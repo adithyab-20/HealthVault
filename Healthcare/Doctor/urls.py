@@ -16,6 +16,7 @@ urlpatterns = [
     path("dashboard/", views.dashboard, name="Dashboard"),
     path("dashboard/<patient_id>", views.dashboard, name="DashboardWithPat"),
     path("dashboard/diagnosis/<patient_id>", views.latest_diagnosis, name="LatestDiagnosis"),
+    path("dashboard/prescription/<patient_id>", views.prescription, name="Prescription"),
     path("patient-redirect", views.patient_redirect, name="PatientRedirect"),
     path("update-profile", views.profile, name="Profile"),
     path("patient-requests", views.request_view, name="PatientRequests"),

@@ -118,12 +118,29 @@ class Doctor_latest_diagnosis(models.Model):
 
     timestamp                   = models.DateTimeField(auto_now_add=True)
 
-    diagnosis = models.TextField()
-    diagnosis_description = models.TextField()
-    doctor_advice = models.TextField()
-    additional_comments = models.TextField()
+    diagnosis                   = models.TextField()
+    diagnosis_description       = models.TextField()
+    doctor_advice               = models.TextField()
+    additional_comments         = models.TextField()
 
     REQUIRED_FIELDS = ['diagnosis', 'diagnosis_description', 'doctor_advice']
 
     def __str__(self):
         return f'{self.patient.full_name} Latest Diagnosis'
+
+
+
+class Prescription(models.Model):
+
+  
+    patient                     = models.ForeignKey(Account,on_delete=models.CASCADE, related_name="prescription_patient")
+    doctor                      = models.ForeignKey(Account,on_delete=models.CASCADE, related_name="prescription_doctor")
+
+    timestamp                   = models.DateTimeField(auto_now_add=True)
+
+    prescription                = models.TextField()
+    additional_advice           = models.TextField()
+
+    REQUIRED_FIELDS = ['prescription']
+    def __str__(self):
+        return f"{self.patient.full_name}'s Presciption"

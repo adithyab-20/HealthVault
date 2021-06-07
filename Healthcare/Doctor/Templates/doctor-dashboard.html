@@ -46,6 +46,33 @@
         margin-top: 12px;
         margin-bottom: 1rem;
     }
+
+
+
+.prescription-btn{
+    float:right;
+    /*background-color: white;*/
+    margin-top: 45px;
+    margin-right: 5%;
+
+}
+
+
+    .prescription-btn button {
+    font-size: 16px;
+    color: black;
+    padding: 8px 15px;
+    outline: none;
+    border: none;
+    border-radius: 30px;
+    background-color: #ffbb33;
+    }
+
+.prescription-btn button:hover{
+    transform: scale(1.1);
+    box-shadow: 0px 1px 2px rgba(0, 0 ,0, 0.8);
+}
+
     </style>
 </head>
 <body>
@@ -134,7 +161,7 @@
                      <h2 class="account-heading">{{ patient.full_name }}</h2>
                 </div>
                 <div class="add-btn">
-                    <button id="chat" style="background-color: #eb3447" onclick="triggerUnenroll({{ patient.id }})"><i class="fas fa-user-minus"></i> Unenroll </button>
+                    <button id="chat" style="background-color: #FF5163" onclick="triggerUnenroll({{ patient.id }})"><i class="fas fa-user-minus"></i> Unenroll </button>
                     <button id="update" onclick='triggerPatientLD("{{ patient.id }}")'><i class="fas fa-plus-circle"></i> Update Medical History</button>
                 </div>
                 <div class="nav">
@@ -276,7 +303,7 @@
             <!--=================================================================================-->
 
              <div class="latest-diagnosis" id="l-diagnosis">
-                <label for="">latest-diagnosis</label>
+                <label for="">Latest Diagnosis</label>
                 <div class="Neurology various-depts">
     
                     <div class="first">
@@ -321,8 +348,18 @@
                     </div>
                 </div>
             </div> {% endcomment %}
+
+             
+            
             <div class="prescription" id="prescrips">
-             <label for="">Prescription</label>
+             <div class="prescription-btn">
+                    <button id="prescript" style="background-color:#ACC8E5" onclick='triggerPatientPrescription("{{ patient.id }}")'><i class="fas fa-prescription-bottle-alt"></i> Write Prescription</button>
+                </div>
+
+           
+            <label for="">Prescriptions</label> 
+
+            
                 <div class="Neurology various-depts">
 
                     <div class="second">
@@ -371,8 +408,12 @@
 
         }
 
+        function triggerPatientPrescription(patient_id)
+        {
+            window.location.replace("prescription/" + patient_id);
 
-    
+
+        }
     
         function onPatientUnenrolled(){
 			location.reload();
