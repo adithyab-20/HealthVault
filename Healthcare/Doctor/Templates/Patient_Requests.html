@@ -144,21 +144,7 @@
 
 	<script type="text/javascript">
 
-		// called from base_js.html
-		//preloadImage("{{profile_image|safe}}", 'id_profile_image')
 	
-		{% comment %} function onFriendRequestSent(){
-			location.reload();
-		}
-	
-		function onFriendRequestCancelled(){
-			location.reload();
-		}
-	
-		function onFriendRemoved(){
-			location.reload();
-		}
-	 {% endcomment %}
 	 
 		function onPatientRequestAccepted(){
 			location.reload();
@@ -181,11 +167,7 @@
 	
 	{% include 'snippets/accept_patient_request.html' %}
 	{% include 'snippets/decline_patient_request.html' %}
-	{% comment %} {% include 'friend/snippets/accept_friend_request.html' %}
-	{% include 'friend/snippets/decline_friend_request.html' %}
-	{% include 'friend/snippets/cancel_friend_request.html' %}
-	{% include 'friend/snippets/remove_friend.html' %}
-	{% include 'chat/snippets/create_or_return_private_chat.html' %} {% endcomment %}
+
 	
 	
 	

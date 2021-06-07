@@ -33,6 +33,18 @@
     color: rgba(255, 255, 255, 0.5);
     }
 
+    .submit a {
+    background: transparent;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    }
+
+    .submit a:hover{
+    color: rgba(255, 255, 255, 0.5);
+    }
+
+
     </style>
 
 </head>
@@ -42,7 +54,7 @@
         <div class="navigation">
             <div class="logo"></div>
             <div class="nav-btn-set1">
-                <a href="#">Home</a>
+                {% comment %} <a href="#">Home</a> {% endcomment %}
                 <a href="#feature_block">Features</a>
                 <a href="#Pricing_block">Pricing</a>
                 <a href="#Aboutus_block">About Us</a>
@@ -84,9 +96,10 @@
                 <div class="back">
                     <div class="content-back">
                         <i class="fas fa-user-injured" style="font-size: 5rem; margin-top: 30px;"></i>
+                          <h2>For Patients</h2>
                         <span>Putting patients above everything</span>
                         <br>
-                        <button type="submit">
+                        <button class="submit">
                             <a href="{% url 'Patient:login' %}">Sign In</a>
                         </button>
                     </div>
@@ -98,9 +111,10 @@
                 <div class="back">
                     <div class="content-back">
                         <i class="fa fa-user-md" style="font-size: 5rem; margin-top: 30px;"></i>
+                        <h2>For Doctors</h2>
                         <span>Dedicated to healing,to provide a possible cure</span>
                         <br>
-                        <button type="submit">
+                        <button class="submit">
                             <a href="{% url 'Doctor:Login' %}">Sign In</a>
                         </button>
                     </div>
@@ -112,9 +126,10 @@
                 <div class="back">
                     <div class="content-back">
                         <i class="fas fa-hospital" style="font-size: 5rem; margin-top: 30px;"></i>
+                        <h2>For Hospitals and Clinics</h2>
                         <span>The Highest Quality Healthcare</span>
                         <br>
-                        <button type="submit">
+                        <button class="submit">
                             <a href="http://127.0.0.1:8000/ColumbiaAsia-admin/">Sign In</a>
                         </button>
                     </div>
