@@ -135,7 +135,7 @@
                 </div>
                 <div class="add-btn">
                     <button id="chat" style="background-color: #eb3447" onclick="triggerUnenroll({{ patient.id }})"><i class="fas fa-user-minus"></i> Unenroll </button>
-                    <button><i class="fas fa-plus-circle"></i> Update Medical History</button>
+                    <button id="update" onclick='triggerPatientLD("{{ patient.id }}")'><i class="fas fa-plus-circle"></i> Update Medical History</button>
                 </div>
                 <div class="nav">
                     <input type="button" id="btn1" value="Patient Info" onclick="forfirst()">
@@ -239,8 +239,8 @@
 
             <!--=================================================================================-->
     
-            <div class="latest-diagnosis" id="l-diagnosis">
-                <label class="heading-label" for="">Latest Diagnosis</label>
+            {% comment %} <div class="latest-diagnosis" id="l-diagnosis">
+             <label class="heading-label" for="">Latest Diagnosis</label>
                 <span></span>
                 <div class="report">
                     <div class="labels"></div>
@@ -271,12 +271,43 @@
                     <label for="">Addtional Comments</label>
                     <textarea rowspan="20" colspan="30"></textarea>
                 </div>
-            </div>
-    
+            </div> {% endcomment %}
+
             <!--=================================================================================-->
+
+             <div class="latest-diagnosis" id="l-diagnosis">
+                <label for="">latest-diagnosis</label>
+                <div class="Neurology various-depts">
     
-            <div class="prescription" id="prescrips">
-                <label for="">Prescriptions</label>
+                    <div class="first">
+                        <div class="bywhom">
+                            <div class="bywhom-info">
+                                <h4 id="Pat-name">Patient Name<h4>
+                                <p style="font-size: 12px;">---------</p>
+                                <h4>Patient ID<h4>
+                                <p style="font-size: 12px;">---------</p>
+                                <h4>Doctor Name<h4>
+                                <p style="font-size: 12px;">---------</p>
+                                <h4>Doctor ID<h4>
+                                <p style="font-size: 12px;">---------</p>    
+                            </div>
+                        </div>
+                        <span></span>
+                        <div class="paragraph">
+                            <h4>Prescription ID<h4>
+                            <p style="font-size: 12px;">---------</p>
+                            <h4>Prescription</h4>
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui placeat repellendus optio aspernatur eum. Recusandae ipsam qui quibusdam nisi quis, repellat excepturi voluptate possimus iure maxime consequatur quos optio exercitationem.</p>
+                            <h4>Additional Advice</h4>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis nesciunt repellat, ipsam voluptates vitae impedit debitis sequi veritatis, deserunt alias ea, odit quod cum recusandae quo quae. Ducimus, ipsam eum.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <!--=================================================================================-->
+          
+                {% comment %} <label for="">Prescriptions</label>
                 <span></span>
                 <div class="prescrip1">
                     <div class="givenby">
@@ -289,7 +320,37 @@
                         Tempore eos incidunt beatae, magni, omnis eveniet, dolore ducimus minus cum dolorum fuga porro error.</p>
                     </div>
                 </div>
+            </div> {% endcomment %}
+            <div class="prescription" id="prescrips">
+             <label for="">Prescription</label>
+                <div class="Neurology various-depts">
+
+                    <div class="second">
+                        <div class="bywhom">
+                            <div class="bywhom-info">
+                                <h4 id="Pat-name">Patient Name<h4>
+                                <p style="font-size: 12px;">---------</p>
+                                <h4>Patient ID<h4>
+                                <p style="font-size: 12px;">---------</p>
+                                <h4>Doctor Name<h4>
+                                <p style="font-size: 12px;">---------</p>
+                                <h4>Doctor ID<h4>
+                                <p style="font-size: 12px;">---------</p>    
+                            </div>
+                        </div>
+                        <span></span>
+                        <div class="paragraph">
+                            <h4>Prescription ID<h4>
+                            <p style="font-size: 12px;">---------</p>
+                            <h4>Prescription</h4>
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui placeat repellendus optio aspernatur eum. Recusandae ipsam qui quibusdam nisi quis, repellat excepturi voluptate possimus iure maxime consequatur quos optio exercitationem.</p>
+                            <h4>Additional Advice</h4>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis nesciunt repellat, ipsam voluptates vitae impedit debitis sequi veritatis, deserunt alias ea, odit quod cum recusandae quo quae. Ducimus, ipsam eum.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
         <script src="{% static 'Doctor-Dashboard.js' %}"></script>
     </div>
@@ -305,6 +366,10 @@
 			
 		}
 
+        function triggerPatientLD(patient_id){
+            window.location.replace("diagnosis/" + patient_id);
+
+        }
 
 
     

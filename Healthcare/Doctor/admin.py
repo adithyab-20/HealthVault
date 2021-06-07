@@ -70,7 +70,7 @@ admin.site.register(Doctor_Assigned_To_Patient)
 
 class DoctorRequestAdmin(admin.ModelAdmin):
     list_filter = ['patient', 'doctor']
-    list_display = ['patient', 'doctor']
+    list_display = ['patient', 'doctor', 'timestamp']
     search_fields = ['patient__fullname', 'patient__email', 'doctor__fullname', 'doctor__email']
 
     class Meta:

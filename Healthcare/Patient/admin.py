@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Account, Patient_medical_history, Profile
+from .models import Account, Patient_medical_history, Profile, Doctor_latest_diagnosis
+
 
 # Register your models here.
 
@@ -29,3 +30,14 @@ admin.site.register(Account, AccountAdminConfig)
 admin.site.register(Patient_medical_history)
 
 admin.site.register(Profile)
+
+
+class LatestDiagnosisAdmin(admin.ModelAdmin):
+    list_filter = ['patient', 'doctor']
+    list_display = ['patient', 'doctor', 'timestamp','diagnosis']
+    search_fields = ['patient__fullname', 'patient__email', 'doctor__fullname', 'doctor__email']
+
+    class Meta:
+        model = Doctor_latest_diagnosis
+
+admin.site.register(Doctor_latest_diagnosis, LatestDiagnosisAdmin)

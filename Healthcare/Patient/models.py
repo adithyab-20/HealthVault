@@ -109,3 +109,21 @@ class Profile(models.Model):
             output_size = (300,300)
             img.thumbnail(output_size)
             img.save(self.image.path)
+
+
+class Doctor_latest_diagnosis(models.Model):
+
+    patient                     = models.ForeignKey(Account,on_delete=models.CASCADE, related_name="latest_diagnois_patient")
+    doctor                      = models.ForeignKey(Account,on_delete=models.CASCADE, related_name="lastest_diagnosis_doctor")
+
+    timestamp                   = models.DateTimeField(auto_now_add=True)
+
+    diagnosis = models.TextField()
+    diagnosis_description = models.TextField()
+    doctor_advice = models.TextField()
+    additional_comments = models.TextField()
+
+    REQUIRED_FIELDS = ['diagnosis', 'diagnosis_description', 'doctor_advice']
+
+    def __str__(self):
+        return f'{self.patient.full_name} Latest Diagnosis'

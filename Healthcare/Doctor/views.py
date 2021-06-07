@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from Doctor.decorators import *
-from Doctor.forms import DocProfileUpdateForm, DocImageForm
+from Doctor.forms import DocProfileUpdateForm, DocImageForm, LatestDiagnosisForm
 from django.contrib import messages
 from Patient.models import Account
 from Doctor.models import Patient_List, Doctor_Request, Doctor_Assigned_To_Patient, ColumbiaAsia_Doctor
@@ -91,31 +91,77 @@ def dashboard(request, *args, **kwargs):
 	return render(request, 'doctor-dashboard.html', context)
 
 
-def Latest_Diagnosis(request):
+# @login_required(login_url="/Doctor")
+# @allowed_users(allowed_roles=['Admin', 'Doctors'])
+def latest_diagnosis(request, *args, **kwargs):
+	
 	context = {}
-	if request.method == 'POST':
-		form = LatestDiagnosisForm(request.POST)
-		if form.is_valid():
-			form.save()
-			Patient_Fullname = form.cleaned_data.get('Full_name')
-			Doctor_Fullname = form.cleaned_data.get('Patient_name')
-			Patient_id = form.cleaned_data.get('Patient_ID')
-			Doctor_id = form.cleaned_data.get('Doctor_ID')
-			Doctor_department = form.cleaned_data.get('Department')
-			# Doctor_DateofUpdation = form.cleaned_data.get('Date_of_updation')
-			Patient_diagnosis = form.cleaned_data.get('Diagnosis')
-			Patient_diagnosis_description = form.cleaned_data.get('Diagnosis_description')
-			Doctor_Advice = forms.cleaned_data.get('Doctor_advice')
-			Doctor_additional_comments = form.cleaned_data.get('Additional_comments')
-			return redirect('/Patient/dashboard')
 
-		else:
-			context['form'] = form
-			print(form.errors)
+	patient_id = kwargs.get("patient_id")
+
+	user = request.user
+
+	context['doctor'] = user
+
+	if patient_id != None:
+		print(f"patient_id = {patient_id}")
+		
+
+		try:
+			patient = Account.objects.get(id=patient_id)
+			context['patient'] = patient
+
+
+			context['patient_img'] = patient.profile.image.url
+
+			try:
+				doctor_assigned = Doctor_Assigned_To_Patient.objects.get(patient=patient)
+				
+				if doctor_assigned.doctor == user:
+					print("Doctor verified.")
+
+					if request.method == 'POST':
+						ld_form = LatestDiagnosisForm(request.POST)
+
+						if ld_form.is_valid():
+							
+							latestdiag = ld_form.save(commit=False)
+							latestdiag.doctor = user
+							latestdiag.patient = patient
+							latestdiag.save()
+
+							# messages.success(request, f'Your profile has been updated!')
+							return redirect('/Doctor/dashboard')
+
+
+						else:
+							context['form'] = ld_form
+							print(ld_form.errors)
+
+					else:
+						ld_form = LatestDiagnosisForm()
+						context['form'] = ld_form
+				
+				else:
+					return HttpResponse("This patient is not assigned to you. Patient: " + patient + " Doctor: " + user)
+				
+				
+    	
+			except Doctor_Assigned_To_Patient.DoesNotExist:
+				return HttpResponse("Something went wrong trying to fetch the doctor assigned")
+
+		except Account.DoesNotExist:
+			return HttpResponse("Something went wrong trying to fetch patient information.")
+
+
 	else:
-		form = LatestDiagnosisForm()
-		context['form'] = form
-	return render(request, 'Latest_Diagnosis_form.html', context)
+		print("Error while trying to get patient id. Patient ID: " + patient_id)
+		context['patient'] = None
+
+		return HttpResponse("Something went wrong trying to fetch patient id. Value Received: " + patient_id)
+	
+
+	return render(request, 'Latest-Diagnosis.html', context)
 
 
 
