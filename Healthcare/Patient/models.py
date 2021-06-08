@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from PIL import Image
+import datetime
 
 class MyAccountManager(BaseUserManager):
     def create_user(self, email, password=None, **other_fields): 
@@ -137,10 +138,11 @@ class Prescription(models.Model):
     doctor                      = models.ForeignKey(Account,on_delete=models.CASCADE, related_name="prescription_doctor")
 
     timestamp                   = models.DateTimeField(auto_now_add=True)
+    valid_until                 = models.DateField(("Valid Until"), default=datetime.date.today)
 
     prescription                = models.TextField()
     additional_advice           = models.TextField()
 
-    REQUIRED_FIELDS = ['prescription']
+    REQUIRED_FIELDS = ['prescription', 'valid_until']
     def __str__(self):
         return f"{self.patient.full_name}'s Presciption"

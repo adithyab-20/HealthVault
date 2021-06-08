@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from Doctor.decorators import *
 from Doctor.forms import DocProfileUpdateForm, DocImageForm, LatestDiagnosisForm, PrescriptionForm
 from django.contrib import messages
-from Patient.models import Account
+from Patient.models import Account, Prescription, Doctor_latest_diagnosis
 from Doctor.models import Patient_List, Doctor_Request, Doctor_Assigned_To_Patient, ColumbiaAsia_Doctor
 from Doctor.doctor_request_status import DoctorRequestStatus
 from Doctor.utils import get_doctor_request_or_false
@@ -67,7 +67,37 @@ def dashboard(request, *args, **kwargs):
 				if doctor_assigned.doctor != None:
 					image = doctor_assigned.doctor.columbiaasia_doctor.image.url
 					context['doc_image'] = image
-				
+
+					prescriptions = Prescription.objects.filter(patient=patient)
+					print(prescriptions)
+
+					if prescriptions.exists():
+						prescriptions = prescriptions.order_by('-timestamp')
+						print(prescriptions)
+
+						context['prescriptions'] = prescriptions
+
+					else:
+
+						context['prescriptions'] = None
+						print("Prescription Query Set empty")
+
+					
+					latdiag = Doctor_latest_diagnosis.objects.filter(patient=patient)
+					
+					print(latdiag)
+
+					if latdiag.exists():
+						latdiag = latdiag.order_by('-timestamp')
+						print(latdiag)
+
+						context['diagnosis'] = latdiag
+
+					else:
+
+						context['diagnosis'] = None
+						print("Latest Diagnosis Query Set empty")
+								
 				else:
 					print("Doctor accessing default dashboard")
 					context['patient'] = None

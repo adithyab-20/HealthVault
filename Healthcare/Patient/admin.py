@@ -45,7 +45,7 @@ admin.site.register(Doctor_latest_diagnosis, LatestDiagnosisAdmin)
 
 class PrescriptionAdmin(admin.ModelAdmin):
     list_filter = ['patient', 'doctor', 'id','timestamp']
-    list_display = ['patient', 'doctor', 'id','timestamp']
+    list_display = ['patient', 'doctor', 'id','timestamp', 'valid_until']
     search_fields = ['patient__fullname', 'patient__email', 'doctor__fullname', 'doctor__email']
 
     class Meta:

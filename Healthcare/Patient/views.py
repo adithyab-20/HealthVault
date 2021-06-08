@@ -14,7 +14,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from Patient.decorators import *
-from Patient.models import Account,Profile
+from Patient.models import Account,Profile, Prescription, Doctor_latest_diagnosis
 from Doctor.models import ColumbiaAsia_Doctor, Doctor_Request, Doctor_Assigned_To_Patient, Patient_List
 from Doctor.doctor_request_status import DoctorRequestStatus
 
@@ -125,8 +125,34 @@ def dashboard(request):
 
 
     context['doctor_assigned'] = doctor_assigned
- 
+    
+    prescriptions = Prescription.objects.filter(patient=request.user)
+    print(prescriptions)
 
+    if prescriptions.exists():
+        prescriptions = prescriptions.order_by('-timestamp')
+        print(prescriptions)
+
+        context['prescriptions'] = prescriptions
+
+    else:
+
+        context['prescriptions'] = None
+        print("Query Set empty")
+
+    latdiag = Doctor_latest_diagnosis.objects.filter(patient=request.user)
+    print(latdiag)
+
+    if latdiag.exists():
+        latdiag = latdiag.order_by('-timestamp')
+        print(latdiag)
+
+        context['diagnosis'] = latdiag
+
+    else:
+
+        context['diagnosis'] = None
+        print("Query Set empty")
 
     return render(request, 'new-dash.html', context)
 

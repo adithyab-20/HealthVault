@@ -305,52 +305,59 @@
              <div class="latest-diagnosis" id="l-diagnosis">
                 <label for="">Latest Diagnosis</label>
                 <div class="Neurology various-depts">
+
+{% if diagnosis != None %}
+
+        {% for diag in diagnosis %}
     
-                    <div class="first">
-                        <div class="bywhom">
-                            <div class="bywhom-info">
-                                <h4 id="Pat-name">Patient Name<h4>
-                                <p style="font-size: 12px;">---------</p>
-                                <h4>Patient ID<h4>
-                                <p style="font-size: 12px;">---------</p>
-                                <h4>Doctor Name<h4>
-                                <p style="font-size: 12px;">---------</p>
-                                <h4>Doctor ID<h4>
-                                <p style="font-size: 12px;">---------</p>    
-                            </div>
-                        </div>
-                        <span></span>
-                        <div class="paragraph">
-                            <h4>Prescription ID<h4>
+                   <div class="first">
+                    <div class="bywhom">
+                        <div class="bywhom-info">
+                            <h4 id="Pat-name">Patient Name<h4>
+                           <p style="font-size: 15px; font-weight:800">{{ diag.patient.full_name }}</p> 
+                            <h4>Doctor Name<h4>
+                            <p style="font-size: 15px; font-weight:800">{{ diag.doctor.full_name }}</p> 
+
+                            <h4>Timestamp<h4>
+                            <p style="font-size: 15px; font-weight:800">{{ diag.timestamp }}</p> 
                             <p style="font-size: 12px;">---------</p>
-                            <h4>Prescription</h4>
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui placeat repellendus optio aspernatur eum. Recusandae ipsam qui quibusdam nisi quis, repellat excepturi voluptate possimus iure maxime consequatur quos optio exercitationem.</p>
-                            <h4>Additional Advice</h4>
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis nesciunt repellat, ipsam voluptates vitae impedit debitis sequi veritatis, deserunt alias ea, odit quod cum recusandae quo quae. Ducimus, ipsam eum.</p>
+
+                            <h4>Additional Comments<h4>
+                            <p style="font-size: 15px; font-weight:800">{{ diag.additional_comments }}</p> 
                         </div>
                     </div>
+                    <span></span>
+                    <div class="paragraph">
+                        <h4>Diagnosis<h4>
+                        <p style="font-size: 20px; margin-left:0px">{{ diag.diagnosis }}</p>
+                        <h4>Description</h4>
+                        <p style="font-size: 20px;"> {{ diag.diagnosis_description }}</p>                        
+                        <h4>Doctor Advice</h4>
+                        <p style="font-size: 20px;">{{ diag.doctor_advice }}</p>
+                    </div>
+                </div>
+
+
+
+                     {% endfor %}
+
+    {% else %}
+  <div class="row">
+        <div class="col-md-10" style="margin-left:110px; margin-top:25px; margin-bottom:25px; ">
+   <div class="alert alert-primary">
+    <p style="font-size: 20px; text-align:center; ">Medical History has not been updated yet.</p>
+    </div>
+    </div>
+    </div>
+
+
+    {% endif %}
                 </div>
             </div>
 
              <!--=================================================================================-->
-          
-                {% comment %} <label for="">Prescriptions</label>
-                <span></span>
-                <div class="prescrip1">
-                    <div class="givenby">
-                        <p class="Doctor-name"><b>By: </b>Dr. ----</p>
-                        <p><b>Date: </b>April 14, 2021</p>
-                    </div>
-                    <div class="Pres">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Incidunt perferendis vel deserunt consequatur iste recusandae? 
-                        Tempore eos incidunt beatae, magni, omnis eveniet, dolore ducimus minus cum dolorum fuga porro error.</p>
-                    </div>
-                </div>
-            </div> {% endcomment %}
 
-             
-            
+
             <div class="prescription" id="prescrips">
              <div class="prescription-btn">
                     <button id="prescript" style="background-color:#ACC8E5" onclick='triggerPatientPrescription("{{ patient.id }}")'><i class="fas fa-prescription-bottle-alt"></i> Write Prescription</button>
@@ -362,29 +369,56 @@
             
                 <div class="Neurology various-depts">
 
-                    <div class="second">
-                        <div class="bywhom">
-                            <div class="bywhom-info">
-                                <h4 id="Pat-name">Patient Name<h4>
-                                <p style="font-size: 12px;">---------</p>
-                                <h4>Patient ID<h4>
-                                <p style="font-size: 12px;">---------</p>
-                                <h4>Doctor Name<h4>
-                                <p style="font-size: 12px;">---------</p>
-                                <h4>Doctor ID<h4>
-                                <p style="font-size: 12px;">---------</p>    
-                            </div>
-                        </div>
-                        <span></span>
-                        <div class="paragraph">
-                            <h4>Prescription ID<h4>
-                            <p style="font-size: 12px;">---------</p>
-                            <h4>Prescription</h4>
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui placeat repellendus optio aspernatur eum. Recusandae ipsam qui quibusdam nisi quis, repellat excepturi voluptate possimus iure maxime consequatur quos optio exercitationem.</p>
-                            <h4>Additional Advice</h4>
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis nesciunt repellat, ipsam voluptates vitae impedit debitis sequi veritatis, deserunt alias ea, odit quod cum recusandae quo quae. Ducimus, ipsam eum.</p>
+               {% if prescriptions != None %}
+
+        {% for prescription in prescriptions %}
+
+                <div class="second">
+                    <div class="bywhom">
+                        <div class="bywhom-info">
+                            <h4 id="Pat-name">Patient Name<h4>
+                            <p style="font-size: 15px; font-weight:800">{{ prescription.patient.full_name }}</p> 
+                            <h4>Doctor Name<h4>
+                            <p style="font-size: 15px; font-weight:800">{{ prescription.doctor.full_name }}</p> 
+                            
+                            <h4>Valid Until<h4>
+                            <p style="font-size: 15px; font-weight:800">{{ prescription.valid_until}}</p> 
+
+                            <h4>Timestamp<h4>
+                            <p style="font-size: 15px; font-weight:800">{{ prescription.timestamp }}</p> 
+                          
+                           
+                             
                         </div>
                     </div>
+                    <span></span>
+                    <div class="paragraph">
+                        <h4>Prescription ID<h4>
+                        <p style="font-size: 20px; margin-left:0px">{{ prescription.id }}</p>
+                        <h4>Prescription</h4>
+                        <p style="font-size: 20px;"> {{ prescription.prescription }}</p>
+                        <h4>Additional Advice</h4>
+                        <p style="font-size: 20px;">{{ prescription.additional_advice }}</p>
+                    </div>
+                </div>
+
+
+        {% endfor %}
+
+    {% else %}
+  <div class="row">
+        <div class="col-md-10" style="margin-left:110px; margin-top:25px; margin-bottom:25px; ">
+   <div class="alert alert-danger">
+    <p style="font-size: 20px; text-align:center; ">No Prescriptions yet.</p>
+    </div>
+    </div>
+</div>
+
+
+    {% endif %}
+
+
+
                 </div>
             </div>
 

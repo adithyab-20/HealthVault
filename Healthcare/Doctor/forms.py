@@ -28,13 +28,13 @@ class LatestDiagnosisForm(ModelForm):
 
 class PrescriptionForm(ModelForm):
 
-
+    valid_until = forms.DateField( )
     prescription = forms.CharField(widget=forms.Textarea)
     additional_advice = forms.CharField(widget=forms.Textarea)
     
     class Meta:
         model = Prescription
-        fields = ("prescription", "additional_advice",)
+        fields = ('valid_until', "prescription", "additional_advice",)
         widgets = {
             'text': forms.Textarea(attrs={'rows':5, 'cols':10}), 
         }
