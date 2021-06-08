@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-
+from PIL import Image
+import datetime
 
 class MyAccountManager(BaseUserManager):
     def create_user(self, email, password=None, **other_fields): 
@@ -71,19 +72,77 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
 class Patient_medical_history(models.Model):
 
-    REQUIRED_FIELDS = ['Full_name','DOB','Age','Gender','Blood Group']
-
-    Full_name = models.CharField(max_length=100)
-    # DOB = models.DateTimeField(default=timezone.now)
-    Age = models.IntegerField()
-    Gender = models.CharField(max_length=20)
-    Height = models.IntegerField()
-    Weight = models.IntegerField()
-    Blood_Group =  models.CharField(max_length=5)
-    Alchohol_Consumption = models.TextField()
-    Smoking_Habit = models.TextField()
-    Drug_Allergies = models.TextField()
-    Current_Medications = models.TextField()
+    REQUIRED_FIELDS = ['Full_name','Age','Gender','Blood_Group']
+    
+    user = models.OneToOneField(Account, on_delete=models.CASCADE)
+    age = models.IntegerField(default=0)
+    gender = models.CharField(max_length=20, default="Null")
+    address = models.TextField(default="Null")
+    contact_no = models.CharField(max_length=12, default="Null")
+    emergency_contact = models.CharField(max_length=12, default="Null")
+    height = models.IntegerField(default=0)
+    weight = models.IntegerField(default=0)
+    blood_group =  models.CharField(max_length=5, default="Null")
+    
+    alchohol_consumption = models.TextField(default="Null")
+    smoking_habit = models.TextField(default="Null")
+    drug_allergies = models.TextField(default="Null")
+    previous_illness = models.TextField(default="Null")
+    current_medications = models.TextField(default="Null")
 
     def __str__(self):
-        return self.Full_name
+        return f'{self.user.full_name} Medical History'
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(Account, on_delete=models.CASCADE)
+    image = models.ImageField(default= 'default.jpg', upload_to='profile_pics')
+
+    def __str__(self):
+        return f'{self.user.full_name} Profile'
+
+    def save(self, *args, **kwargs):
+        super(Profile, self).save(*args, **kwargs)
+
+        img = Image.open(self.image.path)
+        
+        if img.height >300 or img.width > 300:
+            output_size = (300,300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)
+
+
+class Doctor_latest_diagnosis(models.Model):
+
+    patient                     = models.ForeignKey(Account,on_delete=models.CASCADE, related_name="latest_diagnois_patient")
+    doctor                      = models.ForeignKey(Account,on_delete=models.CASCADE, related_name="lastest_diagnosis_doctor")
+
+    timestamp                   = models.DateTimeField(auto_now_add=True)
+
+    diagnosis                   = models.TextField()
+    diagnosis_description       = models.TextField()
+    doctor_advice               = models.TextField()
+    additional_comments         = models.TextField()
+
+    REQUIRED_FIELDS = ['diagnosis', 'diagnosis_description', 'doctor_advice']
+
+    def __str__(self):
+        return f'{self.patient.full_name} Latest Diagnosis'
+
+
+
+class Prescription(models.Model):
+
+  
+    patient                     = models.ForeignKey(Account,on_delete=models.CASCADE, related_name="prescription_patient")
+    doctor                      = models.ForeignKey(Account,on_delete=models.CASCADE, related_name="prescription_doctor")
+
+    timestamp                   = models.DateTimeField(auto_now_add=True)
+    valid_until                 = models.DateField(("Valid Until"), default=datetime.date.today)
+
+    prescription                = models.TextField()
+    additional_advice           = models.TextField()
+
+    REQUIRED_FIELDS = ['prescription', 'valid_until']
+    def __str__(self):
+        return f"{self.patient.full_name}'s Presciption"

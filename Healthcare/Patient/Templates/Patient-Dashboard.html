@@ -22,7 +22,9 @@
             <div class="add-btn">
                 <!--<label for=""><i class="fas fa-plus-circle"></i> Add New</label>-->
                 <button id="chat"><i class="fas fa-comment-alt"></i> Chat</button>
-                <button><i class="fas fa-plus-circle"></i> Add New</button>
+                
+                <!-- <button onclick="location.href='{% url 'Patient:Docselection'%}'" type="button" ><i class="fas fa-plus-circle"></i> Add New</button> -->
+                <a href="{% url 'Patient:Docselection' %}"><button><i class="fas fa-plus-circle"></i> Add New</button></a>
             </div>
             <div class="nav">
                 <input type="button" id="btn1" value="Patient Info" onclick="forfirst()">
@@ -133,33 +135,15 @@
             <label class="heading-label" for="">Latest Diagnosis</label>
             <span></span>
             <div class="report">
-                <div class="labels"></div>
-                <label for="">Doctor Name</label>
-                <input type="text">
-                <br>
-                <br>
-                <label for="">Doctor ID</label>
-                <input type="text">
-                <br>
-                <br>
-                <label for="">Date & Time</label>
-                <input type="datetime-local">
-                <br>
-                <br>
-                <label for="">Diagnosis</label>
-                <input type="text">
-                <br>
-                <br>
-                <label for="">Description</label>
-                <textarea rowspan="20" colspan="30"></textarea>
-                <br>
-                <br>
-                <label for="">Advice</label>
-                <textarea rowspan="20" colspan="30"></textarea>
-                <br>
-                <br>
-                <label for="">Addtional Comments</label>
-                <textarea rowspan="20" colspan="30"></textarea>
+                <div class="givenbyD">
+                    <p class="Doctor-ka-name"><b>By: </b>Dr. ----</p>
+                    <p><b>Date: </b>April 14, 2021</p>
+                </div>
+                <div class="newrep">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    Incidunt perferendis vel deserunt consequatur iste recusandae? 
+                    Tempore eos incidunt beatae, magni, omnis eveniet, dolore ducimus minus cum dolorum fuga porro error.</p>
+                </div>
             </div>
         </div>
 

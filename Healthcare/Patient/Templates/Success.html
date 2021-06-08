@@ -1,17 +1,15 @@
 <html>
 <head>
-	<title>Sign In</title>
+	<title>You're In!</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800&display=swap" rel="stylesheet">
   {% load static %}
-  {% load crispy_forms_tags %}
+
   <link rel="stylesheet" type="text/css" href="{% static 'success.css' %}">
 </head>
 <body>
   <div class="cont">
-    <form method="POST">
-      {% csrf_token %}
     <div class="form sign-in">
       <h2>Yay! You're In!</h2>
 
@@ -21,17 +19,11 @@
       width: 80%;">
   
      
-      
-     <!-- <form action="{% url 'Patient:MedHistoryForm' %}" method="get">
-       <button class="submit" type="submit">Continue</button>
-    </form>
-       -->
-       <!-- <form action="{% url 'Patient:MedHistoryForm' %}">
-        <input type="submit" value="Continue" />
-    </form> -->
 
-    <button class="submit" onclick="location.href='{% url 'Patient:MedHistoryForm' %}'" type="button">
-        Continue</button>
+    <!-- <button class="submit" onclick="location.href='{% url 'Patient:MedHistoryForm' %}'" type="button">
+        Continue</button> -->
+
+    <a href="{% url 'Patient:MedHistoryForm' %}"><button class="submit">Continue</button></a>
       </div>
     </div>
   </div>

@@ -14,7 +14,8 @@
     justify-content: center;
     align-items: center;
     /*background: -webkit-linear-gradient(left, #66b3ff, #aaff80);*/
-    background-image: url(images/gloved-hand-of-doctor-in-scrubs-holds-straight-forceps.jpg);
+    /* background-image: url(images/gloved-hand-of-doctor-in-scrubs-holds-straight-forceps.jpg); */
+    background-image: url(images/general-hospital-sign.jpg);
     background-size: 100% 100vh;
     /*background-image: -webkit-linear-gradient(left, #7579ff, #b224ef);*/
     font-family: 'Nunito', sans-serif;
@@ -154,9 +155,9 @@
     top: 0;
     width: 375px;
     height: 100%;
-    background-image: url(images/doc.jpg);
-    filter: blur(2px);
-    -webkit-filter: blur(2px);
+    background-image: url(images/jonjon.jpg);
+    /* filter: blur(2px);
+    -webkit-filter: blur(2px); */
     background-size:cover ;
     padding-top: 360px;
     
@@ -176,7 +177,8 @@
     width: 100%;
     padding: 0 20px;
     text-align: center;
-    color: rgb(38, 63, 82);
+    color: rgb(35, 44, 51);
+    /* color:rgb(255, 255, 255); */
     -webkit-transition:-webkit-transform 1.2s ease-in-out;
     transition: -webkit-transform 1.2s ease-in-out;
     transition: transform 1.2s ease-in-out, -webkit-transform 1.2s ease-in-out;
@@ -184,14 +186,14 @@
   
   .img-text h2{
     margin-bottom: 20px;
-    font-weight: 600;
+    font-weight: 800;
   }
   
   .img-text p{
     font-size: 17px;
     line-height: 1.0;
     text-align: match-parent;
-    font-weight: 550;
+    font-weight: 700;
   }
   
   .cont.s-signup .img-text.m-up{

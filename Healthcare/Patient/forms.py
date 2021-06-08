@@ -1,7 +1,7 @@
 import datetime
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from Patient.models import Account, Patient_medical_history
+from Patient.models import Account, Patient_medical_history, Profile
 from django.forms import ModelForm
 from django.contrib.auth.forms import forms
 from crispy_forms.helper import FormHelper
@@ -25,9 +25,7 @@ class SignupForm(UserCreationForm):
         self.helper = FormHelper()
         self.helper.form_method = 'POST'
         self.helper.form_id = 'id-SignupForm'
-        # self.helper.attrs = {
-        #     'novalidate': ''
-        # }
+
         for fieldname in ['full_name', 'email', 'password1', 'password2']:
             self.fields[fieldname].help_text = None
         
@@ -36,29 +34,26 @@ class SignupForm(UserCreationForm):
 
 
 
-class MedicalHistoryForm(forms.Form):
+class MedicalHistoryForm(ModelForm):
 
-    Full_name = forms.CharField(label='Full name',max_length=100)
-    # DOB = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'],
-    #     widget=forms.DateInput(
-    #        attrs={
-    #             'type': 'date', 
-    #             'class': 'form_input',
-    #        },
-    #     ),
-    # )
-    Age = forms.IntegerField()
-    Gender = forms.CharField(max_length=20)
-    Height = forms.IntegerField(label='Height(in cm)')
-    Weight = forms.IntegerField(label='Weight(in kg)')
-    Blood_Group =  forms.CharField(max_length=5)
-    Alchohol_Consumption = forms.CharField(max_length=50)
-    Smoking_Habit = forms.CharField(max_length=50)
-    Drug_Allergies = forms.CharField(widget=forms.Textarea)
-    Current_Medications = forms.CharField(widget=forms.Textarea)
+  
+    age = forms.IntegerField()
+    gender = forms.CharField(max_length=20)
+    contact_no = forms.CharField(max_length=12)
+    emergency_contact = forms.CharField(max_length=12)
+    address = forms.CharField(max_length=50)
+    height = forms.IntegerField(label='Height(in cm)')
+    weight = forms.IntegerField(label='Weight(in kg)')
+    blood_group =  forms.CharField(max_length=5)
+
+    alchohol_consumption = forms.CharField(max_length=50)
+    smoking_habit = forms.CharField(max_length=50)
+    drug_allergies = forms.CharField(widget=forms.Textarea)
+    previous_illness = forms.CharField(widget=forms.Textarea)
+    current_medications = forms.CharField(widget=forms.Textarea)
     class Meta:
         model = Patient_medical_history
-        fields = ("Full_name", "DOB", "Age", "Gender", "Height", "Weight", "Blood_Group", "Alchohol_Consumption", "Smoking_Habit", "Drug_Allergies", "Current_Medications",)
+        fields = ("age", "gender",  "contact_no", "emergency_contact", "address", "height", "weight", "blood_group", "alchohol_consumption", "smoking_habit", "drug_allergies","previous_illness", "current_medications",)
         widgets = {
             'text': forms.Textarea(attrs={'rows':5, 'cols':10}), #this is changeble.
         }
@@ -72,3 +67,9 @@ class MedicalHistoryForm(forms.Form):
 #     });
 #   });
 # </script>
+
+
+class ProfileUpdateForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['image']
